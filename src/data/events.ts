@@ -58,7 +58,7 @@ export const EVENTS: WeddingEvent[] = [
     date: '2026-12-13T17:30:00+05:30',
     timeLabel: 'Evening · 5:30 PM',
     venueName: 'Trip is Life, Varkala, Kerala',
-    travelNote: 'Nearest train station: Thiruvalla · Buses provided',
+    travelNote: 'Nearest train station: Varkala · Buses provided',
     mapQuery: 'Trip is Life Varkala Kerala',
   },
 ];
