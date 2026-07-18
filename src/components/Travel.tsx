@@ -64,8 +64,8 @@ export default function Travel() {
               {c.body ?? (
                 <>
                   Call or WhatsApp Abhijith Sreekumar at{' '}
-                  <a href="tel:+917824065488" style={{ color: 'var(--color-maroon)' }}>
-                    +91 78240 65488
+                  <a href="tel:+916282529966" style={{ color: 'var(--color-maroon)' }}>
+                    +91 62825 29966
                   </a>
                   .
                 </>

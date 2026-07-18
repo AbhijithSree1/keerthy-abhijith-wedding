@@ -10,7 +10,6 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
     name: '',
     attending: 'yes',
     guests: 1,
-    dietary: '',
     message: '',
   });
 
@@ -28,7 +27,6 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
         name: formData.name,
         attending: formData.attending,
         guests: formData.guests,
-        dietary: formData.dietary,
         message: formData.message,
         events_attending: formData.attending === 'no' 
           ? 'None' 
@@ -160,21 +158,6 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
               </Reveal>
             )}
 
-            {formData.attending === 'yes' && (
-              <Reveal>
-                <label htmlFor="dietary" className="mb-1 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Dietary Requirements</label>
-                <textarea
-                  id="dietary"
-                  rows={2}
-                  placeholder="Any allergies or dietary restrictions?"
-                  className="w-full rounded-md border p-3 outline-none transition-colors"
-                  style={{ borderColor: 'var(--color-ivory-deep)' }}
-                  value={formData.dietary}
-                  onChange={(e) => setFormData({ ...formData, dietary: e.target.value })}
-                />
-              </Reveal>
-            )}
-
             <div>
               <label htmlFor="message" className="mb-1 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Message for the couple</label>
               <textarea
@@ -211,8 +194,8 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
       <Reveal delay={0.2} className="mt-12">
         <p className="italic" style={{ color: 'var(--color-ink-soft)' }}>
           Prefer to reply directly? Call or WhatsApp Abhijith at{' '}
-          <a href="tel:+917824065488" style={{ color: 'var(--color-maroon)' }}>
-            +91 78240 65488
+          <a href="tel:+916282529966" style={{ color: 'var(--color-maroon)' }}>
+            +91 62825 29966
           </a>
           .
         </p>

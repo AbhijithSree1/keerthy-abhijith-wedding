@@ -95,6 +95,11 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                     {ev.timeLabel}
                   </p>
                   <p style={{ color: 'var(--color-ink-soft)' }}>{ev.venueName}</p>
+                  {ev.travelNote && (
+                    <p className="mt-1 text-sm italic opacity-90" style={{ color: 'var(--color-ink-soft)' }}>
+                      {ev.travelNote}
+                    </p>
+                  )}
                   {(ev.mapQuery || ev.extraLink) && (
                     <div className={`mt-2 flex flex-wrap gap-4 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
                       {ev.extraLink && (
