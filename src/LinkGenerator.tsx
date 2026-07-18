@@ -15,7 +15,10 @@ export default function LinkGenerator() {
     const base = `${window.location.origin}${window.location.pathname}#/`;
     const params = new URLSearchParams();
     if (name.trim()) params.set('to', name.trim());
-    if (chosen.length < EVENTS.length) params.set('events', chosen.join(','));
+    if (chosen.length < EVENTS.length) {
+      // Obfuscate the parameter so users don't easily tamper with it
+      params.set('invite', btoa(chosen.join(',')));
+    }
     const qs = params.toString();
     return qs ? `${base}?${qs}` : base;
   }, [name, chosen]);

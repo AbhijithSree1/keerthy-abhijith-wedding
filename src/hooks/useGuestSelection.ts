@@ -5,13 +5,24 @@ export function useGuestSelection() {
   const [params] = useSearchParams();
   const to = params.get('to');
   const eventsParam = params.get('events');
+  const inviteParam = params.get('invite');
 
-  const parsedEvents: EventKey[] = eventsParam
-    ? (eventsParam.split(',').filter((k) => ALL_EVENT_KEYS.includes(k as EventKey)) as EventKey[])
-    : [...ALL_EVENT_KEYS]; // no param = show everything (default / preview link)
+  // Default public view if NO parameters are provided or they are removed
+  let parsedEvents: EventKey[] = ['wedding', 'backwater'];
+
+  if (inviteParam) {
+    try {
+      const decoded = atob(inviteParam);
+      parsedEvents = decoded.split(',').filter((k) => ALL_EVENT_KEYS.includes(k as EventKey)) as EventKey[];
+    } catch (e) {
+      // Ignore bad base64
+    }
+  } else if (eventsParam) {
+    // Legacy support for plain-text ?events=...
+    parsedEvents = eventsParam.split(',').filter((k) => ALL_EVENT_KEYS.includes(k as EventKey)) as EventKey[];
+  }
 
   // If "wedding" is selected, ALWAYS include the Contour Backwaters reception too
-  // since "Wedding" means both ceremonies that day.
   if (parsedEvents.includes('wedding') && !parsedEvents.includes('backwater')) {
     parsedEvents.push('backwater');
   }
