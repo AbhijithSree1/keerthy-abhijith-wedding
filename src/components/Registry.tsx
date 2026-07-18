@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Reveal from './Reveal';
 
-// ponytail: placeholder UPI ID — replace with the real one before sending links
-const UPI_ID = 'keerthy.abhijith@upi';
+// Replace with the real one before sending links
+const UPI_ID = 'keerthyhemaprakash-3@oksbi';
 
 export default function Registry() {
   const [copied, setCopied] = useState(false);
