@@ -33,6 +33,15 @@ const ICONS: Record<EventKey, ReactNode> = {
 
 export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
   const visibleEvents = EVENTS.filter((e) => visible.includes(e.key));
+  const isSingleEvent = visibleEvents.length === 1;
+  const isOnlyWeddingDay = visibleEvents.every(e => e.key === 'wedding' || e.key === 'backwater');
+
+  let title = "The Celebrations";
+  if (isOnlyWeddingDay) {
+    title = "The Wedding";
+  } else if (isSingleEvent && visibleEvents[0].key === 'reception') {
+    title = "The Reception";
+  }
 
   return (
     <section id="events" className="mx-auto max-w-[1100px] px-5 py-20">
@@ -41,26 +50,26 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
           Join us for
         </p>
         <h2 className="font-script mt-1 text-[clamp(3rem,7vw,4.4rem)] leading-tight" style={{ color: 'var(--color-maroon-deep)' }}>
-          The Celebrations
+          {title}
         </h2>
-        <p className="mx-auto mt-3 max-w-lg italic" style={{ color: 'var(--color-ink-soft)' }}>
-          {visibleEvents.length === 1 
-            ? 'A beautiful day of celebration in Kerala \u2014 we would love for you to be part of it.'
-            : 'Multiple days of celebration across Kerala \u2014 we would love for you to be part of them.'}
-        </p>
+        {!isOnlyWeddingDay && !isSingleEvent && (
+          <p className="mx-auto mt-3 max-w-lg italic" style={{ color: 'var(--color-ink-soft)' }}>
+            Multiple days of celebration across Kerala &mdash; we would love for you to be part of them.
+          </p>
+        )}
       </Reveal>
 
       <div className="relative">
         <div
-          className="absolute bottom-2 left-[27px] top-2 hidden w-px sm:left-1/2 sm:block"
+          className={`absolute bottom-2 left-[27px] top-2 hidden w-px ${isSingleEvent ? '' : 'sm:left-1/2 sm:block'}`}
           style={{ background: 'linear-gradient(180deg, transparent, var(--color-gold), transparent)' }}
         />
-        <div className="flex flex-col gap-6 sm:gap-0">
+        <div className={`flex flex-col gap-6 ${isSingleEvent ? 'sm:items-center' : 'sm:gap-0'}`}>
           {visibleEvents.map((ev, i) => (
-            <Reveal key={ev.key} delay={i * 0.08} className={`sm:flex ${i % 2 === 0 ? 'sm:justify-start' : 'sm:justify-end'}`}>
+            <Reveal key={ev.key} delay={i * 0.08} className={isSingleEvent ? 'w-full max-w-2xl' : `sm:flex ${i % 2 === 0 ? 'sm:justify-start' : 'sm:justify-end'}`}>
               <div
-                className={`relative flex gap-5 rounded-xl px-5 py-5 sm:w-[calc(50%-2.5rem)] sm:py-6 ${
-                  i % 2 === 0 ? 'sm:flex-row-reverse sm:text-right' : ''
+                className={`relative flex gap-5 rounded-xl px-5 py-5 sm:py-6 ${
+                  isSingleEvent ? 'w-full' : `sm:w-[calc(50%-2.5rem)] ${i % 2 === 0 ? 'sm:flex-row-reverse sm:text-right' : ''}`
                 }`}
                 style={{
                   backgroundColor: 'rgba(255,255,255,0.035)',
@@ -87,7 +96,7 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                   </p>
                   <p style={{ color: 'var(--color-ink-soft)' }}>{ev.venueName}</p>
                   {(ev.mapQuery || ev.extraLink) && (
-                    <div className={`mt-2 flex flex-wrap gap-4 ${i % 2 === 0 ? 'sm:justify-end' : ''}`}>
+                    <div className={`mt-2 flex flex-wrap gap-4 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
                       {ev.extraLink && (
                         <a
                           href={ev.extraLink.href}
@@ -118,14 +127,6 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
           ))}
         </div>
       </div>
-
-      {visibleEvents.length < EVENTS.length && (
-        <Reveal className="mt-10 text-center italic" delay={0.1}>
-          <p style={{ color: 'var(--color-ink-soft)' }}>
-            We've highlighted the celebrations we'd love for you to join — see you there!
-          </p>
-        </Reveal>
-      )}
     </section>
   );
 }

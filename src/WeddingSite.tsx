@@ -26,7 +26,7 @@ export default function WeddingSite() {
 
   return (
     <>
-      <DoorIntro />
+      <DoorIntro events={events} />
       <Nav />
       <main>
         <Hero greeting={greeting} events={events} />
