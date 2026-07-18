@@ -70,7 +70,7 @@ export default function DoorIntro() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <img src="/img/couple-portrait.jpg" alt="Keerthy and Abhijith" className="h-full w-full object-cover" />
+          <img src={`${import.meta.env.BASE_URL}img/couple-portrait.jpg`} alt="Keerthy and Abhijith" className="h-full w-full object-cover" />
         </motion.div>
 
         <motion.h1

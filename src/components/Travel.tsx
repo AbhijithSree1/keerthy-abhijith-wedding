@@ -1,7 +1,7 @@
 import Reveal from './Reveal';
 
 // Swap these for venue/Kerala photos when you have them — just change the paths.
-const STRIP = ['/img/engagement-03.jpg', '/img/engagement-06.jpg', '/img/engagement-09.jpg'];
+const STRIP = [`${import.meta.env.BASE_URL}img/engagement-03.jpg`, `${import.meta.env.BASE_URL}img/engagement-06.jpg`, `${import.meta.env.BASE_URL}img/engagement-09.jpg`];
 
 const CARDS = [
   {

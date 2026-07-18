@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Reveal from './Reveal';
 
-const PHOTOS = Array.from({ length: 27 }, (_, i) => `/img/engagement-${String(i + 1).padStart(2, '0')}.jpg`);
+const PHOTOS = Array.from({ length: 27 }, (_, i) => `${import.meta.env.BASE_URL}img/engagement-${String(i + 1).padStart(2, '0')}.jpg`);
 
 export default function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
