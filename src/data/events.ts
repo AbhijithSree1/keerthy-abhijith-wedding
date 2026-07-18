@@ -35,7 +35,7 @@ export const EVENTS: WeddingEvent[] = [
     date: '2026-12-12T07:30:00+05:30',
     timeLabel: 'Morning muhurtham · 7:30 AM',
     venueName: 'Sreevallabha Temple, Thiruvalla, Kerala',
-    travelNote: 'Nearest Railway station: Thiruvalla · Buses provided',
+    travelNote: 'Nearest Railway station: Thiruvalla',
     mapQuery: 'Sreevallabha Temple Thiruvalla Kerala',
     extraLink: {
       label: 'About the Temple',
