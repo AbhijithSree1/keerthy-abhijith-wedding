@@ -31,8 +31,8 @@ export default function AddToCalendar({ event }: { event: CalendarEventDetails }
             transition={{ duration: 0.15 }}
             className="absolute left-0 top-full z-10 mt-2 flex w-48 flex-col rounded-md border py-2 shadow-xl backdrop-blur-md"
             style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.95)',
-              borderColor: 'var(--color-ivory-deep)',
+              backgroundColor: 'rgba(42, 21, 51, 0.95)', // Plum with opacity
+              borderColor: 'var(--color-gold)',
             }}
           >
             <a
@@ -40,7 +40,7 @@ export default function AddToCalendar({ event }: { event: CalendarEventDetails }
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-left text-sm transition-colors hover:bg-black/5"
+              className="px-4 py-2 text-left text-sm transition-colors hover:bg-white/10"
               style={{ color: 'var(--color-ink)' }}
             >
               Google Calendar
@@ -49,7 +49,7 @@ export default function AddToCalendar({ event }: { event: CalendarEventDetails }
               href={getIcsDataUri(event)}
               download={`${event.title.replace(/\s+/g, '_')}.ics`}
               onClick={() => setOpen(false)}
-              className="px-4 py-2 text-left text-sm transition-colors hover:bg-black/5"
+              className="px-4 py-2 text-left text-sm transition-colors hover:bg-white/10"
               style={{ color: 'var(--color-ink)' }}
             >
               Apple / Outlook (.ics)
