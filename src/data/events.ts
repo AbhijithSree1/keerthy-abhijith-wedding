@@ -53,7 +53,7 @@ export const EVENTS: WeddingEvent[] = [
     mapQuery: 'Contour Backwaters Kerala',
     extraLink: {
       label: 'Venue Website',
-      href: 'https://www.contourresorts.com/'
+      href: 'https://contourbackwaters.com/'
     },
   },
   {

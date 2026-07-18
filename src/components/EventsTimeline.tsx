@@ -123,7 +123,7 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                     )}
                     {ev.mapQuery && (
                       <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.mapQuery)}`}
+                        href={`https://maps.google.com/?q=${encodeURIComponent(ev.mapQuery)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-label flex items-center border-b pb-0.5 text-[0.65rem] uppercase tracking-[0.14em]"
