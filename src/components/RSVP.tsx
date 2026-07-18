@@ -1,26 +1,47 @@
 import { useState } from 'react';
 import Reveal from './Reveal';
+import { EVENTS, type EventKey } from '../data/events';
 
-export default function RSVP() {
+export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
+  const visibleEvents = EVENTS.filter((e) => visible.length === 0 || visible.includes(e.key));
+  const isMultiEvent = visibleEvents.length > 1;
+
   const [formData, setFormData] = useState({
     name: '',
     attending: 'yes',
     guests: 1,
     dietary: '',
   });
+
+  const [attendingEvents, setAttendingEvents] = useState<Record<EventKey, boolean>>(
+    Object.fromEntries(visibleEvents.map((e) => [e.key, true])) as Record<EventKey, boolean>
+  );
+
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
     try {
+      const payload = {
+        name: formData.name,
+        attending: formData.attending,
+        guests: formData.guests,
+        dietary: formData.dietary,
+        events_attending: formData.attending === 'no' 
+          ? 'None' 
+          : isMultiEvent 
+            ? Object.keys(attendingEvents).filter((k) => attendingEvents[k as EventKey]).map((k) => EVENTS.find((ev) => ev.key === k)?.label).join(', ')
+            : visibleEvents.map((e) => e.label).join(', ')
+      };
+
       const response = await fetch('https://formspree.io/f/mzdnrdlz', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
       if (response.ok) {
         setStatus('success');
@@ -70,7 +91,7 @@ export default function RSVP() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Will you attend?</label>
+              <label className="mb-2 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Will you be joining us?</label>
               <div className="flex gap-4">
                 <label className="flex cursor-pointer items-center gap-2">
                   <input
@@ -96,6 +117,29 @@ export default function RSVP() {
                 </label>
               </div>
             </div>
+
+            {formData.attending === 'yes' && isMultiEvent && (
+              <Reveal>
+                <div className="mt-2 mb-2 rounded-lg border p-4" style={{ borderColor: 'var(--color-ivory-deep)', backgroundColor: 'rgba(255,255,255,0.4)' }}>
+                  <label className="mb-3 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Which events will you attend?</label>
+                  <div className="flex flex-col gap-3">
+                    {visibleEvents.map((e) => (
+                      <label key={e.key} className="flex cursor-pointer items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={!!attendingEvents[e.key]}
+                          onChange={(ev) => setAttendingEvents({ ...attendingEvents, [e.key]: ev.target.checked })}
+                          className="h-4 w-4 accent-[var(--color-gold)]"
+                        />
+                        <span style={{ color: 'var(--color-ink)' }}>
+                          {e.label} <span className="text-xs opacity-70 block sm:inline sm:ml-1">({e.dayLabel})</span>
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            )}
 
             {formData.attending === 'yes' && (
               <Reveal>

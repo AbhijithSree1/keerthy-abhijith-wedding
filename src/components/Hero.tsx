@@ -1,11 +1,27 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import GoldDust from './GoldDust';
+import { EVENTS, type EventKey } from '../data/events';
 
-export default function Hero({ greeting }: { greeting: string; target: Date }) {
+export default function Hero({ greeting, target, events }: { greeting: string; target: Date; events: EventKey[] }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  let dateText = "10 \u2013 13 December 2026";
+  const eventObjects = EVENTS.filter((e) => events.includes(e.key)).map((e) => new Date(e.date));
+  if (eventObjects.length === 1) {
+    const d = eventObjects[0];
+    dateText = `${d.getDate()} December ${d.getFullYear()}`;
+  } else if (eventObjects.length > 1) {
+    const minD = new Date(Math.min(...eventObjects.map(d => d.getTime())));
+    const maxD = new Date(Math.max(...eventObjects.map(d => d.getTime())));
+    if (minD.getDate() === maxD.getDate()) {
+       dateText = `${minD.getDate()} December ${minD.getFullYear()}`;
+    } else {
+       dateText = `${minD.getDate()} \u2013 ${maxD.getDate()} December ${minD.getFullYear()}`;
+    }
+  }
 
   return (
     <section
@@ -68,7 +84,7 @@ export default function Hero({ greeting }: { greeting: string; target: Date }) {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         >
-          <strong style={{ color: 'var(--color-champagne)', fontWeight: 600 }}>10 &ndash; 13 December 2026</strong> &middot; Kerala
+          <strong style={{ color: 'var(--color-champagne)', fontWeight: 600 }}>{dateText}</strong> &middot; Kerala
         </motion.p>
       </motion.div>
 

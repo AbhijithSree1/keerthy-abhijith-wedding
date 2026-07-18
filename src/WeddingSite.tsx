@@ -29,12 +29,12 @@ export default function WeddingSite() {
       <DoorIntro />
       <Nav />
       <main>
-        <Hero greeting={greeting} target={countdownTarget} />
+        <Hero greeting={greeting} target={countdownTarget} events={events} />
         <EventsTimeline visible={events} />
         <Story />
         <Gallery />
         <Registry />
-        <RSVP />
+        <RSVP visible={events} />
         <Travel />
 
         <section className="mx-auto max-w-[1100px] px-5 pb-24 pt-8 text-center">

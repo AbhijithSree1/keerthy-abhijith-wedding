@@ -44,7 +44,9 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
           The Celebrations
         </h2>
         <p className="mx-auto mt-3 max-w-lg italic" style={{ color: 'var(--color-ink-soft)' }}>
-          Four days of celebration across Kerala — we would love for you to be part of them.
+          {visibleEvents.length === 1 
+            ? 'A beautiful day of celebration in Kerala \u2014 we would love for you to be part of it.'
+            : 'Multiple days of celebration across Kerala \u2014 we would love for you to be part of them.'}
         </p>
       </Reveal>
 
