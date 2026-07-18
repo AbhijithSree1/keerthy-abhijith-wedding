@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { EVENTS, type EventKey } from '../data/events';
 import Reveal from './Reveal';
+import AddToCalendar from './AddToCalendar';
 
 const ICONS: Record<EventKey, ReactNode> = {
   sangeet: (
@@ -100,32 +101,38 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                       {ev.travelNote}
                     </p>
                   )}
-                  {(ev.mapQuery || ev.extraLink) && (
-                    <div className={`mt-2 flex flex-wrap gap-4 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
-                      {ev.extraLink && (
-                        <a
-                          href={ev.extraLink.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-label border-b pb-0.5 text-[0.65rem] uppercase tracking-[0.14em]"
-                          style={{ color: 'var(--color-maroon)', borderColor: 'var(--color-gold)' }}
-                        >
-                          {ev.extraLink.label}
-                        </a>
-                      )}
-                      {ev.mapQuery && (
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.mapQuery)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-label border-b pb-0.5 text-[0.65rem] uppercase tracking-[0.14em]"
-                          style={{ color: 'var(--color-maroon)', borderColor: 'var(--color-gold)' }}
-                        >
-                          Get Directions
-                        </a>
-                      )}
-                    </div>
-                  )}
+                  <div className={`mt-3 flex flex-wrap gap-5 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
+                    <AddToCalendar 
+                      event={{
+                        title: `Keerthy & Abhijith - ${ev.label}`,
+                        description: `We can't wait to celebrate with you!\n\n${ev.venueName}\n\nTime: ${ev.timeLabel}`,
+                        location: ev.mapQuery || ev.venueName,
+                        startDate: ev.date,
+                      }} 
+                    />
+                    {ev.extraLink && (
+                      <a
+                        href={ev.extraLink.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-label flex items-center border-b pb-0.5 text-[0.65rem] uppercase tracking-[0.14em]"
+                        style={{ color: 'var(--color-maroon)', borderColor: 'var(--color-gold)' }}
+                      >
+                        {ev.extraLink.label}
+                      </a>
+                    )}
+                    {ev.mapQuery && (
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ev.mapQuery)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-label flex items-center border-b pb-0.5 text-[0.65rem] uppercase tracking-[0.14em]"
+                        style={{ color: 'var(--color-maroon)', borderColor: 'var(--color-gold)' }}
+                      >
+                        Get Directions
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </Reveal>

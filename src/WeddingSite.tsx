@@ -10,6 +10,7 @@ import Travel from './components/Travel';
 import Countdown from './components/Countdown';
 import Reveal from './components/Reveal';
 import Footer from './components/Footer';
+import AudioPlayer from './components/AudioPlayer';
 import { useGuestSelection } from './hooks/useGuestSelection';
 import { EVENTS } from './data/events';
 
@@ -50,6 +51,7 @@ export default function WeddingSite() {
         </section>
       </main>
       <Footer />
+      <AudioPlayer />
     </>
   );
 }
