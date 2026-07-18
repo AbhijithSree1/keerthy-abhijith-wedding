@@ -29,7 +29,7 @@ export default function WeddingSite() {
       <DoorIntro />
       <Nav />
       <main>
-        <Hero greeting={greeting} target={countdownTarget} events={events} />
+        <Hero greeting={greeting} events={events} />
         <EventsTimeline visible={events} />
         <Story />
         <Gallery />

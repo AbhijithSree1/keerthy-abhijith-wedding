@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import GoldDust from './GoldDust';
 import { EVENTS, type EventKey } from '../data/events';
 
-export default function Hero({ greeting, target, events }: { greeting: string; target: Date; events: EventKey[] }) {
+export default function Hero({ greeting, events }: { greeting: string; events: EventKey[] }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
