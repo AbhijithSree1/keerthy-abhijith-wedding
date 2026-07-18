@@ -6,6 +6,7 @@ const PHOTOS = Array.from({ length: 27 }, (_, i) => `/img/engagement-${String(i 
 
 export default function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const close = useCallback(() => setIndex(null), []);
   const prev = useCallback(() => setIndex((i) => (i === null ? i : (i - 1 + PHOTOS.length) % PHOTOS.length)), []);
@@ -35,7 +36,7 @@ export default function Gallery() {
 
       <Reveal delay={0.1}>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-          {PHOTOS.map((src, i) => (
+          {PHOTOS.slice(0, visibleCount).map((src, i) => (
             <button
               key={src}
               type="button"
@@ -47,7 +48,6 @@ export default function Gallery() {
               <motion.img
                 src={src}
                 alt={`Engagement photo ${i + 1}`}
-                loading="lazy"
                 className="h-full w-full object-cover"
                 whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.5 }}
@@ -55,6 +55,17 @@ export default function Gallery() {
             </button>
           ))}
         </div>
+        {visibleCount < PHOTOS.length && (
+          <div className="mt-10 flex justify-center">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 10)}
+              className="rounded-full px-8 py-3 text-sm font-medium uppercase tracking-widest transition-all hover:scale-105"
+              style={{ backgroundColor: 'var(--color-gold)', color: '#2a1533' }}
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </Reveal>
 
       <AnimatePresence>
@@ -67,8 +78,36 @@ export default function Gallery() {
             exit={{ opacity: 0 }}
             onClick={close}
           >
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Close"
+              className="absolute right-4 top-4 md:right-8 md:top-8 flex h-10 w-10 items-center justify-center rounded-full z-10 transition-transform hover:scale-105"
+              style={{ backgroundColor: 'var(--color-gold)', color: '#2a1533' }}
+            >
+              ✕
+            </button>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); prev(); }}
+              aria-label="Previous"
+              className="absolute left-4 md:left-8 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border text-xl z-10 transition-transform hover:scale-105"
+              style={{ backgroundColor: 'var(--color-plum)', borderColor: 'var(--color-gold)', color: 'var(--color-gold-bright)' }}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); next(); }}
+              aria-label="Next"
+              className="absolute right-4 md:right-8 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border text-xl z-10 transition-transform hover:scale-105"
+              style={{ backgroundColor: 'var(--color-plum)', borderColor: 'var(--color-gold)', color: 'var(--color-gold-bright)' }}
+            >
+              ›
+            </button>
+
             <motion.div
-              className="relative"
+              className="relative flex flex-col items-center justify-center"
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
@@ -88,34 +127,6 @@ export default function Gallery() {
                   transition={{ duration: 0.2 }}
                 />
               </AnimatePresence>
-
-              <button
-                type="button"
-                onClick={close}
-                aria-label="Close"
-                className="absolute -right-4 -top-4 flex h-9 w-9 items-center justify-center rounded-full"
-                style={{ backgroundColor: 'var(--color-gold)', color: '#2a1533' }}
-              >
-                ✕
-              </button>
-              <button
-                type="button"
-                onClick={prev}
-                aria-label="Previous"
-                className="absolute -left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border text-lg"
-                style={{ backgroundColor: 'var(--color-plum)', borderColor: 'var(--color-gold)', color: 'var(--color-gold-bright)' }}
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                onClick={next}
-                aria-label="Next"
-                className="absolute -right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border text-lg"
-                style={{ backgroundColor: 'var(--color-plum)', borderColor: 'var(--color-gold)', color: 'var(--color-gold-bright)' }}
-              >
-                ›
-              </button>
             </motion.div>
           </motion.div>
         )}
