@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 
 const LINKS = [
   { href: '#events', label: 'Celebrations' },
-  { href: '#story', label: 'Our Story' },
   { href: '#gallery', label: 'Gallery' },
   { href: '#rsvp', label: 'RSVP' },
   { href: '#registry', label: 'Registry' },

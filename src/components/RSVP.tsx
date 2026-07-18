@@ -11,6 +11,7 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
     attending: 'yes',
     guests: 1,
     dietary: '',
+    message: '',
   });
 
   const [attendingEvents, setAttendingEvents] = useState<Record<EventKey, boolean>>(
@@ -28,6 +29,7 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
         attending: formData.attending,
         guests: formData.guests,
         dietary: formData.dietary,
+        message: formData.message,
         events_attending: formData.attending === 'no' 
           ? 'None' 
           : isMultiEvent 
@@ -158,15 +160,31 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
               </Reveal>
             )}
 
+            {formData.attending === 'yes' && (
+              <Reveal>
+                <label htmlFor="dietary" className="mb-1 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Dietary Requirements</label>
+                <textarea
+                  id="dietary"
+                  rows={2}
+                  placeholder="Any allergies or dietary restrictions?"
+                  className="w-full rounded-md border p-3 outline-none transition-colors"
+                  style={{ borderColor: 'var(--color-ivory-deep)' }}
+                  value={formData.dietary}
+                  onChange={(e) => setFormData({ ...formData, dietary: e.target.value })}
+                />
+              </Reveal>
+            )}
+
             <div>
-              <label htmlFor="dietary" className="mb-1 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Dietary Requirements / Message</label>
+              <label htmlFor="message" className="mb-1 block text-sm font-medium" style={{ color: 'var(--color-ink)' }}>Message for the couple</label>
               <textarea
-                id="dietary"
+                id="message"
                 rows={3}
+                placeholder="Leave a message for Keerthy and Abhijith..."
                 className="w-full rounded-md border p-3 outline-none transition-colors"
                 style={{ borderColor: 'var(--color-ivory-deep)' }}
-                value={formData.dietary}
-                onChange={(e) => setFormData({ ...formData, dietary: e.target.value })}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               />
             </div>
 
