@@ -35,7 +35,7 @@ export default function Registry() {
             Blessings &amp; Wishes
           </h2>
           <p className="mx-auto mt-4 max-w-xl" style={{ color: 'rgba(251,244,230,0.85)' }}>
-            Your presence at our celebrations is the only gift we ask for. If you'd still like to send
+            Your presence itself is a gift for us. If you'd still like to send
             something our way, we're saving up for our first big trip together as a married couple — a
             contribution to the honeymoon fund would mean the world.
           </p>
