@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  /* Great Vibes is the signature — used for the couple's names and all titles,
+     matching the entry page. Cinzel = small-caps labels, Cormorant = body. */
+  --font-display: "Great Vibes", cursive;
+  --font-body: "Cormorant Garamond", serif;
+  --font-label: "Cinzel", serif;
+  --font-script: "Great Vibes", cursive;
+
+  /* Light-on-dark palette (whole site is deep purple, like the entry) */
+  --color-ivory: #f3ecdf;         /* cream — light text / borders on dark */
+  --color-ivory-deep: #4a3358;    /* subtle plum border on dark */
+
+  --color-maroon: #c6a5d8;        /* lavender accent — overlines, links */
+  --color-maroon-deep: #f2e7d2;   /* light champagne — headings */
+
+  --color-gold: #cba24d;
+  --color-gold-bright: #e8cd82;
+  --color-champagne: #ecd9ab;
+
+  /* Dark showpiece backgrounds (entry + hero + page) */
+  --color-aubergine-deep: #160b1a;
+  --color-aubergine: #1c0f22;
+  --color-plum: #2a1533;
+  --color-mauve: #4a2a58;
+
+  --color-lavender: #c6a5d8;
+
+  --color-ink: #ece3ef;           /* light body text */
+  --color-ink-soft: #b6a6c4;      /* muted lavender text */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #1c0f22;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-label {
+  font-family: var(--font-label);
+}
+.font-script {
+  font-family: var(--font-script);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #1c0f22;
+}
