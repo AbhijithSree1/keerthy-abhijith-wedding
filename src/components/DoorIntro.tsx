@@ -1,19 +1,35 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import GoldDust from './GoldDust';
+import { EVENTS, type EventKey } from '../data/events';
 
 const REDUCE_MOTION =
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 type Phase = 'closed' | 'loosening' | 'opening' | 'done';
 
-// Classic heart outline (24x24 space), tip at (12,21), top dip at (12,6.5).
-// Scaled + translated in the SVG so the tip rests on the thread.
 const HEART =
   'M12 21 C12 21 3 13.5 3 8.5 C3 5.5 5.5 4 8 4 C10 4 11.5 5.5 12 6.5 C12.5 5.5 14 4 16 4 C18.5 4 21 5.5 21 8.5 C21 13.5 12 21 12 21 Z';
 
-export default function DoorIntro() {
+export default function DoorIntro({ events }: { events?: EventKey[] }) {
   const [phase, setPhase] = useState<Phase>(REDUCE_MOTION ? 'done' : 'closed');
+
+  let dateText = "10 \u2013 13 December 2026";
+  if (events) {
+    const eventObjects = EVENTS.filter((e) => events.includes(e.key)).map((e) => new Date(e.date));
+    if (eventObjects.length === 1) {
+      const d = eventObjects[0];
+      dateText = `${d.getDate()} December ${d.getFullYear()}`;
+    } else if (eventObjects.length > 1) {
+      const minD = new Date(Math.min(...eventObjects.map(d => d.getTime())));
+      const maxD = new Date(Math.max(...eventObjects.map(d => d.getTime())));
+      if (minD.getDate() === maxD.getDate()) {
+         dateText = `${minD.getDate()} December ${minD.getFullYear()}`;
+      } else {
+         dateText = `${minD.getDate()} \u2013 ${maxD.getDate()} December ${minD.getFullYear()}`;
+      }
+    }
+  }
 
   if (phase === 'done') return null;
 
@@ -90,7 +106,7 @@ export default function DoorIntro() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.7 }}
         >
-          10 &ndash; 13 December 2026 &middot; Kerala
+          {dateText} &middot; Kerala
         </motion.p>
       </motion.div>
 
