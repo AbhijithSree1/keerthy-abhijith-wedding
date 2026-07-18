@@ -51,6 +51,10 @@ export const EVENTS: WeddingEvent[] = [
     venueName: 'Contour Backwaters, Kerala',
     travelNote: 'Nearest train station: Thiruvalla · Buses provided',
     mapQuery: 'Contour Backwaters Kerala',
+    extraLink: {
+      label: 'Venue Website',
+      href: 'https://www.contourresorts.com/'
+    },
   },
   {
     key: 'reception',
@@ -61,6 +65,10 @@ export const EVENTS: WeddingEvent[] = [
     venueName: 'Trip is Life, Varkala, Kerala',
     travelNote: 'Nearest train station: Varkala · Buses provided',
     mapQuery: 'Trip is Life Varkala Kerala',
+    extraLink: {
+      label: 'Venue Website',
+      href: 'https://cafetripislife.com/'
+    },
   },
 ];
 
