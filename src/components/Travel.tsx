@@ -1,7 +1,18 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import Reveal from './Reveal';
 
-// Swap these for venue/Kerala photos when you have them — just change the paths.
-const STRIP = [`${import.meta.env.BASE_URL}img/engagement-03.jpg`, `${import.meta.env.BASE_URL}img/engagement-06.jpg`, `${import.meta.env.BASE_URL}img/engagement-09.jpg`];
+const TOTAL_PHOTOS = 27;
+
+function getRandomPhotos(count: number): string[] {
+  const selected = new Set<number>();
+  while (selected.size < count) {
+    selected.add(Math.floor(Math.random() * TOTAL_PHOTOS) + 1);
+  }
+  return Array.from(selected).map(
+    (num) => `${import.meta.env.BASE_URL}img/engagement-${String(num).padStart(2, '0')}.jpg`
+  );
+}
 
 const CARDS = [
   {
@@ -19,6 +30,19 @@ const CARDS = [
 ];
 
 export default function Travel() {
+  const [photos, setPhotos] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Initial random photos
+    setPhotos(getRandomPhotos(3));
+    
+    // Change them every 4 seconds
+    const interval = setInterval(() => {
+      setPhotos(getRandomPhotos(3));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="travel" className="mx-auto max-w-[1100px] px-5 py-20">
       <Reveal className="mb-12 text-center">
@@ -53,9 +77,20 @@ export default function Travel() {
 
       <Reveal delay={0.15}>
         <div className="mt-14 grid grid-cols-3 gap-3">
-          {STRIP.map((src, i) => (
-            <div key={src} className="aspect-[4/5] overflow-hidden rounded-sm outline outline-1" style={{ outlineColor: 'var(--color-ivory-deep)' }}>
-              <img src={src} alt={`Kerala ${i + 1}`} loading="lazy" className="h-full w-full object-cover" />
+          {photos.length > 0 && photos.map((src, i) => (
+            <div key={i} className="relative aspect-[4/5] overflow-hidden rounded-sm outline outline-1 bg-black/5" style={{ outlineColor: 'var(--color-ivory-deep)' }}>
+              <AnimatePresence>
+                <motion.img
+                  key={src}
+                  src={src}
+                  alt={`Kerala ${i + 1}`}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 1.2, ease: "easeInOut" }}
+                />
+              </AnimatePresence>
             </div>
           ))}
         </div>
