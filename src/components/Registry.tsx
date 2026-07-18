@@ -40,17 +40,15 @@ export default function Registry() {
             contribution to the honeymoon fund would mean the world.
           </p>
           <div
-            className="mx-auto mt-8 inline-flex flex-wrap items-center justify-center gap-4 rounded border px-6 py-4"
-            style={{ backgroundColor: 'rgba(251,244,230,0.08)', borderColor: 'rgba(228,197,103,0.4)' }}
+            className="mx-auto mt-8 inline-flex items-center justify-center"
           >
-            <code className="text-lg tracking-wide">UPI: {UPI_ID}</code>
             <button
               type="button"
               onClick={copy}
-              className="font-label rounded px-4 py-2 text-[0.62rem] uppercase tracking-[0.14em]"
-              style={{ backgroundColor: copied ? 'var(--color-gold-bright)' : 'var(--color-gold)', color: '#2a1533' }}
+              className="font-label rounded-full px-8 py-3 text-[0.72rem] uppercase tracking-[0.2em] transition-transform hover:scale-[1.03]"
+              style={{ backgroundColor: copied ? 'var(--color-gold-bright)' : 'var(--color-gold)', color: '#2a1533', boxShadow: '0 12px 34px rgba(203,162,77,0.2)' }}
             >
-              {copied ? 'Copied!' : 'Copy UPI ID'}
+              {copied ? 'UPI ID Copied!' : 'Copy UPI ID'}
             </button>
           </div>
         </div>
