@@ -50,7 +50,7 @@ export default function WeddingSite() {
           </Reveal>
         </section>
       </main>
-      <Footer />
+      <Footer visible={events} />
       <AudioPlayer />
     </>
   );
