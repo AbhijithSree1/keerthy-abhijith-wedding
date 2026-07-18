@@ -17,11 +17,11 @@ function getRandomPhotos(count: number): string[] {
 const CARDS = [
   {
     title: 'By Air',
-    body: 'Trivandrum International Airport (TRV) and Cochin International Airport (COK) are the nearest gateways — details on the best option for each venue coming soon.',
+    body: 'The nearest airports are Trivandrum International (TRV, ~3 hrs from Thiruvalla) and Cochin International (COK, ~2.5 hrs). Taxis and pre-paid cabs are available from both airports.',
   },
   {
     title: 'Where to Stay',
-    body: 'A curated list of nearby hotels and homestays will be shared here closer to the date.',
+    body: 'Hotels and homestays are available in Thiruvalla and Varkala. We recommend booking early as December is peak season in Kerala. Reach out to us and we can help you find the perfect place.',
   },
   {
     title: 'Any Questions',

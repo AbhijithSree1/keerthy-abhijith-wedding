@@ -22,6 +22,7 @@ export const EVENTS: WeddingEvent[] = [
     timeLabel: 'Evening · 6:00 PM',
     venueName: 'KGA Elite Hotel',
     travelNote: 'Nearest train station: Thiruvalla',
+    mapQuery: 'KGA Elite Hotel Thiruvalla Kerala',
     extraLink: {
       label: 'Hotel Website',
       href: 'https://kgaelitehotel.com/'
