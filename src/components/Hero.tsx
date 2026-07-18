@@ -74,6 +74,10 @@ export default function Hero({ greeting }: { greeting: string; target: Date }) {
 
       <motion.a
         href="#events"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' });
+        }}
         className="font-label absolute bottom-8 left-1/2 -translate-x-1/2 text-[0.7rem] uppercase tracking-[0.24em]"
         style={{ color: 'var(--color-gold-bright)' }}
         initial={{ opacity: 0 }}

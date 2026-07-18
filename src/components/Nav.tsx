@@ -13,6 +13,11 @@ const LINKS = [
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    document.getElementById(id.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <nav
       className="sticky top-0 z-30 flex items-center justify-between border-b px-6 py-4 backdrop-blur-md sm:px-10"
@@ -25,7 +30,7 @@ export default function Nav() {
       <ul className="hidden gap-6 font-label text-[0.68rem] uppercase tracking-[0.15em] sm:flex">
         {LINKS.map((l) => (
           <li key={l.href}>
-            <a href={l.href} className="transition-colors" style={{ color: 'rgba(236,217,171,0.82)' }}>
+            <a href={l.href} onClick={(e) => handleScroll(e, l.href)} className="transition-colors" style={{ color: 'rgba(236,217,171,0.82)' }}>
               {l.label}
             </a>
           </li>
@@ -68,7 +73,7 @@ export default function Nav() {
           >
             {LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href} onClick={() => setMenuOpen(false)} style={{ color: 'rgba(236,217,171,0.85)' }}>
+                <a href={l.href} onClick={(e) => { handleScroll(e, l.href); setMenuOpen(false); }} style={{ color: 'rgba(236,217,171,0.85)' }}>
                   {l.label}
                 </a>
               </li>
