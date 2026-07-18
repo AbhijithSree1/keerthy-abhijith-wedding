@@ -21,7 +21,7 @@ export const EVENTS: WeddingEvent[] = [
     date: '2026-12-10T18:00:00+05:30',
     timeLabel: 'Evening · 6:00 PM',
     venueName: 'KGA Elite Hotel',
-    travelNote: 'Nearest train station: Thiruvalla',
+    travelNote: 'Nearest Railway station: Thiruvalla',
     mapQuery: 'KGA Elite Hotel Thiruvalla Kerala',
     extraLink: {
       label: 'Hotel Website',
@@ -35,7 +35,7 @@ export const EVENTS: WeddingEvent[] = [
     date: '2026-12-12T07:30:00+05:30',
     timeLabel: 'Morning muhurtham · 7:30 AM',
     venueName: 'Sreevallabha Temple, Thiruvalla, Kerala',
-    travelNote: 'Nearest train station: Thiruvalla · Buses provided',
+    travelNote: 'Nearest Railway station: Thiruvalla · Buses provided',
     mapQuery: 'Sreevallabha Temple Thiruvalla Kerala',
     extraLink: {
       label: 'About the Temple',
@@ -49,7 +49,7 @@ export const EVENTS: WeddingEvent[] = [
     date: '2026-12-12T11:00:00+05:30',
     timeLabel: 'Afternoon · 11:00 AM',
     venueName: 'Contour Backwaters, Kerala',
-    travelNote: 'Nearest train station: Thiruvalla · Buses provided',
+    travelNote: 'Nearest Railway station: Thiruvalla · Buses provided',
     mapQuery: 'Contour Backwaters Kerala',
     extraLink: {
       label: 'Venue Website',
@@ -63,7 +63,7 @@ export const EVENTS: WeddingEvent[] = [
     date: '2026-12-13T17:30:00+05:30',
     timeLabel: 'Evening · 5:30 PM',
     venueName: 'Trip is Life, Varkala, Kerala',
-    travelNote: 'Nearest train station: Varkala · Buses provided',
+    travelNote: 'Nearest Railway station: Varkala · Buses provided',
     mapQuery: 'Trip is Life Varkala Kerala',
     extraLink: {
       label: 'Venue Website',
