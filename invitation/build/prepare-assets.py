@@ -76,10 +76,14 @@ def duotone(im, shadow, highlight, strength=1.0):
 
 
 def build_hero():
-    """Card front: the arched-porch engagement portrait, warmed slightly."""
-    im = Image.open(os.path.join(SRC, "engagement-03.jpg")).convert("RGB")
-    # the source is a hair wider than the arch: shave the ceiling, keep their feet
-    im = cover(im, 1100, 1540, focus=0.66)
+    """Card front: the engagement portrait, warmed slightly.
+
+    1100x1521 is the arch's own ratio (506:700), so `cover` only shaves the
+    frame rather than distorting it; focus 0.16 keeps their feet in and lets
+    the chandelier sit inside the top of the arch.
+    """
+    im = Image.open(os.path.join(SRC, "engagement-07.jpg")).convert("RGB")
+    im = cover(im, 1100, 1521, focus=0.16)
     im = ImageEnhance.Color(im).enhance(0.88)
     im = ImageEnhance.Contrast(im).enhance(1.06)
     # a whisper of plum in the shadows so the photo sits in the palette
@@ -91,11 +95,11 @@ def build_hero():
 def build_candid():
     """Envelope back: an ordinary evening out, pushed to a plum/champagne duotone.
 
-    engagement-10 rather than the tighter selfies: at envelope size the faces
-    need to sit *in* a room, not fill the whole panel.
+    Cut to 2.42:1, the ratio of the band it sits in, so the mask does the
+    shaping rather than object-fit throwing away half the frame.
     """
-    im = Image.open(os.path.join(SRC, "engagement-10.jpg")).convert("RGB")
-    im = cover(im, 1600, 970, focus=0.34)
+    im = Image.open(os.path.join(SRC, "engagement-13.jpg")).convert("RGB")
+    im = cover(im, 1800, 744, focus=0.40)
     im = duotone(im, (26, 13, 32), CHAMPAGNE, strength=1.0)
     im = ImageEnhance.Brightness(im).enhance(1.06)
     im = ImageEnhance.Contrast(im).enhance(1.04)
