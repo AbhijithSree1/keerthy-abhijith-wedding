@@ -4,7 +4,10 @@
 Reads from ../../public/img (the wedding site's photos, untouched) and writes
 print-resolution derivatives into ../assets. Safe to re-run.
 """
+import base64
 import os
+from urllib.parse import urlencode
+
 import qrcode
 from PIL import Image, ImageEnhance, ImageOps
 
@@ -15,12 +18,39 @@ os.makedirs(OUT, exist_ok=True)
 
 SITE_URL = "https://abhijithsree1.github.io/keerthy-abhijith-wedding/"
 
+# Two printed versions of the card, so the QR lands each guest on the same
+# tailored page src/LinkGenerator.tsx would have produced for them. The site
+# reads ?invite=<base64 csv of event keys>; no `to=` here, since a printed
+# card is not addressed to one guest.
+#
+# "backwater" is deliberately absent from the "all" list: useGuestSelection.ts
+# adds it whenever "wedding" is present, so naming it only lengthens the URL.
+#
+# "public" is deliberately the bare URL: useGuestSelection.ts already defaults
+# an unparameterised visit to wedding + backwater, which is exactly the public
+# card's guest list.
+#
+# Both choices are about length. URL length drives QR module count, and module
+# count is what decides whether the printed code still scans — see
+# build/verify-qr.py.
+INVITE_SETS = {
+    "all": ["sangeet", "wedding", "reception"],
+    "public": None,
+}
+
 # palette (mirrors src/index.css)
 PLUM_DEEP = (22, 11, 26)
 PLUM = (42, 21, 51)
 GOLD = (232, 205, 130)
 CREAM = (243, 236, 223)
 CHAMPAGNE = (236, 217, 171)
+
+
+def invite_url(keys):
+    if keys is None:
+        return SITE_URL
+    token = base64.b64encode(",".join(keys).encode()).decode()
+    return f"{SITE_URL}#/?" + urlencode({"invite": token})
 
 
 def cover(im, w, h, focus=0.5):
@@ -74,25 +104,26 @@ def build_candid():
 
 
 def build_qr():
-    """Cream-on-transparent QR pointing at the wedding site."""
-    qr = qrcode.QRCode(
-        version=None,
-        error_correction=qrcode.constants.ERROR_CORRECT_H,
-        box_size=20,
-        border=0,
-    )
-    qr.add_data(SITE_URL)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color=CREAM, back_color=None).convert("RGBA")
-    # strip the background to transparent so it drops onto plum cleanly
-    px = img.load()
-    for y in range(img.height):
-        for x in range(img.width):
-            r, g, b, a = px[x, y]
-            if (r, g, b) != CREAM:
-                px[x, y] = (0, 0, 0, 0)
-    img.save(os.path.join(OUT, "qr.png"))
-    print("qr.png", img.size, "->", SITE_URL)
+    """One QR per printed version of the card, as a cream plaque.
+
+    Deliberately dark-on-light with a full quiet zone rather than the prettier
+    cream-on-plum: light-on-dark inverts what decoders expect and a zero border
+    removes the margin they lock onto. Both together made the first version of
+    this card scan on nothing at all.
+    """
+    for name, keys in INVITE_SETS.items():
+        url = invite_url(keys)
+        qr = qrcode.QRCode(
+            version=None,
+            error_correction=qrcode.constants.ERROR_CORRECT_M,
+            box_size=20,
+            border=4,  # the spec's quiet zone, in modules
+        )
+        qr.add_data(url)
+        qr.make(fit=True)
+        img = qr.make_image(fill_color=PLUM_DEEP, back_color=CREAM).convert("RGB")
+        img.save(os.path.join(OUT, f"qr-{name}.png"))
+        print(f"qr-{name}.png", img.size, f"{img.width // 20} modules", "->", url)
 
 
 if __name__ == "__main__":

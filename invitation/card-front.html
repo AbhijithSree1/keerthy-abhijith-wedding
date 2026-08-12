@@ -7,24 +7,17 @@
 <style>
   .stack {
     position: absolute;
-    inset: 100px 78px 100px;
+    inset: 108px 78px 104px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .overline {
-    font-size: 27px;
-    letter-spacing: 0.05em;
-    color: rgba(236, 217, 171, 0.85);
-    margin-top: 2px;
-  }
-
   /* the arch echoes the doorway they're standing in */
   .arch {
     width: 506px;
-    height: 708px;
-    margin-top: 24px;
+    height: 730px;
+    margin-top: 0;
     border-radius: 253px 253px 10px 10px;
     overflow: hidden;
     position: relative;
@@ -52,11 +45,11 @@
   /* a gold thread traced just off the arch */
   .arch-frame {
     position: absolute;
-    top: 16px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%);
     width: 542px;
-    height: 726px;
+    height: 748px;
     border: 1px solid rgba(203, 162, 77, 0.5);
     border-radius: 271px 271px 12px 12px;
     pointer-events: none;
@@ -64,13 +57,13 @@
 
   .chai-rule {
     width: 100%;
-    margin-top: 34px;
+    margin-top: 40px;
   }
   .chai-rule .line { max-width: 210px; }
 
   .names {
     font-size: 99px;
-    margin-top: 22px;
+    margin-top: 4px;
     text-align: center;
     white-space: nowrap;
   }
@@ -106,8 +99,6 @@
     <div class="kasavu-band bottom"></div>
 
     <div class="stack">
-      <p class="serif-italic overline">Ten years in the making</p>
-
       <div class="arch">
         <img src="assets/hero.jpg" alt="">
       </div>

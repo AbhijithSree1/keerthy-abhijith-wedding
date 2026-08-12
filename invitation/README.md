@@ -10,94 +10,122 @@ includes `src/`, so this folder is inert as far as the site is concerned.
 | Page | Trim size | What it is |
 | --- | --- | --- |
 | `card-front.html` | 5 × 7 in | The showpiece — arched photo, names, date |
-| `card-back.html` | 5 × 7 in | Families, the four events, the chai line, QR |
-| `envelope-front.html` | 5.25 × 7.25 in | Ruled lines for the guest's name, sender at the foot |
-| `envelope-back.html` | 5.25 × 7.25 in | Flap, gold seal on the fold, a candid, backwaters |
+| `card-back-all.html` | 5 × 7 in | **All four celebrations.** For close family and friends |
+| `card-back-public.html` | 5 × 7 in | **The wedding day only.** The general-invite version |
+| `envelope-front.html` | 5.25 × 7.25 in | Address side — ruled lines for the guest's name |
+| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — flap, gold seal, a candid, backwaters |
+| `envelope-diecut.html` | 7.55 × 12.15 in | The flat sheet the envelope is cut and folded from |
 
-Rendered PNGs land in `out/`. Everything is 300 dpi.
+Rendered PNGs land in `out/`, at 300 dpi. The card front is shared by both
+versions — you only print two different backs.
 
-## The idea
+## The envelope, physically
 
-Three things had to be true at once: unmistakably Kerala, no religious motifs,
-and specific to the two of you rather than to weddings in general.
+It is an ordinary **rectangular A7 envelope, portrait, 5.25 × 7.25 in**. The
+5 × 7 card slides straight in; nothing about the card folds.
 
-- **Kasavu, not deities.** The frame is the *kara* of a Kerala mundu — a fine
-  outer thread, a breath of cloth, then a band of gold weave (`.kasavu-band` in
-  `shared.css`, drawn as repeating 1px threads rather than a printed pattern).
-  It carries "Kerala" without a single religious symbol.
-- **The backwaters, drawn not photographed.** Coconut palms, water, and a
-  *vallam* being poled across it — generated as SVG in `motifs.js`, so it
-  scales to any size and prints as clean line-art. Full panorama on the
-  envelope back; palms only on the card back, where the QR needs the room.
-- **Two glasses of chai.** Your motif, not a stock flourish. It sits where a
-  traditional card would put a lamp: as the divider under the photo on the
-  front, and above the line on the back. Kerala chaya glasses — narrow foot,
-  flared rim, steam leaning together.
-- **The arch.** The card's photo is cut to the arch of the doorway you're
-  actually standing in.
-- **Ten years.** Said plainly on the front, and cashed in on the back.
+- **Front** is the smooth face. This is the address side, and the one that
+  faces up in the post.
+- **Back** is where the flap folds down and seals. That is the side the guest
+  opens.
 
-Palette and fonts are lifted straight from `src/index.css` and the site's
-`index.html` — plum, gold, Great Vibes / Cormorant Garamond / Cinzel — so the
-card and the website read as one thing.
+The two PNGs show each face *finished and sealed* — they are not fold-out
+templates. `envelope-diecut.png` is the fold-out: the flat sheet at true scale,
+solid lines to cut, dashed lines to fold, with the fold order numbered.
+
+**Worth knowing before you commit to custom envelopes.** On a real envelope the
+side, bottom and top flaps fold *away* from the front panel, so their outward
+faces are the reverse of the sheet — meaning a fully printed custom envelope is
+a two-sided print job and costs accordingly. The cheap path is to buy ready-made
+plain A7 envelopes in plum or kraft and print or foil only the front. Hand the
+die-line to a printer only if you want the full custom job.
+
+## The two card versions, and the QR
+
+The QR on each back opens the website already filtered to that guest's events —
+the same thing `/#/invite` produces, minus the guest's name.
+
+| Version | QR opens | Shows |
+| --- | --- | --- |
+| `card-back-all` | `…/#/?invite=…` | Sangeet, wedding, backwater reception, reception |
+| `card-back-public` | the bare site URL | Wedding + backwater reception |
+
+Two things to know, both coming from the site's own behaviour in
+`src/hooks/useGuestSelection.ts`:
+
+1. **The temple wedding and the backwater reception are inseparable on the
+   site.** Line 26 adds `backwater` whenever `wedding` is selected. So a truly
+   wedding-only card is not something the site can currently show — the public
+   card lists both, which is what its QR opens. To decouple them, delete that
+   `if` block in `useGuestSelection.ts` and change the public card's QR to an
+   explicit `invite` token.
+2. **The bare URL is not "everything".** It defaults to wedding + backwater,
+   which is exactly the public guest list — so the public card uses it as-is.
+   That also keeps its URL short, which matters (see below).
+
+### Why the QR is a cream tile
+
+The first version was cream modules on plum with no quiet zone. It scanned on
+nothing — light-on-dark inverts what decoders expect, and a zero border removes
+the margin they lock onto. It is now dark-on-cream with a full quiet zone, and
+`image-rendering: pixelated` keeps the module edges hard.
+
+`build/verify-qr.py` decodes the QR straight out of the finished card PNG and
+checks the URL, at print size and at two screen sizes. **Run it after every
+render.** At 5 in a module is ~0.48 mm, comfortably above the ~0.4 mm phones
+need. Both cards pass.
+
+URL length drives module count, which is what decides whether a printed code
+scans — that is why `INVITE_SETS` omits `backwater` from the "all" list (the
+site adds it anyway) and why the public card uses the bare URL.
 
 ## Editing
 
-The text is plain HTML; open the file and type. The two blocks most likely to
-need changing are marked:
+The text is plain HTML; open the file and type. Blocks likely to change are
+marked `<!-- EDIT ME -->`. Colours live in one place: `:root` in `shared.css`.
 
-```html
-<!-- ============ EDIT ME: parents' names ============ -->
-<!-- ============ EDIT ME: return address ============ -->
-```
+**Check before printing:** the four parents' names came from a voice message
+and two are guesses at the spelling.
 
-**Still to fill in** (currently visible placeholders — do not print as-is):
+| Currently reads | Confidence |
+| --- | --- |
+| Sri. P. K. Prakash | as given |
+| Smt. Hema Prakash | as given |
+| Sri. Sreekumar V. | reconstructed — "Sreekumar" was heard as "rekumar" |
+| Smt. Anantha Kumari | **guess** — heard as "anata kumar" |
 
-- Both mothers' names: `card-back.html` reads "Smt. Bride's Mother" /
-  "Smt. Groom's Mother". The fathers' names are guesses drawn from your own
-  names — check them.
-- The return address on `envelope-front.html` is just "Thiruvalla, Kerala".
-- The QR points at `https://abhijithsree1.github.io/keerthy-abhijith-wedding/`
-  (set in `build/prepare-assets.py`, `SITE_URL`). If you buy a domain, change
-  it there and re-run the asset step, and update the printed URL on the card
-  back to match.
-
-Colours live in one place: `:root` in `shared.css`. Change `--plum` and
-`--gold-bright` there and every page follows.
+Also still a placeholder: the return address on `envelope-front.html` is only
+"Thiruvalla, Kerala".
 
 ## Rebuilding
 
-Needs Python (Pillow, qrcode) and Playwright's Chromium.
+Needs Python (Pillow, qrcode, opencv-python-headless) and Playwright's Chromium.
 
 ```bash
-pip install pillow qrcode
+pip install pillow qrcode opencv-python-headless
 npm install -D playwright && npx playwright install chromium
 
-python3 build/prepare-assets.py     # crops, duotones, QR -> assets/
+python3 build/prepare-assets.py     # crops, duotones, QR codes -> assets/
 node build/render.mjs               # trim-size PNGs -> out/
-node build/render.mjs --bleed       # +0.125in bleed on all sides, for the printer
+node build/render.mjs --bleed       # +0.125in bleed, for the printer
+python3 build/verify-qr.py          # decode the QR back off the finished cards
 node build/render.mjs card-front    # just one page, while iterating
 ```
 
+`render.mjs` fails the build if a page's `.stack` overflows its box — that is
+how the QR caption ended up printed on top of the kasavu band once.
 `prepare-assets.py` reads from `../public/img` and only ever writes into
-`assets/` — the website's photos are never modified.
+`assets/`; the website's photos are never modified.
 
 ## Printing
 
 - Send the printer the `-bleed` files. Trim is 5 × 7 in for the card,
-  5.25 × 7.25 in for the envelope (a standard A7 envelope, which the 5 × 7 card
-  drops straight into).
-- These are RGB PNGs. A press will want CMYK; ask the printer to convert, and
-  expect the gold to sit a little flatter in CMYK than it does on screen. If
-  they can do a **gold foil** pass, the elements to foil are the kasavu bands,
-  the frame, the names, and the seal — everything already sits in the same
-  gold.
-- The plum is a heavy ink coverage. On uncoated stock ask for a proof first.
+  5.25 × 7.25 in for the envelope.
+- These are RGB PNGs; a press will want CMYK. Ask the printer to convert, and
+  expect the gold to sit flatter in CMYK than on screen. If they can do a **gold
+  foil** pass, foil the kasavu bands, the frame, the names and the seal —
+  they already share one gold.
+- The plum is heavy ink coverage. On uncoated stock, ask for a proof first.
+- Do not let anyone rescale or re-compress the QR tile. Check a proof by
+  scanning it with a phone before the full run.
 - The non-bleed PNGs in `out/` are the ones to send on WhatsApp.
-
-## A note on the four events
-
-The printed card lists all four celebrations. The website already tailors the
-event list per guest via `/#/invite` links, so if you want a card that only
-shows, say, the reception, duplicate `card-back.html`, delete the `.ev` blocks
-you don't need, and render that file by name.

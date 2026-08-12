@@ -23,9 +23,9 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 60%;
+    top: 53%;
     width: 100%;
-    height: 22.5%;
+    height: 21%;
     object-fit: cover;
     object-position: 50% 26%;
     display: block;
@@ -46,9 +46,12 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 34%, 50% 57%, 0 34%);
+    clip-path: polygon(0 0, 100% 0, 100% 29%, 50% 47%, 0 29%);
+    /* a shade lighter than the body it lies on, and casting onto it, so the
+       fold reads as a physical flap rather than a printed triangle */
     background:
-      radial-gradient(120% 96% at 50% -22%, var(--mauve) 0%, var(--plum-mid) 34%, var(--plum) 66%, var(--plum-deep) 100%);
+      radial-gradient(120% 96% at 50% -22%, #45264f 0%, #33193d 34%, #26132e 66%, #1b0f21 100%);
+    filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.62));
   }
 
   .flap::after {
@@ -83,7 +86,7 @@
 
   .flap-type {
     position: absolute;
-    top: 128px;
+    top: 118px;
     left: 0;
     right: 0;
     text-align: center;
@@ -107,7 +110,7 @@
   /* the seal straddles the point of the flap */
   .seal {
     position: absolute;
-    top: 57%;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--gold-bright);
@@ -156,10 +159,10 @@
 
   <div class="flap-edge">
     <svg viewBox="0 0 1008 1392" preserveAspectRatio="none" fill="none">
-      <path d="M0,0 H1008 V473 L504,793 L0,473 Z"
+      <path d="M0,0 H1008 V404 L504,654 L0,404 Z"
             stroke="rgba(203,162,77,0.62)" stroke-width="2"
             vector-effect="non-scaling-stroke"/>
-      <path d="M0,462 L504,782 L1008,462"
+      <path d="M0,393 L504,643 L1008,393"
             stroke="rgba(232,205,130,0.26)" stroke-width="1.5"
             vector-effect="non-scaling-stroke"/>
     </svg>

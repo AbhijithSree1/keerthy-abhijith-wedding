@@ -164,9 +164,14 @@ body.bleed .sheet > .inner {
   font-weight: 500;
 }
 
+/* The gold is a gradient clipped to the glyphs, which means the *line box* is
+   the paint box: anything Great Vibes throws outside it — the swash on the K,
+   the descender on the y — comes out unpainted and reads as a straight cut.
+   Great Vibes needs roughly 1.4x, plus padding, for the box to contain it. */
 .names {
   font-family: var(--font-script);
-  line-height: 0.98;
+  line-height: 1.42;
+  padding: 0.1em 0.06em;
   background: linear-gradient(178deg, #f6e8bf 0%, var(--gold-bright) 38%, var(--gold-mid) 74%, #a8842a 100%);
   -webkit-background-clip: text;
   background-clip: text;

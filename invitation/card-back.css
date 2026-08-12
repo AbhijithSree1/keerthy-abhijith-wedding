@@ -1,0 +1,208 @@
+/* Shared layout for both printed versions of the card back.
+   card-back-all.html      — the four-celebration card
+   card-back-wedding.html  — the temple wedding only
+   Only the event rows and the QR differ between them. */
+
+.stack {
+  position: absolute;
+  inset: 108px 92px 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* --- families ------------------------------------------------------------ */
+
+.eyebrow {
+  font-size: 12.5px;
+  letter-spacing: 0.42em;
+  color: rgba(198, 165, 216, 0.92);
+  margin-top: 14px;
+}
+
+.families {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0 26px;
+  align-items: start;
+  margin-top: 22px;
+  width: 100%;
+}
+
+.families .divider {
+  align-self: stretch;
+  background: linear-gradient(180deg, transparent, rgba(203, 162, 77, 0.55), transparent);
+}
+
+.families .who {
+  font-size: 25px;
+  line-height: 1.3;
+  color: var(--ivory);
+}
+
+.families .role {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: rgba(198, 165, 216, 0.72);
+  margin-top: 9px;
+}
+
+.invite {
+  font-size: 23px;
+  line-height: 1.5;
+  margin-top: 24px;
+  max-width: 560px;
+}
+
+.names-sm {
+  font-family: var(--font-script);
+  font-size: 62px;
+  /* same paint-box rule as .names in shared.css — the script overshoots */
+  line-height: 1.4;
+  margin-top: 4px;
+  color: var(--gold-bright);
+}
+.names-sm .amp { font-size: 0.66em; margin: 0 0.08em; }
+
+/* --- events -------------------------------------------------------------- */
+
+.section-rule {
+  width: 100%;
+  margin-top: 22px;
+}
+.section-rule .line { max-width: 260px; }
+
+.events {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.ev {
+  display: grid;
+  grid-template-columns: 152px 1fr;
+  align-items: baseline;
+  column-gap: 22px;
+  text-align: left;
+  padding: 11px 4px 12px;
+  border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
+}
+.ev:first-child {
+  border-top: 0.75px solid rgba(203, 162, 77, 0.26);
+}
+
+.ev .day {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: var(--champagne);
+  white-space: nowrap;
+}
+
+.ev .what {
+  display: block;
+  font-size: 24px;
+  color: var(--ivory);
+  line-height: 1.18;
+}
+
+.ev .what .time {
+  display: inline;
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  color: rgba(232, 205, 130, 0.92);
+  margin-left: 10px;
+  white-space: nowrap;
+}
+
+.ev .venue {
+  display: block;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(198, 165, 216, 0.9);
+  margin-top: 3px;
+  line-height: 1.25;
+}
+
+/* The public card covers one day rather than four, so it heads the block with
+   the date and drops the per-row dates that would just repeat it. */
+.day-head {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--champagne);
+  margin-top: 26px;
+}
+
+/* --- the chai line ------------------------------------------------------- */
+
+.chai-block {
+  margin-top: auto;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chai-line {
+  font-size: 24px;
+  line-height: 1.4;
+  margin-top: 12px;
+  color: rgba(243, 236, 223, 0.92);
+}
+
+.chai-call {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  color: var(--gold-bright);
+  margin-top: 12px;
+}
+
+/* --- QR ------------------------------------------------------------------ */
+
+.qr-block {
+  margin-top: auto;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+}
+
+/* a cream plaque, not a cutout: the code has to be dark-on-light with its
+   quiet zone intact or phones will not read it off the printed card */
+.qr-block img {
+  width: 192px;
+  height: 192px;
+  display: block;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(203, 162, 77, 0.5), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  /* nearest-neighbour keeps the module edges hard; smooth scaling leaves grey
+     half-modules that cost the decoder contrast exactly where it samples */
+  image-rendering: pixelated;
+}
+
+.qr-block .caption {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.3em;
+  color: rgba(236, 217, 171, 0.88);
+}
+
+/* The backwaters run faintly behind the foot. Held inside the kasavu frame —
+   left/right must clear it, and the QR is centred so the palms never meet it. */
+.backwater-wash {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 96px;
+  color: var(--gold-bright);
+  opacity: 0.15;
+  pointer-events: none;
+}
