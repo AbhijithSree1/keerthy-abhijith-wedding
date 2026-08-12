@@ -117,14 +117,8 @@
     filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
   }
 
-  .seal::before {
-    content: "";
-    position: absolute;
-    inset: -14px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(24, 12, 30, 0.92) 40%, rgba(24, 12, 30, 0) 72%);
-    z-index: -1;
-  }
+  /* the seal disc is opaque in the SVG itself now, so it needs only a soft
+     shadow under it rather than a painted backing */
 
   /* --- the foot ---------------------------------------------------------- */
 

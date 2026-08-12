@@ -120,39 +120,62 @@ function diamond(w = 22) {
     </svg>`;
 }
 
-/* ---- the seal: a monogram roundel for the envelope flap ----------------- */
+/* ---- the seal: a monogram roundel for the envelope flap -----------------
+   Wax-seal logic: an opaque disc that sits *on* the fold, so the flap edge
+   passes behind it rather than through the lettering.
+
+   SVG's y axis points down, so an angle of 270deg is the top of the circle
+   and 90deg is the bottom. Text around the top reads correctly when each
+   glyph is turned by (angle + 90); around the bottom, by (angle - 90), and
+   the angle has to run *backwards* or the word comes out mirrored. Getting
+   that pair wrong is what made the first seal read "AllAVURIHT".            */
 function seal(w = 190, { arcs = true } = {}) {
-  const arc = (text, r, startDeg, sweep, size, opacity) => {
+  const ring = (text, r, midDeg, spreadDeg, size, rotOffset) => {
     const chars = text.split("");
-    const step = sweep / Math.max(chars.length - 1, 1);
+    const step = chars.length > 1 ? spreadDeg / (chars.length - 1) : 0;
+    const start = midDeg - spreadDeg / 2;
     return chars
       .map((c, i) => {
-        const a = ((startDeg + i * step) * Math.PI) / 180;
-        const x = Math.cos(a) * r;
-        const y = Math.sin(a) * r;
-        const rot = startDeg + i * step + 90;
-        return `<text x="${x.toFixed(2)}" y="${y.toFixed(2)}"
-          transform="rotate(${rot.toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)})"
-          font-family="Cinzel, serif" font-size="${size}" letter-spacing="0.5"
-          fill="currentColor" fill-opacity="${opacity}" text-anchor="middle">${c}</text>`;
+        const deg = start + i * step;
+        const a = (deg * Math.PI) / 180;
+        const x = (Math.cos(a) * r).toFixed(2);
+        const y = (Math.sin(a) * r).toFixed(2);
+        const rot = (deg + rotOffset).toFixed(2);
+        return `<text x="${x}" y="${y}" transform="rotate(${rot} ${x} ${y})"
+          font-family="Cinzel, serif" font-size="${size}" letter-spacing="0.6"
+          fill="currentColor" fill-opacity="0.82" text-anchor="middle"
+          dominant-baseline="middle">${c}</text>`;
       })
       .join("");
   };
 
+  // top arc reads left→right through 270deg; bottom arc runs backwards
+  // through 90deg so it also reads left→right
+  const topText = arcs ? ring("THIRUVALLA", 74, 270, 118, 11, 90) : "";
+  const bottomText = arcs ? ring("KERALA", 74, 90, -64, 11, -90) : "";
+  const pips = arcs
+    ? `<circle cx="-74" cy="0" r="1.9" fill="currentColor" stroke="none" opacity="0.7"/>
+       <circle cx="74" cy="0" r="1.9" fill="currentColor" stroke="none" opacity="0.7"/>`
+    : "";
+
   return `<svg viewBox="-100 -100 200 200" width="${w}" fill="none" stroke="currentColor"
       stroke-linecap="round" stroke-linejoin="round">
-      <circle r="92" stroke-width="1.5" opacity="0.55"/>
-      <circle r="86" stroke-width="0.9" opacity="0.35"/>
-      <circle r="64" stroke-width="1.2" opacity="0.75"/>
-      <g stroke="none">
-        ${arcs ? arc("THIRUVALLA", 77, 152, 76, 11, 0.8) : ""}
-        ${arcs ? arc("KERALA", -75, -22, 44, 11, 0.8) : ""}
+      <circle r="90" fill="#150c19" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
+      <circle r="84" stroke-width="0.8" stroke-opacity="0.3"/>
+      <circle r="62" stroke-width="1.1" stroke-opacity="0.5"/>
+      <g stroke="none">${topText}${bottomText}</g>
+      ${pips}
+      <!-- Cinzel capitals, not the script: at seal size Great Vibes' K and A
+           throw swashes into each other and the pair reads as one blob. The
+           ampersand stays script, which keeps the tie to the names. -->
+      <g stroke="none" fill="currentColor" font-family="Cinzel, serif"
+         text-anchor="middle">
+        <text x="0" y="10" font-size="38" letter-spacing="2">K<tspan
+          font-family="Great Vibes, cursive" font-size="24" fill-opacity="0.75"
+          dx="4" dy="-2">&amp;</tspan><tspan dx="4" dy="2">A</tspan></text>
       </g>
-      ${arcs ? '<path d="M-64,0 l-9,0 M64,0 l9,0" stroke-width="1.2" opacity="0.6"/>' : ""}
-      <text x="0" y="16" text-anchor="middle" font-family="Great Vibes, cursive"
-        font-size="62" fill="currentColor" stroke="none">K<tspan font-size="44" dy="-4">&amp;</tspan><tspan font-size="62" dy="4">A</tspan></text>
-      <text x="0" y="42" text-anchor="middle" font-family="Cinzel, serif" font-size="11"
-        letter-spacing="4" fill="currentColor" fill-opacity="0.75" stroke="none">2026</text>
+      <text x="0" y="43" text-anchor="middle" font-family="Cinzel, serif" font-size="10"
+        letter-spacing="3.6" fill="currentColor" fill-opacity="0.7" stroke="none">2026</text>
     </svg>`;
 }
 

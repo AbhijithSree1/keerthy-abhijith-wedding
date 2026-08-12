@@ -84,17 +84,16 @@ site adds it anyway) and why the public card uses the bare URL.
 The text is plain HTML; open the file and type. Blocks likely to change are
 marked `<!-- EDIT ME -->`. Colours live in one place: `:root` in `shared.css`.
 
-**Check before printing:** the four parents' names came from a voice message
-and two are guesses at the spelling.
+**Parents' names**, confirmed:
 
-| Currently reads | Confidence |
+| Currently reads | Whose |
 | --- | --- |
-| Sri. P. K. Prakash | as given |
-| Smt. Hema Prakash | as given |
-| Sri. Sreekumar V. | reconstructed — "Sreekumar" was heard as "rekumar" |
-| Smt. Anantha Kumari | **guess** — heard as "anata kumar" |
+| Sri. T. K. Prakash | Bride's father |
+| Smt. Hema Prakash | Bride's mother |
+| Sri. Sreekumar V. | Groom's father |
+| Smt. Anitha Kumary | Groom's mother |
 
-Also still a placeholder: the return address on `envelope-front.html` is only
+Still a placeholder: the return address on `envelope-front.html` is only
 "Thiruvalla, Kerala".
 
 ## Rebuilding
