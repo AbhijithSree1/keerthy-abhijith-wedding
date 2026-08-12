@@ -1,0 +1,214 @@
+/* ============================================================
+   Keerthy & Abhijith — invitation artwork
+   Authored at 192 CSS px = 1 inch. Rendered at deviceScaleFactor
+   1.5625 to land on 300 dpi. See build/render.mjs.
+   ============================================================ */
+
+@import url("fonts.css");
+
+:root {
+  --in: 192px;
+
+  /* palette — mirrors src/index.css so card and website are one family */
+  --plum-deep: #120912;
+  --plum: #1d0f24;
+  --plum-mid: #2a1533;
+  --mauve: #3d2149;
+
+  --gold: #b8912f;
+  --gold-mid: #cba24d;
+  --gold-bright: #e8cd82;
+  --champagne: #ecd9ab;
+  --ivory: #f3ecdf;
+  --lavender: #c6a5d8;
+
+  --font-script: "Great Vibes", cursive;
+  --font-body: "Cormorant Garamond", serif;
+  --font-label: "Cinzel", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--plum-deep);
+}
+
+/* ---------- the sheet ---------------------------------------------------- */
+
+.sheet {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(125% 68% at 50% -14%, var(--mauve) 0%, var(--plum-mid) 30%, var(--plum) 58%, var(--plum-deep) 100%);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.sheet.card {
+  width: 960px;   /* 5in  */
+  height: 1344px; /* 7in  */
+}
+
+.sheet.envelope {
+  width: 1008px;  /* 5.25in */
+  height: 1392px; /* 7.25in */
+}
+
+/* bleed: grow the sheet by 0.125in on every side and shift the content back,
+   so the plum ground runs off the trim edge for the printer. */
+body.bleed .sheet.card {
+  width: 1008px;
+  height: 1392px;
+}
+body.bleed .sheet.envelope {
+  width: 1056px;
+  height: 1440px;
+}
+body.bleed .sheet > .inner {
+  inset: 24px;
+}
+
+/* a fine paper tooth, so flat plum doesn't read as dead screen fill */
+.sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+}
+
+.inner {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- kasavu border ------------------------------------------------
+   A Kerala mundu's kara: a fine outer thread, a breath of cloth, then the
+   woven gold band. Used as the card's frame and as the heavy bottom band.  */
+
+.kasavu-frame {
+  position: absolute;
+  inset: 46px;
+  border: 1.5px solid rgba(203, 162, 77, 0.72);
+  pointer-events: none;
+}
+
+.kasavu-frame::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 0.75px solid rgba(203, 162, 77, 0.34);
+}
+
+/* the woven band — fine vertical gold threads, like the kara of a mundu */
+.kasavu-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 26px;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(232, 205, 130, 0.62) 0px,
+      rgba(232, 205, 130, 0.62) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(184, 145, 47, 0) 0%,
+      rgba(184, 145, 47, 0.22) 45%,
+      rgba(184, 145, 47, 0) 100%
+    );
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+
+.kasavu-band.top {
+  top: 74px;
+}
+.kasavu-band.bottom {
+  bottom: 74px;
+}
+
+.kasavu-band::before,
+.kasavu-band::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232, 205, 130, 0.75) 20%, rgba(232, 205, 130, 0.75) 80%, transparent);
+}
+.kasavu-band::before {
+  top: 0;
+}
+.kasavu-band::after {
+  bottom: 0;
+}
+
+/* ---------- type --------------------------------------------------------- */
+
+.label {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  color: var(--champagne);
+  font-weight: 500;
+}
+
+.names {
+  font-family: var(--font-script);
+  line-height: 0.98;
+  background: linear-gradient(178deg, #f6e8bf 0%, var(--gold-bright) 38%, var(--gold-mid) 74%, #a8842a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.amp {
+  font-family: var(--font-script);
+  color: var(--gold-bright);
+}
+
+.serif-italic {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: rgba(243, 236, 223, 0.86);
+}
+
+/* ---------- rules & motif slots ------------------------------------------ */
+
+.rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.rule .line {
+  height: 1px;
+  flex: 1;
+  max-width: 190px;
+  background: linear-gradient(90deg, transparent, rgba(203, 162, 77, 0.85));
+}
+.rule .line.r {
+  background: linear-gradient(90deg, rgba(203, 162, 77, 0.85), transparent);
+}
+
+.motif {
+  display: block;
+  color: var(--gold-bright);
+}
+
+.motif svg {
+  display: block;
+  overflow: visible;
+}

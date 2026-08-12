@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Card — front</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .stack {
+    position: absolute;
+    inset: 100px 78px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overline {
+    font-size: 27px;
+    letter-spacing: 0.05em;
+    color: rgba(236, 217, 171, 0.85);
+    margin-top: 2px;
+  }
+
+  /* the arch echoes the doorway they're standing in */
+  .arch {
+    width: 506px;
+    height: 708px;
+    margin-top: 24px;
+    border-radius: 253px 253px 10px 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 26px 60px -22px rgba(0, 0, 0, 0.75);
+  }
+
+  .arch img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    display: block;
+  }
+
+  /* the photo settles into the plum at its foot, so it sits *in* the card */
+  .arch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(29, 15, 36, 0.3) 0%, transparent 20%, transparent 76%, rgba(24, 12, 30, 0.62) 100%),
+      radial-gradient(126% 96% at 50% 34%, transparent 60%, rgba(18, 9, 18, 0.42) 100%);
+  }
+
+  /* a gold thread traced just off the arch */
+  .arch-frame {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 542px;
+    height: 726px;
+    border: 1px solid rgba(203, 162, 77, 0.5);
+    border-radius: 271px 271px 12px 12px;
+    pointer-events: none;
+  }
+
+  .chai-rule {
+    width: 100%;
+    margin-top: 34px;
+  }
+  .chai-rule .line { max-width: 210px; }
+
+  .names {
+    font-size: 99px;
+    margin-top: 22px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Great Vibes' ampersand is a swash in its own right — give it air and let
+     it sit a size smaller so the two names stay the loudest thing here. */
+  .names .amp {
+    font-size: 0.68em;
+    margin: 0 0.1em;
+    vertical-align: 0.06em;
+  }
+
+  .when {
+    font-size: 19px;
+    letter-spacing: 0.36em;
+    color: var(--ivory);
+    margin-top: 30px;
+  }
+
+  .where {
+    font-size: 14px;
+    letter-spacing: 0.42em;
+    color: rgba(198, 165, 216, 0.9);
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="sheet card">
+  <div class="inner">
+    <div class="kasavu-frame"></div>
+    <div class="kasavu-band top"></div>
+    <div class="kasavu-band bottom"></div>
+
+    <div class="stack">
+      <p class="serif-italic overline">Ten years in the making</p>
+
+      <div class="arch">
+        <img src="assets/hero.jpg" alt="">
+      </div>
+      <div class="arch-frame"></div>
+
+      <div class="rule chai-rule">
+        <span class="line"></span>
+        <span class="motif" data-motif="chai" data-w="104"></span>
+        <span class="line r"></span>
+      </div>
+
+      <h1 class="names">Keerthy <span class="amp">&amp;</span> Abhijith</h1>
+
+      <p class="label when">Saturday &middot; 12 December 2026</p>
+      <p class="label where">Thiruvalla &middot; Kerala</p>
+    </div>
+  </div>
+</div>
+<script src="motifs.js"></script>
+</body>
+</html>

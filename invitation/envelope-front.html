@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Envelope — front</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Three bands — the couple at the head, the guest's name written across the
+     middle, the sender at the foot — spread so the panel never goes hollow. */
+  .stack {
+    position: absolute;
+    inset: 118px 96px 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .crest {
+    color: var(--gold-bright);
+    opacity: 0.92;
+  }
+
+  .crest-sub {
+    font-size: 10.5px;
+    letter-spacing: 0.46em;
+    color: rgba(198, 165, 216, 0.78);
+    margin-top: 20px;
+  }
+
+  .head .names {
+    font-family: var(--font-script);
+    font-size: 52px;
+    line-height: 1.08;
+    margin-top: 12px;
+    color: var(--gold-bright);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+  .head .names .amp { font-size: 0.66em; margin: 0 0.07em; }
+
+  /* --- ten years of long distance, as a flight path ---------------------- */
+
+  .journey {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(232, 205, 130, 0.74);
+  }
+
+  .journey-label {
+    font-size: 9.5px;
+    letter-spacing: 0.4em;
+    color: rgba(198, 165, 216, 0.6);
+    margin-bottom: 22px;
+  }
+
+  /* --- the address panel: ruled lines, written by hand ------------------- */
+
+  .to {
+    width: 100%;
+  }
+
+  .to-label {
+    font-size: 10.5px;
+    letter-spacing: 0.46em;
+    color: rgba(232, 205, 130, 0.85);
+    text-align: left;
+    margin-bottom: 42px;
+    padding-left: 4px;
+  }
+
+  .lines {
+    display: flex;
+    flex-direction: column;
+    gap: 84px;
+  }
+
+  .lines span {
+    height: 1px;
+    background: linear-gradient(90deg,
+      rgba(203, 162, 77, 0.12) 0%,
+      rgba(203, 162, 77, 0.52) 7%,
+      rgba(203, 162, 77, 0.52) 93%,
+      rgba(203, 162, 77, 0.12) 100%);
+  }
+  /* the last line stops short — it's a postcode, not a sentence */
+  .lines span:last-child { margin-right: 44%; }
+
+  /* --- sender + date, at the foot --------------------------------------- */
+
+  .foot {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .from .from-label {
+    font-size: 9.5px;
+    letter-spacing: 0.34em;
+    color: rgba(198, 165, 216, 0.62);
+    margin-bottom: 10px;
+  }
+
+  .from .who {
+    font-size: 21px;
+    color: var(--ivory);
+    line-height: 1.35;
+  }
+
+  .from .where {
+    font-size: 17px;
+    font-style: italic;
+    color: rgba(198, 165, 216, 0.75);
+    margin-top: 2px;
+  }
+
+  .when {
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    color: var(--champagne);
+    text-align: right;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+<div class="sheet envelope">
+  <div class="inner">
+    <div class="kasavu-frame"></div>
+    <div class="kasavu-band top"></div>
+    <div class="kasavu-band bottom"></div>
+
+    <div class="stack">
+      <div class="head">
+        <span class="motif crest" data-motif="seal" data-w="118"
+              data-opts='{"arcs":false}'></span>
+        <p class="label crest-sub">The wedding of</p>
+        <p class="names">Keerthy <span class="amp">&amp;</span> Abhijith</p>
+      </div>
+
+      <!-- college, then a decade of timezones, then home -->
+      <div class="journey">
+        <p class="label journey-label">The long way round</p>
+        <span class="motif" data-motif="distance" data-w="380"></span>
+      </div>
+
+      <div class="to">
+        <p class="label to-label">To</p>
+        <div class="lines">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="from">
+          <p class="label from-label">With love, from</p>
+          <!-- ============ EDIT ME: return address ============ -->
+          <p class="who">Keerthy &amp; Abhijith</p>
+          <p class="where">Thiruvalla, Kerala</p>
+          <!-- ================================================= -->
+        </div>
+        <p class="label when">10 &ndash; 13 December<br>2026</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="motifs.js"></script>
+</body>
+</html>
