@@ -179,6 +179,59 @@ function seal(w = 190, { arcs = true } = {}) {
     </svg>`;
 }
 
+/* ---- Ganapati, drawn as line-art for the envelope seal ------------------
+   Front-facing and symmetric apart from the trunk, which sweeps left and
+   hooks at the tip. Everything is stroked, nothing filled, so it foils or
+   prints in the single gold the rest of the suite uses. The group is shifted
+   down 24 units because the trunk hangs well below the head — without it the
+   figure sits high in the seal instead of centred.                          */
+function ganapati() {
+  return `
+  <g transform="translate(0,24)" stroke="currentColor" fill="none" stroke-width="2.4"
+     stroke-linecap="round" stroke-linejoin="round">
+    <!-- finial and crown -->
+    <path d="M0,-92 C-5.5,-84 -5.5,-78 0,-73 C5.5,-78 5.5,-84 0,-92 Z"/>
+    <path d="M-25,-52 C-25,-70 -12,-79 0,-79 C12,-79 25,-70 25,-52"/>
+    <path d="M-29,-51 C-15,-55 15,-55 29,-51"/>
+    <path d="M-29,-44 C-15,-48 15,-48 29,-44" stroke-width="1.3" opacity="0.7"/>
+    <circle cx="0" cy="-63" r="3.2" stroke-width="1.4"/>
+
+    <!-- head -->
+    <path d="M-29,-46 C-33,-32 -32,-14 -24,-2 C-14,10 14,10 24,-2 C32,-14 33,-32 29,-46"/>
+
+    <!-- ears: leaf-shaped rather than full circles, so the figure stays
+         roughly as wide as it is tall and fits the seal -->
+    <path d="M-28,-45 C-46,-52 -62,-40 -61,-20 C-60,-3 -46,7 -27,0"/>
+    <path d="M-29,-37 C-42,-41 -52,-32 -51,-19 C-50,-8 -41,-1 -29,-5" stroke-width="1.2" opacity="0.7"/>
+    <path d="M28,-45 C46,-52 62,-40 61,-20 C60,-3 46,7 27,0"/>
+    <path d="M29,-37 C42,-41 52,-32 51,-19 C50,-8 41,-1 29,-5" stroke-width="1.2" opacity="0.7"/>
+
+    <path d="M-7,-41 C-7,-32 7,-32 7,-41" stroke-width="1.5"/>
+
+    <path d="M-20,-22 C-16,-27 -9,-27 -6,-21" stroke-width="1.7"/>
+    <path d="M20,-22 C16,-27 9,-27 6,-21" stroke-width="1.7"/>
+
+    <!-- tusks sit outboard of the trunk; inside it they read as whiskers -->
+    <path d="M-19,-4 C-24,2 -26,8 -25,13" stroke-width="1.9"/>
+    <path d="M19,-4 C24,1 25,5 25,8" stroke-width="1.9"/>
+
+    <!-- trunk -->
+    <path d="M-8,-12 C-11,8 -20,25 -33,31 C-43,36 -50,30 -48,22 C-47,17 -41,16 -39,20"/>
+    <path d="M8,-12 C8,10 0,28 -16,36 C-32,44 -54,37 -54,21 C-54,11 -46,5 -38,10"/>
+    <path d="M-39,20 C-35,17 -35,13 -38,10" stroke-width="1.8"/>
+  </g>`;
+}
+
+/* ---- the seal that closes the envelope: Ganapati and nothing else ------- */
+function ganapatiSeal(w = 190) {
+  return `<svg viewBox="-100 -100 200 200" width="${w}" fill="none" stroke="currentColor"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle r="90" fill="#150c19" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
+      <circle r="84" stroke-width="0.8" stroke-opacity="0.32"/>
+      <g transform="scale(0.94)">${ganapati()}</g>
+    </svg>`;
+}
+
 /* ---- the long-distance line: Kerala to the UK and back ------------------ */
 function distance(w = 420) {
   return `<svg viewBox="0 0 420 74" width="${w}" fill="none" stroke="currentColor"
@@ -197,7 +250,9 @@ function distance(w = 420) {
 
 /* ------------------------------------------------------------------------ */
 
-const MOTIFS = { chai, diamond, seal, distance, backwater, palm, vallam };
+const MOTIFS = {
+  chai, diamond, seal, ganapati, ganapatiSeal, distance, backwater, palm, vallam,
+};
 
 document.querySelectorAll("[data-motif]").forEach((el) => {
   const name = el.dataset.motif;

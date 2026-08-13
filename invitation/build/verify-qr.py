@@ -20,8 +20,10 @@ OUT = os.path.normpath(os.path.join(HERE, "..", "out"))
 
 # kept in step with INVITE_SETS in prepare-assets.py
 EXPECTED = {
-    "card-back-all.png": "sangeet,wedding,reception",
-    "card-back-public.png": None,  # bare URL — the site's own public default
+    "card-back-all-bride.png": "sangeet,wedding,reception",
+    "card-back-all-groom.png": "sangeet,wedding,reception",
+    "card-back-public-bride.png": None,  # bare URL — the site's public default
+    "card-back-public-groom.png": None,
 }
 
 BASE = "https://abhijithsree1.github.io/keerthy-abhijith-wedding/"

@@ -18,7 +18,7 @@
   font-size: 12.5px;
   letter-spacing: 0.42em;
   color: rgba(198, 165, 216, 0.92);
-  margin-top: 14px;
+  margin-top: 8px;
 }
 
 .families {
@@ -26,7 +26,7 @@
   grid-template-columns: 1fr 1px 1fr;
   gap: 0 26px;
   align-items: start;
-  margin-top: 22px;
+  margin-top: 18px;
   width: 100%;
 }
 
@@ -47,31 +47,49 @@
   font-size: 10px;
   letter-spacing: 0.3em;
   color: rgba(198, 165, 216, 0.72);
-  margin-top: 9px;
+  margin-top: 8px;
+}
+
+/* house name and number under each family, so the card carries both */
+.families .house {
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.3;
+  color: rgba(236, 217, 171, 0.86);
+  margin-top: 10px;
+}
+
+.families .tel {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  color: rgba(198, 165, 216, 0.86);
+  margin-top: 5px;
 }
 
 .invite {
-  font-size: 23px;
-  line-height: 1.5;
-  margin-top: 24px;
+  font-size: 22px;
+  line-height: 1.45;
+  margin-top: 20px;
   max-width: 560px;
 }
 
 .names-sm {
   font-family: var(--font-script);
-  font-size: 62px;
+  font-size: 56px;
   /* same paint-box rule as .names in shared.css — the script overshoots */
   line-height: 1.4;
   margin-top: 4px;
   color: var(--gold-bright);
 }
-.names-sm .amp { font-size: 0.66em; margin: 0 0.08em; }
+.names-sm { gap: 0.16em; }
+.names-sm .amp { font-size: 0.66em; }
 
 /* --- events -------------------------------------------------------------- */
 
 .section-rule {
   width: 100%;
-  margin-top: 22px;
+  margin-top: 16px;
 }
 .section-rule .line { max-width: 260px; }
 
@@ -86,7 +104,7 @@
   align-items: baseline;
   column-gap: 22px;
   text-align: left;
-  padding: 11px 4px 12px;
+  padding: 9px 4px 10px;
   border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
 }
 .ev:first-child {
@@ -141,16 +159,16 @@
 
 .chai-block {
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .chai-line {
-  font-size: 24px;
-  line-height: 1.4;
-  margin-top: 12px;
+  font-size: 23px;
+  line-height: 1.35;
+  margin-top: 10px;
   color: rgba(243, 236, 223, 0.92);
 }
 
@@ -167,7 +185,7 @@
 
 .qr-block {
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -168,6 +168,38 @@ body.bleed .sheet > .inner {
    the paint box: anything Great Vibes throws outside it — the swash on the K,
    the descender on the y — comes out unpainted and reads as a straight cut.
    Great Vibes needs roughly 1.4x, plus padding, for the box to contain it. */
+/* ---- bride's side / groom's side -----------------------------------------
+   The same artwork prints twice: the bride's family invites with her name
+   first, the groom's family with his. Rather than keeping two copies of every
+   page in sync, the pages carry both orderings and `body.groom` reverses them
+   with `order`. That is also why the names are three spans instead of one
+   run of text — CSS can reorder boxes, not text nodes.
+   --------------------------------------------------------------------- */
+
+.pair {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.pair .bride { order: 1; }
+.pair .amp { order: 2; }
+.pair .groom { order: 3; }
+
+body.groom .pair .groom { order: 1; }
+body.groom .pair .bride { order: 3; }
+
+/* the families block is a 3-column grid: their columns swap the same way */
+body.groom .families .side-bride { order: 3; }
+body.groom .families .divider { order: 2; }
+body.groom .families .side-groom { order: 1; }
+
+/* return address on the envelope: show only the inviting family's */
+.only-bride { display: block; }
+.only-groom { display: none; }
+body.groom .only-bride { display: none; }
+body.groom .only-groom { display: block; }
+
 .names {
   font-family: var(--font-script);
   line-height: 1.42;

@@ -13,11 +13,28 @@ includes `src/`, so this folder is inert as far as the site is concerned.
 | `card-back-all.html` | 5 × 7 in | **All four celebrations.** For close family and friends |
 | `card-back-public.html` | 5 × 7 in | **The wedding day only.** The general-invite version |
 | `envelope-front.html` | 5.25 × 7.25 in | Address side — ruled lines for the guest's name |
-| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — flap, gold seal, a candid, backwaters |
+| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — flap, Ganapati seal, a candid, backwaters |
 | `envelope-diecut.html` | 7.55 × 12.15 in | The flat sheet the envelope is cut and folded from |
 
-Rendered PNGs land in `out/`, at 300 dpi. The card front is shared by both
-versions — you only print two different backs.
+## Bride's side and groom's side
+
+Every page except the die-line prints **twice**, once per inviting family:
+
+- **Bride's side** — Keerthy's name first, her parents in the left column.
+- **Groom's side** — Abhijith's name first, his parents in the left column.
+
+Rather than keeping two copies of every page in sync, each page carries both
+orderings and `body.groom` reverses them with CSS `order`. That is also why the
+names are three spans (`.bride` / `.amp` / `.groom`) inside a `.pair` flex row
+instead of one run of text — CSS can reorder boxes, but not text nodes.
+`render.mjs` renders each page once per side and suffixes the filename.
+
+Both families' house names and phone numbers appear on **both** versions of the
+card back; only the column order changes. The envelope's return address is the
+inviting family's alone, switched by `.only-bride` / `.only-groom`.
+
+Rendered PNGs land in `out/`, at 300 dpi — 10 artwork files plus the die-line,
+and the same again with bleed.
 
 ## The envelope, physically
 
@@ -47,8 +64,11 @@ the same thing `/#/invite` produces, minus the guest's name.
 
 | Version | QR opens | Shows |
 | --- | --- | --- |
-| `card-back-all` | `…/#/?invite=…` | Sangeet, wedding, backwater reception, reception |
-| `card-back-public` | the bare site URL | Wedding + backwater reception |
+| `card-back-all-*` | `…/#/?invite=…` | Sangeet, wedding, backwater reception, reception |
+| `card-back-public-*` | the bare site URL | Wedding + backwater reception |
+
+The QR is identical on both sides of a given version — it points at the events,
+not at a family.
 
 Two things to know, both coming from the site's own behaviour in
 `src/hooks/useGuestSelection.ts`:
@@ -84,17 +104,24 @@ site adds it anyway) and why the public card uses the bare URL.
 The text is plain HTML; open the file and type. Blocks likely to change are
 marked `<!-- EDIT ME -->`. Colours live in one place: `:root` in `shared.css`.
 
-**Parents' names**, confirmed:
+**Families**, as given:
 
-| Currently reads | Whose |
-| --- | --- |
-| Sri. T. K. Prakash | Bride's father |
-| Smt. Hema Prakash | Bride's mother |
-| Sri. Sreekumar V. | Groom's father |
-| Smt. Anitha Kumary | Groom's mother |
+| | Bride's side | Groom's side |
+| --- | --- | --- |
+| Parents | Sri. T. K. Prakash & Smt. Hema Prakash | Sri. Sreekumar V. & Smt. Anitha Kumary |
+| House | Thompil Puthenpurayil, Manjadi, Thiruvalla | Sreenitha, Thonnalloor, Pandalam |
+| Phone | +91 88914 53672 | +91 94475 94088 |
 
-Still a placeholder: the return address on `envelope-front.html` is only
-"Thiruvalla, Kerala".
+## The Ganapati
+
+`ganapati()` in `motifs.js` is hand-drawn SVG — front-facing, symmetric apart
+from the trunk, entirely stroked so it foils or prints in the same single gold
+as everything else. `ganapatiSeal()` wraps it in the opaque disc that closes the
+envelope; that seal carries the Ganapati and nothing else.
+
+The **K&A monogram still appears on the envelope front**, at the top of the
+address side. Swap it for the Ganapati by changing that page's `data-motif`
+from `seal` to `ganapatiSeal`.
 
 ## Rebuilding
 

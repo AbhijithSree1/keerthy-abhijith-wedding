@@ -43,7 +43,8 @@
     background: none;
     -webkit-text-fill-color: currentColor;
   }
-  .head .names .amp { font-size: 0.66em; margin: 0 0.07em; }
+  .head .names { gap: 0.15em; }
+  .head .names .amp { font-size: 0.66em; }
 
   /* --- the address panel: ruled lines, written by hand ------------------- */
 
@@ -94,7 +95,7 @@
   }
 
   .from .who {
-    font-size: 21px;
+    font-size: 20px;
     color: var(--ivory);
     line-height: 1.35;
   }
@@ -127,7 +128,7 @@
         <span class="motif crest" data-motif="seal" data-w="118"
               data-opts='{"arcs":false}'></span>
         <p class="label crest-sub">The wedding of</p>
-        <p class="names">Keerthy <span class="amp">&amp;</span> Abhijith</p>
+        <p class="names pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></p>
       </div>
 
       <div class="to">
@@ -141,8 +142,14 @@
         <div class="from">
           <p class="label from-label">With love, from</p>
           <!-- ============ EDIT ME: return address ============ -->
-          <p class="who">Keerthy &amp; Abhijith</p>
-          <p class="where">Thiruvalla, Kerala</p>
+          <span class="only-bride">
+            <p class="who">Thompil Puthenpurayil</p>
+            <p class="where">Manjadi, Thiruvalla &middot; +91 88914 53672</p>
+          </span>
+          <span class="only-groom">
+            <p class="who">Sreenitha</p>
+            <p class="where">Thonnalloor, Pandalam &middot; +91 94475 94088</p>
+          </span>
           <!-- ================================================= -->
         </div>
         <p class="label when">10 &ndash; 13 December<br>2026</p>
