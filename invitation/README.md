@@ -98,8 +98,8 @@ the same thing `/#/invite` produces, minus the guest's name.
 
 | Version | QR opens | Shows |
 | --- | --- | --- |
-| `card-back-all-*` | `…/#/?invite=…` | Sangeet, wedding, backwater reception, reception |
-| `card-back-public-*` | the bare site URL | Wedding + backwater reception |
+| `card-back-all-*` | `…/#/?invite=…` | Sangeet, temple wedding, auditorium wedding, reception |
+| `card-back-public-*` | the bare site URL | Temple wedding + auditorium wedding |
 
 The QR is identical on both sides of a given version — it points at the events,
 not at a family.
@@ -107,15 +107,18 @@ not at a family.
 Two things to know, both coming from the site's own behaviour in
 `src/hooks/useGuestSelection.ts`:
 
-1. **The temple wedding and the backwater reception are inseparable on the
-   site.** Line 26 adds `backwater` whenever `wedding` is selected. So a truly
-   wedding-only card is not something the site can currently show — the public
-   card lists both, which is what its QR opens. To decouple them, delete that
-   `if` block in `useGuestSelection.ts` and change the public card's QR to an
-   explicit `invite` token.
-2. **The bare URL is not "everything".** It defaults to wedding + backwater,
-   which is exactly the public guest list — so the public card uses it as-is.
-   That also keeps its URL short, which matters (see below).
+1. **The temple wedding and the auditorium wedding are inseparable on the
+   site.** Line 26 adds `backwater` whenever `wedding` is selected. So a
+   temple-wedding-only card is not something the site can currently show — the
+   public card lists both, which is what its QR opens. To decouple them, delete
+   that `if` block in `useGuestSelection.ts` and change the public card's QR to
+   an explicit `invite` token.
+2. **The bare URL is not "everything".** It defaults to temple + auditorium
+   wedding, which is exactly the public guest list — so the public card uses it
+   as-is. That also keeps its URL short, which matters (see below).
+
+Event names and venues are kept in step with `src/data/events.ts` by hand — the
+card is static artwork and does not read from the site.
 
 ### Why the QR is a cream tile
 

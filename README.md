@@ -13,7 +13,7 @@ npm run preview # preview the production build locally
 ```
 
 ## Structure
-- `src/data/events.ts` — the 4 events (Sangeet/Wedding/Backwater/Reception): dates, venues, map links. Edit here.
+- `src/data/events.ts` — the 4 events (Sangeet / Temple Wedding / Auditorium Wedding / Reception): dates, venues, map links. Edit here.
 - `src/components/` — one file per section (Hero, EventsTimeline, Gallery, Registry, RSVP, Travel, ...)
 - `src/WeddingSite.tsx` — the guest-facing page, assembles all sections
 - `src/LinkGenerator.tsx` — **private** page (`/#/invite`) that builds each guest's personal link
@@ -21,7 +21,7 @@ npm run preview # preview the production build locally
 
 ## Things to fill in before sending links
 1. **Love story** — edit the placeholder paragraph in `src/components/Story.tsx`.
-2. **Sangeet & backwater venue addresses** — in `src/data/events.ts`, currently "coming soon" / a generic map search query.
+2. **Sangeet venue address** — in `src/data/events.ts`, currently a generic map search query.
 3. **Event times** — every event currently shows "Time to be announced". Once muhurtham/timings are fixed, update both `timeLabel` (what guests see) and `date` (drives the countdown) for each event in `src/data/events.ts`.
 4. **RSVP form** — create a Google Form, then Send → embed (`<>`) icon → copy the `src` URL → paste it into the `iframe` in `src/components/RSVP.tsx` (currently `src="about:blank"`).
 5. **Honeymoon fund / UPI ID** — replace the placeholder in `src/components/Registry.tsx` (`UPI_ID` constant) with the real one, or swap the wording for a registry link instead.

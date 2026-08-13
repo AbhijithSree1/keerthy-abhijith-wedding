@@ -89,13 +89,14 @@
 
 .section-rule {
   width: 100%;
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 16px;
 }
 .section-rule .line { max-width: 260px; }
 
 .events {
   width: 100%;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .ev {
@@ -104,7 +105,7 @@
   align-items: baseline;
   column-gap: 22px;
   text-align: left;
-  padding: 9px 4px 10px;
+  padding: 13px 4px 14px;
   border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
 }
 .ev:first-child {
@@ -155,37 +156,19 @@
   margin-top: 26px;
 }
 
-/* --- the chai line ------------------------------------------------------- */
+/* --- the chai glasses ----------------------------------------------------
+   Kept as a mark between the schedule and the QR. It carries its own meaning
+   without a caption under it, and it echoes the divider on the card front. */
 
-.chai-block {
+.chai-mark {
   margin-top: auto;
-  padding-top: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.chai-line {
-  font-size: 23px;
-  line-height: 1.35;
-  margin-top: 10px;
-  color: rgba(243, 236, 223, 0.92);
-}
-
-.chai-call {
-  font-family: var(--font-label);
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  color: var(--gold-bright);
-  margin-top: 12px;
 }
 
 /* --- QR ------------------------------------------------------------------ */
 
 .qr-block {
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
