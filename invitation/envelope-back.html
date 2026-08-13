@@ -29,7 +29,7 @@
     object-fit: cover;
     object-position: 50% 44%;
     display: block;
-    opacity: 0.84;
+    opacity: 0.9;
     /* one radial layer rather than two linear ones — multi-layer
        mask-composite: intersect did not survive the renderer */
     mask-image: radial-gradient(
@@ -49,16 +49,15 @@
     clip-path: polygon(0 0, 100% 0, 100% 29%, 50% 47%, 0 29%);
     /* a shade lighter than the body it lies on, and casting onto it, so the
        fold reads as a physical flap rather than a printed triangle */
-    background:
-      radial-gradient(120% 96% at 50% -22%, #45264f 0%, #33193d 34%, #26132e 66%, #1b0f21 100%);
-    filter: drop-shadow(0 7px 12px rgba(0, 0, 0, 0.62));
+    background: var(--flap-ground);
+    filter: drop-shadow(var(--flap-shadow));
   }
 
   .flap::after {
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.05;
+    opacity: var(--sheet-noise);
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
   }
 
@@ -95,7 +94,7 @@
   .flap-type .names-sm {
     font-family: var(--font-script);
     font-size: 56px;
-    color: var(--gold-bright);
+    color: var(--text-script);
     line-height: 1.06;
   }
     .flap-type .names-sm { gap: 0.15em; }
@@ -104,7 +103,7 @@
   .flap-type .sub {
     font-size: 11px;
     letter-spacing: 0.44em;
-    color: rgba(198, 165, 216, 0.82);
+    color: var(--text-soft);
     margin-top: 18px;
   }
 
@@ -114,8 +113,8 @@
     top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--gold-bright);
-    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
+    color: var(--seal-ink);
+    filter: drop-shadow(0 6px 16px rgba(70, 45, 20, 0.32));
   }
 
   /* the seal disc is opaque in the SVG itself now, so it needs only a soft
@@ -132,22 +131,22 @@
   }
 
   .foot .backwater {
-    color: var(--gold-bright);
-    opacity: 0.72;
+    color: var(--art-ink);
+    opacity: 0.8;
   }
 
   .foot .place {
     font-size: 11px;
     letter-spacing: 0.42em;
-    color: var(--champagne);
+    color: var(--text-label);
     margin-top: 14px;
   }
 </style>
 </head>
 <body>
-<div class="sheet envelope">
+<div class="sheet envelope ivory">
   <div class="photo">
-    <img src="assets/candid.jpg" alt="">
+    <img src="assets/candid-ivory.jpg" alt="">
   </div>
 
   <div class="flap"></div>
@@ -155,10 +154,10 @@
   <div class="flap-edge">
     <svg viewBox="0 0 1008 1392" preserveAspectRatio="none" fill="none">
       <path d="M0,0 H1008 V404 L504,654 L0,404 Z"
-            stroke="rgba(203,162,77,0.62)" stroke-width="2"
+            stroke="var(--kara-line)" stroke-width="2"
             vector-effect="non-scaling-stroke"/>
       <path d="M0,393 L504,643 L1008,393"
-            stroke="rgba(232,205,130,0.26)" stroke-width="1.5"
+            stroke="var(--kara-line-soft)" stroke-width="1.5"
             vector-effect="non-scaling-stroke"/>
     </svg>
   </div>

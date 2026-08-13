@@ -25,6 +25,70 @@
   --font-script: "Great Vibes", cursive;
   --font-body: "Cormorant Garamond", serif;
   --font-label: "Cinzel", serif;
+
+  /* ---- theme tokens -------------------------------------------------------
+     Everything that changes between the plum card and the ivory envelope goes
+     through these. Components below must not hardcode a colour, or the ivory
+     sheet ends up with the plum sheet's ink on it. Overrides: `.sheet.ivory`.
+     -------------------------------------------------------------------- */
+  --sheet-ground:
+    radial-gradient(125% 68% at 50% -14%, var(--mauve) 0%, var(--plum-mid) 30%, var(--plum) 58%, var(--plum-deep) 100%);
+  --sheet-noise: 0.05;
+
+  --text-strong: var(--ivory);
+  --text-soft: rgba(198, 165, 216, 0.9);
+  --text-label: var(--champagne);
+  --text-script: var(--gold-bright);
+
+  /* the kasavu kara: outer thread, inner hairline, woven band */
+  --kara-line: rgba(203, 162, 77, 0.72);
+  --kara-line-soft: rgba(203, 162, 77, 0.34);
+  --kara-thread: rgba(232, 205, 130, 0.62);
+  --kara-wash: rgba(184, 145, 47, 0.22);
+  --kara-edge: rgba(232, 205, 130, 0.75);
+  --rule-line: rgba(203, 162, 77, 0.85);
+
+  --seal-fill: #150c19;
+  --seal-ink: var(--gold-bright);
+  --art-ink: var(--gold-bright);
+
+  --flap-ground:
+    radial-gradient(120% 96% at 50% -22%, #45264f 0%, #33193d 34%, #26132e 66%, #1b0f21 100%);
+  --flap-shadow: 0 7px 12px rgba(0, 0, 0, 0.62);
+}
+
+/* ---------- ivory sheet ---------------------------------------------------
+   The envelope prints the other way round from the card: warm ivory stock,
+   plum ink, gold kara. Deeper golds than the plum sheet uses — #e8cd82 is
+   built to glow out of a dark ground and all but disappears on ivory.
+   ---------------------------------------------------------------------- */
+
+.sheet.ivory {
+  --sheet-ground:
+    radial-gradient(125% 74% at 50% -12%, #fdfaf3 0%, #f8f2e5 34%, #f3ecdc 66%, #ede4d0 100%);
+  --sheet-noise: 0.07;
+
+  --text-strong: #33193d;
+  --text-soft: rgba(61, 33, 73, 0.78);
+  --text-label: #8a6a20;
+  --text-script: #4a2a58;
+
+  --kara-line: rgba(150, 112, 30, 0.8);
+  --kara-line-soft: rgba(150, 112, 30, 0.38);
+  --kara-thread: rgba(150, 112, 28, 0.9);
+  --kara-wash: rgba(150, 112, 28, 0.3);
+  --kara-edge: rgba(150, 112, 30, 0.85);
+  --rule-line: rgba(150, 112, 30, 0.8);
+
+  /* a plum wax seal on ivory paper, stamped in gold */
+  --seal-fill: #2f1739;
+  --seal-ink: var(--gold-bright);
+  /* line-art reads better in plum than gold on a pale ground */
+  --art-ink: rgba(74, 42, 88, 0.82);
+
+  --flap-ground:
+    radial-gradient(120% 110% at 50% -30%, #fffefa 0%, #fdfaf1 45%, #faf5e8 100%);
+  --flap-shadow: 0 8px 14px rgba(96, 66, 24, 0.3);
 }
 
 * {
@@ -43,9 +107,8 @@ body {
 .sheet {
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(125% 68% at 50% -14%, var(--mauve) 0%, var(--plum-mid) 30%, var(--plum) 58%, var(--plum-deep) 100%);
-  color: var(--ivory);
+  background: var(--sheet-ground);
+  color: var(--text-strong);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
@@ -80,7 +143,7 @@ body.bleed .sheet > .inner {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: var(--sheet-noise);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
 }
 
@@ -96,7 +159,7 @@ body.bleed .sheet > .inner {
 .kasavu-frame {
   position: absolute;
   inset: 46px;
-  border: 1.5px solid rgba(203, 162, 77, 0.72);
+  border: 1.5px solid var(--kara-line);
   pointer-events: none;
 }
 
@@ -104,7 +167,7 @@ body.bleed .sheet > .inner {
   content: "";
   position: absolute;
   inset: 7px;
-  border: 0.75px solid rgba(203, 162, 77, 0.34);
+  border: 0.75px solid var(--kara-line-soft);
 }
 
 /* the woven band — fine vertical gold threads, like the kara of a mundu */
@@ -116,16 +179,16 @@ body.bleed .sheet > .inner {
   background-image:
     repeating-linear-gradient(
       90deg,
-      rgba(232, 205, 130, 0.62) 0px,
-      rgba(232, 205, 130, 0.62) 1px,
+      var(--kara-thread) 0px,
+      var(--kara-thread) 1px,
       transparent 1px,
       transparent 5px
     ),
     linear-gradient(
       180deg,
-      rgba(184, 145, 47, 0) 0%,
-      rgba(184, 145, 47, 0.22) 45%,
-      rgba(184, 145, 47, 0) 100%
+      transparent 0%,
+      var(--kara-wash) 45%,
+      transparent 100%
     );
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
@@ -145,7 +208,7 @@ body.bleed .sheet > .inner {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(232, 205, 130, 0.75) 20%, rgba(232, 205, 130, 0.75) 80%, transparent);
+  background: linear-gradient(90deg, transparent, var(--kara-edge) 20%, var(--kara-edge) 80%, transparent);
 }
 .kasavu-band::before {
   top: 0;
@@ -160,7 +223,7 @@ body.bleed .sheet > .inner {
   font-family: var(--font-label);
   text-transform: uppercase;
   letter-spacing: 0.34em;
-  color: var(--champagne);
+  color: var(--text-label);
   font-weight: 500;
 }
 
@@ -212,13 +275,14 @@ body.groom .only-groom { display: block; }
 
 .amp {
   font-family: var(--font-script);
-  color: var(--gold-bright);
+  color: var(--text-label);
 }
 
 .serif-italic {
   font-family: var(--font-body);
   font-style: italic;
-  color: rgba(243, 236, 223, 0.86);
+  color: var(--text-strong);
+  opacity: 0.9;
 }
 
 /* ---------- rules & motif slots ------------------------------------------ */
@@ -234,15 +298,15 @@ body.groom .only-groom { display: block; }
   height: 1px;
   flex: 1;
   max-width: 190px;
-  background: linear-gradient(90deg, transparent, rgba(203, 162, 77, 0.85));
+  background: linear-gradient(90deg, transparent, var(--rule-line));
 }
 .rule .line.r {
-  background: linear-gradient(90deg, rgba(203, 162, 77, 0.85), transparent);
+  background: linear-gradient(90deg, var(--rule-line), transparent);
 }
 
 .motif {
   display: block;
-  color: var(--gold-bright);
+  color: var(--seal-ink);
 }
 
 .motif svg {

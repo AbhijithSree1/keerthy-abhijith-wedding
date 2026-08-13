@@ -160,7 +160,7 @@ function seal(w = 190, { arcs = true } = {}) {
 
   return `<svg viewBox="-100 -100 200 200" width="${w}" fill="none" stroke="currentColor"
       stroke-linecap="round" stroke-linejoin="round">
-      <circle r="90" fill="#150c19" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
+      <circle r="90" fill="var(--seal-fill)" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
       <circle r="84" stroke-width="0.8" stroke-opacity="0.3"/>
       <circle r="62" stroke-width="1.1" stroke-opacity="0.5"/>
       <g stroke="none">${topText}${bottomText}</g>
@@ -226,7 +226,7 @@ function ganapati() {
 function ganapatiSeal(w = 190) {
   return `<svg viewBox="-100 -100 200 200" width="${w}" fill="none" stroke="currentColor"
       stroke-linecap="round" stroke-linejoin="round">
-      <circle r="90" fill="#150c19" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
+      <circle r="90" fill="var(--seal-fill)" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
       <circle r="84" stroke-width="0.8" stroke-opacity="0.32"/>
       <g transform="scale(0.94)">${ganapati()}</g>
     </svg>`;

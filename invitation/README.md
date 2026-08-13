@@ -36,6 +36,29 @@ inviting family's alone, switched by `.only-bride` / `.only-groom`.
 Rendered PNGs land in `out/`, at 300 dpi — 10 artwork files plus the die-line,
 and the same again with bleed.
 
+## Two grounds
+
+The **card** prints plum with gold and ivory on it. The **envelope** prints the
+other way round: warm ivory stock, plum ink, gold kara.
+
+Both come out of one set of theme tokens declared in `:root` in `shared.css` and
+overridden by `.sheet.ivory` — ground, text, kara, seal, flap. Shared components
+(`.kasavu-frame`, `.kasavu-band`, `.label`, `.rule`, `.motif`) read those tokens
+and **must not hardcode a colour**; a literal in one of them puts the plum
+sheet's ink on the ivory sheet.
+
+Two things did not simply invert:
+
+- **The gold had to get darker.** `#e8cd82` is built to glow out of a dark
+  ground and all but vanishes on ivory, so the ivory theme uses `#8a6a20` and
+  friends.
+- **The photo needed its own file.** `candid.jpg` is toned ivory-out-of-plum;
+  `candid-ivory.jpg` is the same frame toned plum-out-of-ivory, so it dissolves
+  into the paper instead of sitting on it as a dark rectangle.
+
+The seal inverts with it: a plum wax disc stamped in gold, rather than the dark
+disc the plum sheet used.
+
 ## The envelope, physically
 
 It is an ordinary **rectangular A7 envelope, portrait, 5.25 × 7.25 in**. The
@@ -151,7 +174,9 @@ how the QR caption ended up printed on top of the kasavu band once.
   expect the gold to sit flatter in CMYK than on screen. If they can do a **gold
   foil** pass, foil the kasavu bands, the frame, the names and the seal —
   they already share one gold.
-- The plum is heavy ink coverage. On uncoated stock, ask for a proof first.
+- The card's plum is heavy ink coverage. On uncoated stock, ask for a proof
+  first. The envelope is the opposite — mostly unprinted ivory, so it is the
+  cheaper half of the job and the better candidate for foil.
 - Do not let anyone rescale or re-compress the QR tile. Check a proof by
   scanning it with a phone before the full run.
 - The non-bleed PNGs in `out/` are the ones to send on WhatsApp.

@@ -23,14 +23,14 @@
   }
 
   .crest {
-    color: var(--gold-bright);
+    color: var(--seal-ink);
     opacity: 0.92;
   }
 
   .crest-sub {
     font-size: 10.5px;
     letter-spacing: 0.46em;
-    color: rgba(198, 165, 216, 0.78);
+    color: var(--text-soft);
     margin-top: 20px;
   }
 
@@ -39,7 +39,7 @@
     font-size: 52px;
     line-height: 1.08;
     margin-top: 12px;
-    color: var(--gold-bright);
+    color: var(--text-script);
     background: none;
     -webkit-text-fill-color: currentColor;
   }
@@ -55,7 +55,7 @@
   .to-label {
     font-size: 10.5px;
     letter-spacing: 0.46em;
-    color: rgba(232, 205, 130, 0.85);
+    color: var(--text-label);
     text-align: left;
     margin-bottom: 42px;
     padding-left: 4px;
@@ -70,10 +70,10 @@
   .lines span {
     height: 1px;
     background: linear-gradient(90deg,
-      rgba(203, 162, 77, 0.12) 0%,
-      rgba(203, 162, 77, 0.52) 7%,
-      rgba(203, 162, 77, 0.52) 93%,
-      rgba(203, 162, 77, 0.12) 100%);
+      transparent 0%,
+      var(--kara-line) 7%,
+      var(--kara-line) 93%,
+      transparent 100%);
   }
   /* the last line stops short — it's a postcode, not a sentence */
   .lines span:last-child { margin-right: 44%; }
@@ -90,34 +90,34 @@
   .from .from-label {
     font-size: 9.5px;
     letter-spacing: 0.34em;
-    color: rgba(198, 165, 216, 0.62);
+    color: var(--text-soft);
     margin-bottom: 10px;
   }
 
   .from .who {
     font-size: 20px;
-    color: var(--ivory);
+    color: var(--text-strong);
     line-height: 1.35;
   }
 
   .from .where {
     font-size: 17px;
     font-style: italic;
-    color: rgba(198, 165, 216, 0.75);
+    color: var(--text-soft);
     margin-top: 2px;
   }
 
   .when {
     font-size: 10.5px;
     letter-spacing: 0.3em;
-    color: var(--champagne);
+    color: var(--text-label);
     text-align: right;
     line-height: 2;
   }
 </style>
 </head>
 <body>
-<div class="sheet envelope">
+<div class="sheet envelope ivory">
   <div class="inner">
     <div class="kasavu-frame"></div>
     <div class="kasavu-band top"></div>

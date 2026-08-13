@@ -13,12 +13,13 @@
        side flaps    1.15 each     — fold behind
        bottom flap   2.00          — folds up behind
        top flap      2.90 deep     — folds down over the back and seals
+       stock         ivory, printed in plum and gold
        flat sheet    7.55 x 12.15
   */
   .sheet.diecut {
     width: 1450px;   /* 7.55in */
     height: 2333px;  /* 12.15in */
-    background: #fbfaf8;
+    background: #e9e7e2;
     color: #241a28;
     font-family: var(--font-body);
   }
@@ -51,7 +52,7 @@
     font-size: 13px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #6b5e73;
+    color: #5d5364;
     line-height: 2;
   }
 
@@ -73,10 +74,10 @@
     <!-- viewBox is hundredths of an inch, so every number below is real -->
     <svg viewBox="0 0 755 1215" fill="none">
       <defs>
-        <linearGradient id="plum" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#3d2149"/>
-          <stop offset="0.55" stop-color="#24122c"/>
-          <stop offset="1" stop-color="#150c19"/>
+        <linearGradient id="stock" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fdfaf3"/>
+          <stop offset="0.55" stop-color="#f5eee0"/>
+          <stop offset="1" stop-color="#ece2cd"/>
         </linearGradient>
       </defs>
 
@@ -87,10 +88,10 @@
           L 640,290 L 755,410 L 755,895 L 640,1015
           L 640,1015 L 600,1207 L 155,1207 L 115,1015
           L 115,1015 L 0,895 L 0,410 L 115,290 Z"
-        fill="url(#plum)" stroke="#241a28" stroke-width="2.2"/>
+        fill="url(#stock)" stroke="#241a28" stroke-width="2.2"/>
 
       <!-- fold lines -->
-      <g stroke="#c9a24d" stroke-width="2" stroke-dasharray="11 7" opacity="0.95">
+      <g stroke="#a8801f" stroke-width="2" stroke-dasharray="11 7" opacity="0.95">
         <path d="M115,290 L640,290"/>
         <path d="M115,1015 L640,1015"/>
         <path d="M115,290 L115,1015"/>
@@ -99,22 +100,22 @@
 
       <!-- panel labels -->
       <g font-family="Cinzel, serif" font-size="15" letter-spacing="3.4"
-         fill="#ecd9ab" text-anchor="middle">
+         fill="#8a6a20" text-anchor="middle">
         <text x="377.5" y="180">TOP FLAP</text>
         <text x="377.5" y="1120">BOTTOM FLAP</text>
       </g>
       <g font-family="Cinzel, serif" font-size="13" letter-spacing="3"
-         fill="#c6a5d8" text-anchor="middle">
+         fill="#6b4a7a" text-anchor="middle">
         <text x="57" y="657" transform="rotate(-90 57 657)">SIDE FLAP</text>
         <text x="698" y="657" transform="rotate(90 698 657)">SIDE FLAP</text>
       </g>
 
-      <g text-anchor="middle" fill="#f3ecdf">
+      <g text-anchor="middle" fill="#33193d">
         <text x="377.5" y="620" font-family="Great Vibes, cursive" font-size="62">Front panel</text>
         <text x="377.5" y="664" font-family="Cinzel, serif" font-size="14"
-              letter-spacing="4" fill="#ecd9ab">THE ADDRESS SIDE</text>
+              letter-spacing="4" fill="#8a6a20">THE ADDRESS SIDE</text>
         <text x="377.5" y="706" font-family="Cormorant Garamond, serif" font-size="21"
-              font-style="italic" fill="#c6a5d8">5.25 &#215; 7.25 in &#183; takes the 5 &#215; 7 card flat</text>
+              font-style="italic" fill="#6b4a7a">5.25 &#215; 7.25 in &#183; takes the 5 &#215; 7 card flat</text>
       </g>
 
       <!-- fold-order callouts, numbered because the order genuinely matters -->
