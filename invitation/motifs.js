@@ -222,13 +222,45 @@ function ganapati() {
   </g>`;
 }
 
+/* ---- Ganapati, calligraphic ---------------------------------------------
+   The style Keerthy and Abhijith picked: not an outline drawing but flowing
+   calligraphic strokes — a domed crown under a finial, two lobed ears, and
+   one long trunk sweeping down and curling into a spiral at bottom left,
+   over a low scrolled body. Drawn as heavy round-capped strokes, which is
+   what gives the ribbon quality; nothing here is an outline of a shape.     */
+function ganapatiCalligraphic() {
+  return `
+  <g transform="translate(0,16)" fill="none" stroke="currentColor"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0,-92 C-6,-84 -6,-78 0,-73 C6,-78 6,-84 0,-92 Z"
+          fill="currentColor" stroke="none"/>
+    <circle cx="0" cy="-68" r="4.5" fill="currentColor" stroke="none"/>
+
+    <path d="M-27,-42 C-27,-58 -13,-64 0,-64 C13,-64 27,-58 27,-42" stroke-width="10"/>
+
+    <!-- ears mirrored exactly; the reference pair is symmetric -->
+    <path d="M-27,-40 C-48,-45 -64,-28 -60,-8 C-57,7 -42,13 -29,5" stroke-width="10"/>
+    <path d="M27,-40 C48,-45 64,-28 60,-8 C57,7 42,13 29,5" stroke-width="10"/>
+
+    <circle cx="-13" cy="-26" r="3.4" fill="currentColor" stroke="none"/>
+    <circle cx="13" cy="-26" r="3.4" fill="currentColor" stroke="none"/>
+
+    <path d="M0,-16 C3,4 -2,20 -16,31 C-32,44 -52,40 -55,25
+             C-57,13 -46,6 -38,13 C-32,18 -34,27 -41,26" stroke-width="11"/>
+
+    <path d="M-44,50 C-18,40 22,40 46,50" stroke-width="10"/>
+    <path d="M-44,50 C-54,52 -56,62 -47,64 C-40,65 -38,58 -43,56" stroke-width="7"/>
+    <path d="M46,50 C56,52 58,62 49,64 C42,65 40,58 45,56" stroke-width="7"/>
+  </g>`;
+}
+
 /* ---- the seal that closes the envelope: Ganapati and nothing else ------- */
 function ganapatiSeal(w = 190) {
   return `<svg viewBox="-100 -100 200 200" width="${w}" fill="none" stroke="currentColor"
       stroke-linecap="round" stroke-linejoin="round">
       <circle r="90" fill="var(--seal-fill)" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
       <circle r="84" stroke-width="0.8" stroke-opacity="0.32"/>
-      <g transform="scale(0.94)">${ganapati()}</g>
+      <g transform="scale(0.9)">${ganapatiCalligraphic()}</g>
     </svg>`;
 }
 
@@ -251,7 +283,8 @@ function distance(w = 420) {
 /* ------------------------------------------------------------------------ */
 
 const MOTIFS = {
-  chai, diamond, seal, ganapati, ganapatiSeal, distance, backwater, palm, vallam,
+  chai, diamond, seal, ganapati, ganapatiCalligraphic, ganapatiSeal,
+  distance, backwater, palm, vallam,
 };
 
 document.querySelectorAll("[data-motif]").forEach((el) => {

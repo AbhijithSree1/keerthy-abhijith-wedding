@@ -151,10 +151,24 @@ marked `<!-- EDIT ME -->`. Colours live in one place: `:root` in `shared.css`.
 
 ## The Ganapati
 
-`ganapati()` in `motifs.js` is hand-drawn SVG — front-facing, symmetric apart
-from the trunk, entirely stroked so it foils or prints in the same single gold
-as everything else. `ganapatiSeal()` wraps it in the opaque disc that closes the
-envelope; that seal carries the Ganapati and nothing else.
+Two versions live in `motifs.js`:
+
+- `ganapatiCalligraphic()` — **the one in use.** Flowing calligraphic strokes:
+  domed crown under a finial, two lobed ears, one long trunk sweeping down into
+  a spiral at bottom left, over a low scrolled body. Drawn as heavy round-capped
+  strokes rather than outlines, which is what gives it the ribbon quality.
+- `ganapati()` — the earlier front-facing outline drawing, kept as an
+  alternative.
+
+Both are entirely stroked, so they foil or print in the same single ink as
+everything else. `ganapatiSeal()` wraps the calligraphic one in the disc that
+closes the envelope; that seal carries the Ganapati and nothing else.
+
+**This is a redraw, not the reference image.** It follows the style of the
+symbol Keerthy and Abhijith picked, but it is not that exact artwork. To use
+the original, drop the file into `assets/` and trace it to vector — a raster
+symbol at seal size (~25 mm) needs to be at least 300 px across, and will not
+foil.
 
 The **K&A monogram still appears on the envelope front**, at the top of the
 address side. Swap it for the Ganapati by changing that page's `data-motif`
