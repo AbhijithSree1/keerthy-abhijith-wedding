@@ -38,11 +38,15 @@ and the same again with bleed.
 
 ## Two grounds
 
-The **card** prints plum with gold and ivory on it. The **envelope** prints the
-other way round: warm ivory stock, plum ink, gold kara.
+The **card** prints plum with gold and ivory on it. The **envelope** is
+two-tone: the address side and the flap are warm ivory, the body behind the
+flap is plum. Fold the flap down and you get ivory over plum, with a gold
+Ganapati seal on the join.
 
-Both come out of one set of theme tokens declared in `:root` in `shared.css` and
-overridden by `.sheet.ivory` — ground, text, kara, seal, flap. Shared components
+Both come out of one set of theme tokens declared in `:root` in `shared.css`.
+`.sheet.ivory` flips a whole sheet (the envelope front); `.on-ivory` flips a
+*region* of one (the flap on the envelope back, which is an ivory island on a
+plum sheet). Same declaration block, two selectors. Shared components
 (`.kasavu-frame`, `.kasavu-band`, `.label`, `.rule`, `.motif`) read those tokens
 and **must not hardcode a colour**; a literal in one of them puts the plum
 sheet's ink on the ivory sheet.
@@ -56,8 +60,15 @@ Two things did not simply invert:
   `candid-ivory.jpg` is the same frame toned plum-out-of-ivory, so it dissolves
   into the paper instead of sitting on it as a dark rectangle.
 
-The seal inverts with it: a plum wax disc stamped in gold, rather than the dark
-disc the plum sheet used.
+- **The seal is struck gold-on-plum, not the reverse.** It straddles the fold,
+  so its top half lies on ivory and its bottom half on plum. A dark disc reads
+  on the ivory and disappears on the plum; a gold disc with a plum figure holds
+  against both.
+
+**The envelope is a two-sided print.** On a real envelope the flaps fold away
+from the front panel, so the ivory flap you see on the sealed back is the
+*reverse* face of the sheet. Side A is ivory throughout; side B prints plum over
+the centre panel only, leaving the flap ivory.
 
 ## The envelope, physically
 
@@ -175,8 +186,8 @@ how the QR caption ended up printed on top of the kasavu band once.
   foil** pass, foil the kasavu bands, the frame, the names and the seal —
   they already share one gold.
 - The card's plum is heavy ink coverage. On uncoated stock, ask for a proof
-  first. The envelope is the opposite — mostly unprinted ivory, so it is the
-  cheaper half of the job and the better candidate for foil.
+  first. The envelope needs both faces printed (see above), but its ink
+  coverage is lighter and its gold is the better candidate for foil.
 - Do not let anyone rescale or re-compress the QR tile. Check a proof by
   scanning it with a phone before the full run.
 - The non-bleed PNGs in `out/` are the ones to send on WhatsApp.

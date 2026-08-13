@@ -63,7 +63,8 @@
    built to glow out of a dark ground and all but disappears on ivory.
    ---------------------------------------------------------------------- */
 
-.sheet.ivory {
+.sheet.ivory,
+.on-ivory {
   --sheet-ground:
     radial-gradient(125% 74% at 50% -12%, #fdfaf3 0%, #f8f2e5 34%, #f3ecdc 66%, #ede4d0 100%);
   --sheet-noise: 0.07;

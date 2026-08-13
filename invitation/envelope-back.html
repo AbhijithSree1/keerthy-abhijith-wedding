@@ -6,8 +6,12 @@
 <link rel="stylesheet" href="shared.css">
 <style>
   /* --- the sealed side ----------------------------------------------------
-     Flap across the top, the tea-shop photo on the body below it, and a gold
-     seal sitting on the fold the way a wax seal would.
+     Two-tone, and physically honest about it: the body of the envelope is
+     plum, the flap that folds down over it is ivory — the same ivory as the
+     address side, because on a real envelope the flap is part of that same
+     panel. The seal straddles the fold, so it reads against both.
+
+     That does mean a two-sided print. See the die-line note.
      --------------------------------------------------------------------- */
 
   /* the photo lives on .sheet (not .inner) so it runs into the bleed */
@@ -47,17 +51,17 @@
     inset: 0;
     z-index: 1;
     clip-path: polygon(0 0, 100% 0, 100% 29%, 50% 47%, 0 29%);
-    /* a shade lighter than the body it lies on, and casting onto it, so the
-       fold reads as a physical flap rather than a printed triangle */
-    background: var(--flap-ground);
-    filter: drop-shadow(var(--flap-shadow));
+    /* ivory paper laid over the plum body, casting onto it */
+    background:
+      radial-gradient(120% 112% at 50% -28%, #fffefa 0%, #fbf6ec 42%, #f5eee0 100%);
+    filter: drop-shadow(0 9px 16px rgba(0, 0, 0, 0.55));
   }
 
   .flap::after {
     content: "";
     position: absolute;
     inset: 0;
-    opacity: var(--sheet-noise);
+    opacity: 0.07;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
   }
 
@@ -95,6 +99,7 @@
     font-family: var(--font-script);
     font-size: 56px;
     color: var(--text-script);
+    /* .flap-type carries .on-ivory, so this resolves to plum, not gold */
     line-height: 1.06;
   }
     .flap-type .names-sm { gap: 0.15em; }
@@ -107,14 +112,18 @@
     margin-top: 18px;
   }
 
-  /* the seal straddles the point of the flap */
+  /* The seal straddles the fold: its top half lies on the ivory flap, its
+     bottom half on the plum body. A dark disc reads on the ivory and vanishes
+     on the plum, so it is struck the other way round — gold disc, plum figure,
+     which holds against both. */
   .seal {
+    --seal-fill: #c9a24d;
+    color: #22102b;
     position: absolute;
     top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--seal-ink);
-    filter: drop-shadow(0 6px 16px rgba(70, 45, 20, 0.32));
+    filter: drop-shadow(0 7px 18px rgba(0, 0, 0, 0.55));
   }
 
   /* the seal disc is opaque in the SVG itself now, so it needs only a soft
@@ -144,9 +153,9 @@
 </style>
 </head>
 <body>
-<div class="sheet envelope ivory">
+<div class="sheet envelope">
   <div class="photo">
-    <img src="assets/candid-ivory.jpg" alt="">
+    <img src="assets/candid.jpg" alt="">
   </div>
 
   <div class="flap"></div>
@@ -154,18 +163,18 @@
   <div class="flap-edge">
     <svg viewBox="0 0 1008 1392" preserveAspectRatio="none" fill="none">
       <path d="M0,0 H1008 V404 L504,654 L0,404 Z"
-            stroke="var(--kara-line)" stroke-width="2"
+            stroke="rgba(184,145,47,0.9)" stroke-width="2"
             vector-effect="non-scaling-stroke"/>
       <path d="M0,393 L504,643 L1008,393"
-            stroke="var(--kara-line-soft)" stroke-width="1.5"
+            stroke="rgba(184,145,47,0.4)" stroke-width="1.5"
             vector-effect="non-scaling-stroke"/>
     </svg>
   </div>
 
   <div class="inner content">
-    <div class="kasavu-band top"></div>
+    <div class="kasavu-band top on-ivory"></div>
 
-    <div class="flap-type">
+    <div class="flap-type on-ivory">
       <p class="names-sm pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></p>
       <p class="label sub">12 December 2026</p>
     </div>
