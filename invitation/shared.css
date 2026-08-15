@@ -267,7 +267,12 @@ body.groom .only-groom { display: block; }
 .names {
   font-family: var(--font-script);
   line-height: 1.42;
-  padding: 0.1em 0.06em;
+  /* Horizontal padding matters as much as the line-height: Great Vibes leans
+     right, so the last letter's ascender overhangs its advance width. With the
+     gradient clipped to the element box, that overhang fell outside the paint
+     box and the final "h" of Abhijith came out sliced. Only shows on whichever
+     name lands last — "Keerthy" ends in a y, which does not overhang. */
+  padding: 0.12em 0.26em;
   background: linear-gradient(178deg, #f6e8bf 0%, var(--gold-bright) 38%, var(--gold-mid) 74%, #a8842a 100%);
   -webkit-background-clip: text;
   background-clip: text;
