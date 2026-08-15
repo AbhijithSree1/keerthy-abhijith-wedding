@@ -44,6 +44,7 @@ PLUM = (42, 21, 51)
 GOLD = (232, 205, 130)
 CREAM = (243, 236, 223)
 CHAMPAGNE = (236, 217, 171)
+SEAL_INK = (34, 16, 43)   # the plum the seal figure is struck in, on its gold disc
 
 
 def invite_url(keys):
@@ -141,7 +142,72 @@ def build_qr():
         print(f"qr-{name}.png", img.size, f"{img.width // 20} modules", "->", url)
 
 
+def build_seal_figure():
+    """Turn a supplied Ganapati into the seal's figure, if one has been added.
+
+    Drop the artwork in as `assets/ganapati-source.<ext>` and re-run. An SVG is
+    used as-is (best: it foils, and it is resolution-free). A raster is turned
+    into a clean single-colour silhouette in the seal's ink with a transparent
+    ground, trimmed to its own edges so it centres properly in the disc.
+
+    Writes `assets/seal-config.js` either way, so the pages know whether to use
+    the supplied figure or fall back to the drawn one. Nothing here fails when
+    no source is present — that is the normal state until artwork arrives.
+    """
+    config = os.path.join(OUT, "seal-config.js")
+    src = None
+    for ext in ("svg", "png", "jpg", "jpeg", "webp"):
+        candidate = os.path.join(OUT, f"ganapati-source.{ext}")
+        if os.path.exists(candidate):
+            src = candidate
+            break
+
+    if src is None:
+        with open(config, "w") as fh:
+            fh.write("window.GANAPATI_SRC = null;\n")
+        print("seal-config.js  no ganapati-source.* found — using the drawn figure")
+        return
+
+    if src.endswith(".svg"):
+        with open(config, "w") as fh:
+            fh.write('window.GANAPATI_SRC = "assets/ganapati-source.svg";\n')
+        print("seal-config.js  using ganapati-source.svg")
+        return
+
+    im = Image.open(src)
+    if im.mode in ("RGBA", "LA") and im.getchannel("A").getextrema()[0] < 255:
+        mask = im.getchannel("A")            # already cut out
+    else:
+        grey = ImageOps.grayscale(im.convert("RGB"))
+        # line art is usually dark on light; if the corners are dark, invert
+        w, h = grey.size
+        corners = [grey.getpixel(p) for p in
+                   ((2, 2), (w - 3, 2), (2, h - 3), (w - 3, h - 3))]
+        light_ground = sum(corners) / 4 > 128
+        mask = ImageOps.invert(grey) if light_ground else grey
+
+    # firm up the edges without losing the antialiasing that keeps curves smooth
+    mask = mask.point(lambda v: 0 if v < 40 else min(255, int((v - 40) * 1.6)))
+
+    bbox = mask.getbbox()
+    if bbox:
+        mask = mask.crop(bbox)
+
+    side = max(mask.size)
+    square = Image.new("L", (side, side), 0)
+    square.paste(mask, ((side - mask.width) // 2, (side - mask.height) // 2))
+    square = square.resize((1200, 1200), Image.LANCZOS)
+
+    out = Image.new("RGBA", square.size, SEAL_INK + (0,))
+    out.putalpha(square)
+    out.save(os.path.join(OUT, "ganapati.png"))
+    with open(config, "w") as fh:
+        fh.write('window.GANAPATI_SRC = "assets/ganapati.png";\n')
+    print("ganapati.png", out.size, f"from {os.path.basename(src)}")
+
+
 if __name__ == "__main__":
     build_hero()
     build_candid()
     build_qr()
+    build_seal_figure()

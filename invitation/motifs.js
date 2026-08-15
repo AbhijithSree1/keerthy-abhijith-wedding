@@ -254,13 +254,23 @@ function ganapatiCalligraphic() {
   </g>`;
 }
 
-/* ---- the seal that closes the envelope: Ganapati and nothing else ------- */
+/* ---- the seal that closes the envelope: Ganapati and nothing else -------
+   Prefers the supplied artwork. build/prepare-assets.py writes
+   assets/seal-config.js, which sets window.GANAPATI_SRC to the prepared file
+   when `assets/ganapati-source.*` exists and to null when it does not — so the
+   drawn figure is a fallback, not the default.                               */
 function ganapatiSeal(w = 190) {
+  const src = typeof window !== "undefined" ? window.GANAPATI_SRC : null;
+  const figure = src
+    ? `<image href="${src}" x="-64" y="-64" width="128" height="128"
+              preserveAspectRatio="xMidYMid meet"/>`
+    : `<g transform="scale(0.9)">${ganapatiCalligraphic()}</g>`;
+
   return `<svg viewBox="-100 -100 200 200" width="${w}" fill="none" stroke="currentColor"
       stroke-linecap="round" stroke-linejoin="round">
       <circle r="90" fill="var(--seal-fill)" stroke="currentColor" stroke-width="1.6" stroke-opacity="0.7"/>
       <circle r="84" stroke-width="0.8" stroke-opacity="0.32"/>
-      <g transform="scale(0.9)">${ganapatiCalligraphic()}</g>
+      ${figure}
     </svg>`;
 }
 
