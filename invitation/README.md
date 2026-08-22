@@ -13,7 +13,7 @@ includes `src/`, so this folder is inert as far as the site is concerned.
 | `card-back-all.html` | 5 × 7 in | **All four celebrations.** For close family and friends |
 | `card-back-public.html` | 5 × 7 in | **The wedding day only.** The general-invite version |
 | `envelope-front.html` | 5.25 × 7.25 in | Address side — ruled lines for the guest's name |
-| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — ivory flap, Ganapati seal, backwaters |
+| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — ivory flap, Ganapati seal on the fold |
 | `envelope-diecut.html` | 7.55 × 12.15 in | The flat sheet the envelope is cut and folded from |
 
 ## Bride's side and groom's side
@@ -61,11 +61,11 @@ Two things did not simply invert:
   on the ivory and disappears on the plum; a gold disc with a plum figure holds
   against both.
 
-The envelope back carries no photograph — the plum body is deliberately plain,
-with only the seal on the fold and the backwater line-art along the foot. (An
-earlier version had a duotoned candid there; `build_candid()` in
-`prepare-assets.py` generated it, and both are in the git history if it is ever
-wanted back.)
+The envelope back is deliberately bare: the ivory flap, the Ganapati seal on
+the fold, and nothing else. Earlier versions carried a duotoned candid and a
+backwater line-art footer there; both were removed, and both are in the git
+history if they are ever wanted back. The backwater motif itself is still in
+`motifs.js` and still used, faintly, behind the foot of the card backs.
 
 **The envelope is a two-sided print.** On a real envelope the flaps fold away
 from the front panel, so the ivory flap you see on the sealed back is the

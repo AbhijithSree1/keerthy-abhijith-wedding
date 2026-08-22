@@ -50,7 +50,6 @@
 
   --seal-fill: #150c19;
   --seal-ink: var(--gold-bright);
-  --art-ink: var(--gold-bright);
 
   --flap-ground:
     radial-gradient(120% 96% at 50% -22%, #45264f 0%, #33193d 34%, #26132e 66%, #1b0f21 100%);
@@ -84,8 +83,6 @@
   /* a plum wax seal on ivory paper, stamped in gold */
   --seal-fill: #2f1739;
   --seal-ink: var(--gold-bright);
-  /* line-art reads better in plum than gold on a pale ground */
-  --art-ink: rgba(74, 42, 88, 0.82);
 
   --flap-ground:
     radial-gradient(120% 110% at 50% -30%, #fffefa 0%, #fdfaf1 45%, #faf5e8 100%);
