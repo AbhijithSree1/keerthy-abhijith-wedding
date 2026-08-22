@@ -84,6 +84,8 @@ export default function Travel() {
                   key={src}
                   src={src}
                   alt={`Kerala ${i + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

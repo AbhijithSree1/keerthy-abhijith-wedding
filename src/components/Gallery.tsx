@@ -49,6 +49,8 @@ export default function Gallery() {
               <motion.img
                 src={src}
                 alt={`Engagement photo ${i + 1}`}
+                loading={i < 3 ? 'eager' : 'lazy'}
+                decoding="async"
                 className="h-full w-full object-cover"
                 whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.5 }}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Link preview card</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* The card people see when the website link is forwarded on WhatsApp.
+     1200x630 is the size every messenger and social preview crops to. It is
+     rendered from the same tokens as the printed suite, so the forward and the
+     card in the guest's hand look like one thing.
+
+     Read at thumbnail size, so: names large, one date line, nothing else. */
+  .sheet.og {
+    width: 1200px;
+    height: 630px;
+    display: flex;
+  }
+
+  .copy {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 54px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-size: 15px;
+    letter-spacing: 0.42em;
+  }
+
+  .names {
+    font-size: 104px;
+    line-height: 1.34;
+    margin-top: 14px;
+    white-space: nowrap;
+    gap: 0.08em;
+  }
+  .names .amp { font-size: 0.62em; margin: 0 0.08em; vertical-align: 0.06em; }
+
+  .rule { width: 320px; margin-top: 22px; }
+  .rule .line { max-width: 130px; }
+
+  .when { font-size: 20px; letter-spacing: 0.3em; margin-top: 26px; }
+  .where {
+    font-size: 14px;
+    letter-spacing: 0.36em;
+    color: var(--text-soft);
+    margin-top: 12px;
+  }
+
+  /* the photo edge is dissolved into the plum rather than butted against it,
+     so the card reads as one field and not as two panels */
+  .photo {
+    width: 430px;
+    position: relative;
+    flex: none;
+  }
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 42%;
+  }
+  .photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, var(--plum) 0%, rgba(29,15,36,0.72) 22%, rgba(29,15,36,0.12) 62%, transparent 100%),
+      linear-gradient(180deg, rgba(18,9,18,0.55) 0%, transparent 26%, transparent 72%, rgba(18,9,18,0.6) 100%);
+  }
+</style>
+</head>
+<body>
+<div class="sheet og">
+  <div class="inner">
+    <div class="kasavu-band top" style="top:40px"></div>
+    <div class="kasavu-band bottom" style="bottom:40px"></div>
+  </div>
+
+  <div class="copy">
+    <p class="label eyebrow">We're getting married</p>
+    <h1 class="names pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></h1>
+    <div class="rule">
+      <span class="line"></span>
+      <span class="motif" data-motif="chai" data-w="72"></span>
+      <span class="line r"></span>
+    </div>
+    <p class="label when">12 December 2026</p>
+    <p class="label where">Thiruvalla &middot; Kerala</p>
+  </div>
+
+  <div class="photo"><img src="../public/img/engagement-07.jpg" alt=""></div>
+</div>
+<script src="motifs.js"></script>
+</body>
+</html>
