@@ -61,11 +61,17 @@ Two things did not simply invert:
   on the ivory and disappears on the plum; a gold disc with a plum figure holds
   against both.
 
-The envelope back is deliberately bare: the ivory flap, the Ganapati seal on
-the fold, and nothing else. Earlier versions carried a duotoned candid and a
-backwater line-art footer there; both were removed, and both are in the git
-history if they are ever wanted back. The backwater motif itself is still in
-`motifs.js` and still used, faintly, behind the foot of the card backs.
+The artwork has been pared back over several rounds. The envelope back is now
+the ivory flap, the Ganapati seal on the fold, and nothing else; the card backs
+are purely typographic. Removed along the way: a duotoned candid on the
+envelope back, a backwater line-art footer under it, and the same line-art run
+faintly behind the foot of both card backs. With no consumer left, the `palm`,
+`vallam`, `backwater` and `distance` motifs came out of `motifs.js` too. All of
+it is in the git history if any of it is ever wanted back.
+
+`motifs.js` now holds only what the artwork actually uses: `chai`, `diamond`,
+`seal`, `ganapatiSeal`, and the two drawn Ganapatis that `ganapatiSeal` falls
+back on when no source file is supplied.
 
 **The envelope is a two-sided print.** On a real envelope the flaps fold away
 from the front panel, so the ivory flap you see on the sealed back is the

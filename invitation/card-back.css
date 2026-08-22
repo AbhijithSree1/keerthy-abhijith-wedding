@@ -196,14 +196,3 @@
   color: rgba(236, 217, 171, 0.88);
 }
 
-/* The backwaters run faintly behind the foot. Held inside the kasavu frame —
-   left/right must clear it, and the QR is centred so the palms never meet it. */
-.backwater-wash {
-  position: absolute;
-  left: 64px;
-  right: 64px;
-  bottom: 96px;
-  color: var(--gold-bright);
-  opacity: 0.15;
-  pointer-events: none;
-}
