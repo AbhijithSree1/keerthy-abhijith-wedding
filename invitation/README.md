@@ -149,10 +149,13 @@ site adds it anyway) and why the public card uses the bare URL.
 The text is plain HTML; open the file and type. Blocks likely to change are
 marked `<!-- EDIT ME -->`. Colours live in one place: `:root` in `shared.css`.
 
-**Families**, as given:
+**Families**, as given. The card backs set these traditionally: each side leads
+with the full name, then "daughter of" / "son of", then the parents, house and
+number, with the ampersand between the two names.
 
 | | Bride's side | Groom's side |
 | --- | --- | --- |
+| Name | Keerthy Prakash | Abhijith Sreekumar |
 | Parents | Sri. T. K. Prakash & Smt. Hema Prakash | Sri. Sreekumar V. & Smt. Anitha Kumary |
 | House | Thompil Puthenpurayil, Manjadi, Thiruvalla | Sreenitha, Thonnalloor, Pandalam |
 | Phone | +91 88914 53672 | +91 94475 94088 |
