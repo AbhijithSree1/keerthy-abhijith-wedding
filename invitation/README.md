@@ -9,7 +9,7 @@ includes `src/`, so this folder is inert as far as the site is concerned.
 
 | Page | Trim size | What it is |
 | --- | --- | --- |
-| `card-front.html` | 5 × 7 in | The showpiece — arched photo, names, date |
+| `card-front.html` | 5 × 7 in | The showpiece — photo wrapped in kasavu, names, date |
 | `card-back-all.html` | 5 × 7 in | **All four celebrations.** For close family and friends |
 | `card-back-public.html` | 5 × 7 in | **The wedding day only.** The general-invite version |
 | `envelope-front.html` | 5.25 × 7.25 in | Address side — ruled lines for the guest's name |

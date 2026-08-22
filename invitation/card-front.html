@@ -13,18 +13,20 @@
     align-items: center;
   }
 
-  /* the arch echoes the doorway they're standing in */
-  .arch {
+  /* A plain rectangle wrapped in the kasavu kara, top and bottom. The photo
+     used to sit in a round-topped arch, which read Indo-Islamic; this puts it
+     in the card's own language instead of giving it a shape of its own. */
+  .portrait {
     width: 506px;
     height: 700px;
     margin-top: 30px;
-    border-radius: 253px 253px 10px 10px;
+    border-radius: 2px;
     overflow: hidden;
     position: relative;
     box-shadow: 0 26px 60px -22px rgba(0, 0, 0, 0.75);
   }
 
-  .arch img {
+  .portrait img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -33,7 +35,7 @@
   }
 
   /* the photo settles into the plum at its foot, so it sits *in* the card */
-  .arch::after {
+  .portrait::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -42,18 +44,19 @@
       radial-gradient(126% 96% at 50% 34%, transparent 60%, rgba(18, 9, 18, 0.42) 100%);
   }
 
-  /* a gold thread traced just off the arch */
-  .arch-frame {
-    position: absolute;
-    top: 22px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 542px;
-    height: 716px;
-    border: 1px solid rgba(203, 162, 77, 0.5);
-    border-radius: 271px 271px 12px 12px;
-    pointer-events: none;
+  /* the kara, run across the head and foot of the photo like the border of a
+     mundu — same component as the sheet's own bands, without the end fade */
+  .portrait .kasavu-band {
+    z-index: 2;
+    height: 22px;
+    /* the photo runs bright at the top and dark at the foot; without a backing
+       the gold thread reads strongly on one band and vanishes on the other */
+    background-color: rgba(22, 11, 26, 0.62);
+    -webkit-mask-image: none;
+    mask-image: none;
   }
+  .portrait .kasavu-band.top { top: 0; }
+  .portrait .kasavu-band.bottom { bottom: 0; }
 
   .chai-rule {
     width: 100%;
@@ -99,10 +102,11 @@
     <div class="kasavu-band bottom"></div>
 
     <div class="stack">
-      <div class="arch">
+      <div class="portrait">
         <img src="assets/hero.jpg" alt="">
+        <span class="kasavu-band top"></span>
+        <span class="kasavu-band bottom"></span>
       </div>
-      <div class="arch-frame"></div>
 
       <div class="rule chai-rule">
         <span class="line"></span>
