@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Card — front</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .stack {
+    position: absolute;
+    inset: 108px 78px 104px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* A soft-cornered rectangle. The photo used to sit in a round-topped arch,
+     which read Indo-Islamic; a plain rounded frame carries no such reference
+     and leaves the kasavu bands to do the edge work at the head and foot of
+     the sheet. */
+  .portrait {
+    width: 506px;
+    height: 700px;
+    margin-top: 30px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 26px 60px -22px rgba(0, 0, 0, 0.75);
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    display: block;
+  }
+
+  /* the photo settles into the plum at its foot, so it sits *in* the card */
+  .portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(29, 15, 36, 0.34) 0%, transparent 18%, transparent 62%, rgba(24, 12, 30, 0.5) 84%, rgba(20, 10, 24, 0.9) 100%),
+      radial-gradient(126% 96% at 50% 34%, transparent 60%, rgba(18, 9, 18, 0.42) 100%);
+  }
+
+
+  .chai-rule {
+    width: 100%;
+    margin-top: 40px;
+  }
+  .chai-rule .line { max-width: 210px; }
+
+  .names {
+    font-size: 99px;
+    margin-top: 4px;
+    text-align: center;
+    white-space: nowrap;
+    gap: 0.1em;
+  }
+
+  /* Great Vibes' ampersand is a swash in its own right — give it air and let
+     it sit a size smaller so the two names stay the loudest thing here. */
+  .names .amp {
+    font-size: 0.68em;
+    margin: 0 0.1em;
+    vertical-align: 0.06em;
+  }
+
+  .when {
+    font-size: 19px;
+    letter-spacing: 0.36em;
+    color: var(--ivory);
+    margin-top: 30px;
+  }
+
+  .where {
+    font-size: 14px;
+    letter-spacing: 0.42em;
+    color: rgba(198, 165, 216, 0.9);
+    margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="sheet card">
+  <div class="inner">
+    <div class="kasavu-band top"></div>
+    <div class="kasavu-band bottom"></div>
+
+    <div class="stack">
+      <div class="portrait">
+        <img src="assets/hero.jpg" alt="">
+      </div>
+
+      <div class="rule chai-rule">
+        <span class="line"></span>
+        <span class="motif" data-motif="chai" data-w="104"></span>
+        <span class="line r"></span>
+      </div>
+
+      <h1 class="names pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></h1>
+
+      <p class="label when">Saturday &middot; 12 December 2026</p>
+      <p class="label where">Thiruvalla &middot; Kerala</p>
+    </div>
+  </div>
+</div>
+<script src="motifs.js"></script>
+</body>
+</html>

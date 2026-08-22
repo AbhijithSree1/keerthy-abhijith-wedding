@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Envelope — front</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Three bands — the couple at the head, the guest's name written across the
+     middle, the sender at the foot — spread so the panel never goes hollow. */
+  .stack {
+    position: absolute;
+    /* The head sat tight under the top band with a long drop to the address
+       lines. Starting it lower evens the two gaps out. */
+    inset: 228px 96px 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .crest {
+    color: var(--seal-ink);
+    opacity: 0.92;
+  }
+
+  .crest-sub {
+    font-size: 10.5px;
+    letter-spacing: 0.46em;
+    color: var(--text-soft);
+    margin-top: 20px;
+  }
+
+  .head .names {
+    font-family: var(--font-script);
+    font-size: 52px;
+    line-height: 1.08;
+    margin-top: 12px;
+    color: var(--text-script);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+  .head .names { gap: 0.15em; }
+  .head .names .amp { font-size: 0.66em; }
+
+  /* --- the address panel: ruled lines, written by hand ------------------- */
+
+  .to {
+    width: 100%;
+  }
+
+  .to-label {
+    font-size: 10.5px;
+    letter-spacing: 0.46em;
+    color: var(--text-label);
+    text-align: left;
+    margin-bottom: 42px;
+    padding-left: 4px;
+  }
+
+  .lines {
+    display: flex;
+    flex-direction: column;
+    gap: 84px;
+  }
+
+  .lines span {
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--kara-line) 7%,
+      var(--kara-line) 93%,
+      transparent 100%);
+  }
+  /* the last line stops short — it's a postcode, not a sentence */
+  .lines span:last-child { margin-right: 44%; }
+
+  /* --- sender + date, at the foot --------------------------------------- */
+
+  .foot {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .from .from-label {
+    font-size: 9.5px;
+    letter-spacing: 0.34em;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+  }
+
+  .from .who {
+    font-size: 20px;
+    color: var(--text-strong);
+    line-height: 1.35;
+  }
+
+  .from .where {
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text-soft);
+    margin-top: 2px;
+  }
+
+  .when {
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    color: var(--text-label);
+    text-align: right;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+<div class="sheet envelope ivory">
+  <div class="inner">
+    <div class="kasavu-band top"></div>
+    <div class="kasavu-band bottom"></div>
+
+    <div class="stack">
+      <div class="head">
+        <span class="motif crest" data-motif="seal" data-w="118"
+              data-opts='{"arcs":false}'></span>
+        <p class="label crest-sub">The wedding of</p>
+        <p class="names pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></p>
+      </div>
+
+      <div class="to">
+        <p class="label to-label">To</p>
+        <div class="lines">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="from">
+          <p class="label from-label">With love, from</p>
+          <!-- ============ EDIT ME: return address ============ -->
+          <span class="only-bride">
+            <p class="who">Thompil Puthenpurayil</p>
+            <p class="where">Manjadi, Thiruvalla &middot; +91 88914 53672</p>
+          </span>
+          <span class="only-groom">
+            <p class="who">Sreenitha</p>
+            <p class="where">Thonnalloor, Pandalam &middot; +91 94475 94088</p>
+          </span>
+          <!-- ================================================= -->
+        </div>
+        <p class="label when">12 December<br>2026</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/seal-config.js"></script>
+<script src="motifs.js"></script>
+</body>
+</html>

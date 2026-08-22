@@ -22,7 +22,7 @@ export function useGuestSelection() {
     parsedEvents = eventsParam.split(',').filter((k) => ALL_EVENT_KEYS.includes(k as EventKey)) as EventKey[];
   }
 
-  // If "wedding" is selected, ALWAYS include the Contour Backwaters reception too
+  // If "wedding" is selected, ALWAYS include the auditorium wedding too
   if (parsedEvents.includes('wedding') && !parsedEvents.includes('backwater')) {
     parsedEvents.push('backwater');
   }

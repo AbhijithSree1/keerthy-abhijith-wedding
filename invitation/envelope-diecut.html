@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Envelope — die-line</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* A technical drawing, not artwork: this is the sheet the envelope is cut
+     and folded from, at true scale. Light ground so a printer can mark it up.
+
+     Geometry (inches), A7 to take a 5x7 card:
+       front panel   5.25 x 7.25   — the address side
+       side flaps    1.15 each     — fold behind
+       bottom flap   2.00          — folds up behind
+       top flap      2.90 deep     — folds down over the back and seals
+       stock         ivory; reverse prints plum over the centre panel only
+       flat sheet    7.55 x 12.15
+  */
+  .sheet.diecut {
+    width: 1450px;   /* 7.55in */
+    height: 2333px;  /* 12.15in */
+    background: #e9e7e2;
+    color: #241a28;
+    font-family: var(--font-body);
+  }
+
+  .sheet.diecut::after { display: none; }  /* no paper tooth on a drawing */
+
+  .drawing {
+    position: absolute;
+    inset: 0;
+  }
+
+  .drawing svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* the drawing's own margins are the only reliably light ground, so both
+     text blocks live up in the corners beside the top flap */
+  .note {
+    position: absolute;
+    top: 62px;
+    width: 430px;
+  }
+  .note.left { left: 44px; }
+  .note.right { right: 44px; text-align: right; }
+
+  .note .t {
+    font-family: var(--font-label);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #5d5364;
+    line-height: 2;
+  }
+
+  .note .b {
+    display: block;
+    font-size: 20px;
+    font-style: italic;
+    color: #4a3f52;
+    line-height: 1.5;
+    margin-top: 16px;
+  }
+
+  .note .b b { font-style: normal; font-weight: 600; color: #241a28; }
+</style>
+</head>
+<body>
+<div class="sheet envelope diecut">
+  <div class="drawing">
+    <!-- viewBox is hundredths of an inch, so every number below is real -->
+    <svg viewBox="0 0 755 1215" fill="none">
+      <defs>
+        <linearGradient id="stock" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fdfaf3"/>
+          <stop offset="0.55" stop-color="#f5eee0"/>
+          <stop offset="1" stop-color="#ece2cd"/>
+        </linearGradient>
+      </defs>
+
+      <!-- the cut shape: front panel + four flaps, as one continuous outline -->
+      <path id="blank" d="
+          M 115,290
+          L 377.5,8 L 640,290
+          L 640,290 L 755,410 L 755,895 L 640,1015
+          L 640,1015 L 600,1207 L 155,1207 L 115,1015
+          L 115,1015 L 0,895 L 0,410 L 115,290 Z"
+        fill="url(#stock)" stroke="#241a28" stroke-width="2.2"/>
+
+      <!-- fold lines -->
+      <g stroke="#a8801f" stroke-width="2" stroke-dasharray="11 7" opacity="0.95">
+        <path d="M115,290 L640,290"/>
+        <path d="M115,1015 L640,1015"/>
+        <path d="M115,290 L115,1015"/>
+        <path d="M640,290 L640,1015"/>
+      </g>
+
+      <!-- panel labels -->
+      <g font-family="Cinzel, serif" font-size="15" letter-spacing="3.4"
+         fill="#8a6a20" text-anchor="middle">
+        <text x="377.5" y="180">TOP FLAP</text>
+        <text x="377.5" y="1120">BOTTOM FLAP</text>
+      </g>
+      <g font-family="Cinzel, serif" font-size="13" letter-spacing="3"
+         fill="#6b4a7a" text-anchor="middle">
+        <text x="57" y="657" transform="rotate(-90 57 657)">SIDE FLAP</text>
+        <text x="698" y="657" transform="rotate(90 698 657)">SIDE FLAP</text>
+      </g>
+
+      <g text-anchor="middle" fill="#33193d">
+        <text x="377.5" y="620" font-family="Great Vibes, cursive" font-size="62">Front panel</text>
+        <text x="377.5" y="664" font-family="Cinzel, serif" font-size="14"
+              letter-spacing="4" fill="#8a6a20">THE ADDRESS SIDE</text>
+        <text x="377.5" y="706" font-family="Cormorant Garamond, serif" font-size="21"
+              font-style="italic" fill="#6b4a7a">5.25 &#215; 7.25 in &#183; takes the 5 &#215; 7 card flat</text>
+      </g>
+
+      <!-- fold-order callouts, numbered because the order genuinely matters -->
+      <g font-family="Cinzel, serif" font-size="13" letter-spacing="2" fill="#241a28">
+        <g stroke="#241a28" stroke-width="1.8" fill="none" opacity="0.85">
+          <path d="M40,352 L108,326" stroke-dasharray="6 5"/>
+          <path d="M715,352 L647,326" stroke-dasharray="6 5"/>
+          <path d="M690,1105 L612,1060" stroke-dasharray="6 5"/>
+          <path d="M690,150 L560,205" stroke-dasharray="6 5"/>
+        </g>
+        <text x="34" y="344" text-anchor="end">1</text>
+        <text x="721" y="344" text-anchor="start">1</text>
+        <text x="697" y="1112" text-anchor="start">2</text>
+        <text x="697" y="143" text-anchor="start">3</text>
+      </g>
+
+    </svg>
+  </div>
+
+  <div class="note left">
+    <span class="t">
+      Envelope die-line<br>
+      A7 portrait &middot; true scale
+    </span>
+    <span class="b">
+      Flat sheet <b>7.55 &#215; 12.15 in</b>.<br>
+      Finished <b>5.25 &#215; 7.25 in</b> &mdash; the
+      5 &#215; 7 card goes in flat, no folding.
+    </span>
+  </div>
+
+  <div class="note right">
+    <span class="t">
+      Solid cuts &middot; dashed folds
+    </span>
+    <span class="b">
+      <b>1</b> &nbsp;side flaps fold in<br>
+      <b>2</b> &nbsp;bottom flap folds up over them, then glue<br>
+      <b>3</b> &nbsp;top flap folds down last &mdash; this is the
+      one the guest opens
+    </span>
+    <span class="b" style="margin-top:22px">
+      <b>Two-sided.</b> This face prints ivory throughout &mdash; it becomes the
+      address side. The reverse prints <b>plum over the centre panel only</b>,
+      leaving the top flap ivory, so the sealed back reads ivory over plum.
+    </span>
+  </div>
+</div>
+<script src="motifs.js"></script>
+</body>
+</html>

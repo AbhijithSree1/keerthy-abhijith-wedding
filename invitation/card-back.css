@@ -1,0 +1,217 @@
+/* Shared layout for both printed versions of the card back.
+   card-back-all.html      — the four-celebration card
+   card-back-wedding.html  — the temple wedding only
+   Only the event rows and the QR differ between them. */
+
+.stack {
+  position: absolute;
+  inset: 108px 92px 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* --- families ------------------------------------------------------------ */
+
+.eyebrow {
+  font-size: 12.5px;
+  letter-spacing: 0.42em;
+  color: rgba(198, 165, 216, 0.92);
+  margin-top: 8px;
+}
+
+/* Traditional two-family setting: each side leads with the full name, then
+   "daughter of" / "son of", then the parents, house and number. The ampersand
+   sits in the middle column at the height of the two names, with the rule
+   dropping away below it. */
+.families {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0 24px;
+  align-items: start;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.families .divider {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.families .divider .amp-mark {
+  font-family: var(--font-script);
+  font-size: 34px;
+  line-height: 1.15;
+  color: var(--gold-bright);
+}
+
+.families .divider .line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(203, 162, 77, 0.5), transparent);
+}
+
+.families .full {
+  font-family: var(--font-script);
+  font-size: 40px;
+  /* the script overshoots its box, same as the names on the front */
+  line-height: 1.3;
+  padding: 0 0.12em;
+  color: var(--gold-bright);
+  white-space: nowrap;
+}
+
+.families .rel {
+  font-style: italic;
+  font-size: 19px;
+  color: rgba(198, 165, 216, 0.9);
+  margin-top: 2px;
+}
+
+.families .who {
+  font-size: 23px;
+  line-height: 1.3;
+  color: var(--ivory);
+  margin-top: 6px;
+}
+
+/* house name and number under each family, so the card carries both */
+.families .house {
+  font-style: italic;
+  font-size: 16.5px;
+  line-height: 1.3;
+  color: rgba(236, 217, 171, 0.86);
+  margin-top: 10px;
+}
+
+.families .tel {
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  color: rgba(198, 165, 216, 0.86);
+  margin-top: 5px;
+}
+
+.invite {
+  font-size: 22px;
+  line-height: 1.45;
+  margin-top: 18px;
+  max-width: 560px;
+}
+
+
+/* --- events -------------------------------------------------------------- */
+
+.section-rule {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
+}
+.section-rule .line { max-width: 260px; }
+
+.events {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.ev {
+  display: grid;
+  grid-template-columns: 152px 1fr;
+  align-items: baseline;
+  column-gap: 22px;
+  text-align: left;
+  padding: 13px 4px 14px;
+  border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
+}
+.ev:first-child {
+  border-top: 0.75px solid rgba(203, 162, 77, 0.26);
+}
+
+.ev .day {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: 0.16em;
+  color: var(--champagne);
+  white-space: nowrap;
+}
+
+.ev .what {
+  display: block;
+  font-size: 24px;
+  color: var(--ivory);
+  line-height: 1.18;
+}
+
+.ev .what .time {
+  display: inline;
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  color: rgba(232, 205, 130, 0.92);
+  margin-left: 10px;
+  white-space: nowrap;
+}
+
+.ev .venue {
+  display: block;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(198, 165, 216, 0.9);
+  margin-top: 3px;
+  line-height: 1.25;
+}
+
+/* The public card covers one day rather than four, so it heads the block with
+   the date and drops the per-row dates that would just repeat it. */
+.day-head {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--champagne);
+  margin-top: 26px;
+}
+
+/* --- the chai glasses ----------------------------------------------------
+   Kept as a mark between the schedule and the QR. It carries its own meaning
+   without a caption under it, and it echoes the divider on the card front. */
+
+.chai-mark {
+  margin-top: auto;
+}
+
+/* --- QR ------------------------------------------------------------------ */
+
+.qr-block {
+  margin-top: auto;
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+}
+
+/* a cream plaque, not a cutout: the code has to be dark-on-light with its
+   quiet zone intact or phones will not read it off the printed card */
+.qr-block img {
+  width: 192px;
+  height: 192px;
+  display: block;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(203, 162, 77, 0.5), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  /* nearest-neighbour keeps the module edges hard; smooth scaling leaves grey
+     half-modules that cost the decoder contrast exactly where it samples */
+  image-rendering: pixelated;
+}
+
+.qr-block .caption {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.3em;
+  color: rgba(236, 217, 171, 0.88);
+}
+

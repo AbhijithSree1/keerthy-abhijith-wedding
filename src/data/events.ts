@@ -30,10 +30,10 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     key: 'wedding',
-    label: 'Wedding',
+    label: 'Thalikettu',
     dayLabel: 'Sat · 12 December',
-    date: '2026-12-12T07:30:00+05:30',
-    timeLabel: 'Morning muhurtham · 7:30 AM',
+    date: '2026-12-12T07:00:00+05:30',
+    timeLabel: 'Muhurtham · 7:00 – 7:30 AM',
     venueName: 'Sreevallabha Temple, Thiruvalla, Kerala',
     travelNote: 'Nearest Railway station: Thiruvalla',
     mapQuery: 'Sreevallabha Temple Thiruvalla Kerala',
@@ -44,13 +44,13 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     key: 'backwater',
-    label: 'Backwater Reception',
+    label: 'Auditorium Wedding',
     dayLabel: 'Sat · 12 December',
     date: '2026-12-12T11:00:00+05:30',
-    timeLabel: 'Afternoon · 11:00 AM',
-    venueName: 'Contour Backwaters, Kerala',
-    travelNote: 'Nearest Railway station: Thiruvalla · Buses provided',
-    mapQuery: 'Contour Backwaters Kerala',
+    timeLabel: 'Late morning · 11:00 AM',
+    venueName: 'Contour Backwaters, Changanassery, Kerala',
+    travelNote: 'Nearest Railway station: Changanassery',
+    mapQuery: 'Contour Backwaters Changanassery Kerala',
     extraLink: {
       label: 'Venue Website',
       href: 'https://contourbackwaters.com/'
