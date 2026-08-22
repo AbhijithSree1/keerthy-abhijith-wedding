@@ -5,7 +5,6 @@ const LINKS = [
   { href: '#events', label: 'Celebrations' },
   { href: '#gallery', label: 'Gallery' },
   { href: '#rsvp', label: 'RSVP' },
-  { href: '#registry', label: 'Blessings' },
   { href: '#travel', label: 'Travel' },
 ];
 

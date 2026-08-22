@@ -4,7 +4,6 @@ import Nav from './components/Nav';
 import Hero from './components/Hero';
 import EventsTimeline from './components/EventsTimeline';
 import Gallery from './components/Gallery';
-import Registry from './components/Registry';
 import RSVP from './components/RSVP';
 import Travel from './components/Travel';
 import Countdown from './components/Countdown';
@@ -31,7 +30,6 @@ export default function WeddingSite() {
         <Hero greeting={greeting} events={events} />
         <EventsTimeline visible={events} />
         <Gallery />
-        <Registry />
         <RSVP visible={events} />
         <Travel />
 
