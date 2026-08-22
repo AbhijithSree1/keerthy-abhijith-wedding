@@ -13,7 +13,7 @@ includes `src/`, so this folder is inert as far as the site is concerned.
 | `card-back-all.html` | 5 × 7 in | **All four celebrations.** For close family and friends |
 | `card-back-public.html` | 5 × 7 in | **The wedding day only.** The general-invite version |
 | `envelope-front.html` | 5.25 × 7.25 in | Address side — ruled lines for the guest's name |
-| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — flap, Ganapati seal, a candid, backwaters |
+| `envelope-back.html` | 5.25 × 7.25 in | Sealed side — ivory flap, Ganapati seal, backwaters |
 | `envelope-diecut.html` | 7.55 × 12.15 in | The flat sheet the envelope is cut and folded from |
 
 ## Bride's side and groom's side
@@ -56,14 +56,16 @@ Two things did not simply invert:
 - **The gold had to get darker.** `#e8cd82` is built to glow out of a dark
   ground and all but vanishes on ivory, so the ivory theme uses `#8a6a20` and
   friends.
-- **The photo needed its own file.** `candid.jpg` is toned ivory-out-of-plum;
-  `candid-ivory.jpg` is the same frame toned plum-out-of-ivory, so it dissolves
-  into the paper instead of sitting on it as a dark rectangle.
-
 - **The seal is struck gold-on-plum, not the reverse.** It straddles the fold,
   so its top half lies on ivory and its bottom half on plum. A dark disc reads
   on the ivory and disappears on the plum; a gold disc with a plum figure holds
   against both.
+
+The envelope back carries no photograph — the plum body is deliberately plain,
+with only the seal on the fold and the backwater line-art along the foot. (An
+earlier version had a duotoned candid there; `build_candid()` in
+`prepare-assets.py` generated it, and both are in the git history if it is ever
+wanted back.)
 
 **The envelope is a two-sided print.** On a real envelope the flaps fold away
 from the front panel, so the ivory flap you see on the sealed back is the

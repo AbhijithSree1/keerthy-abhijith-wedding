@@ -14,36 +14,6 @@
      That does mean a two-sided print. See the die-line note.
      --------------------------------------------------------------------- */
 
-  /* the photo lives on .sheet (not .inner) so it runs into the bleed */
-  .photo {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  /* A band, not a full bleed — it should read as a memory surfacing through
-     the plum, and it has to clear the line-art at the foot. */
-  .photo img {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 50%;
-    width: 100%;
-    height: 30%;
-    object-fit: cover;
-    object-position: 50% 44%;
-    display: block;
-    opacity: 0.9;
-    /* one radial layer rather than two linear ones — multi-layer
-       mask-composite: intersect did not survive the renderer */
-    mask-image: radial-gradient(
-      ellipse 49% 64% at 50% 46%,
-      #000 52%,
-      rgba(0, 0, 0, 0.92) 74%,
-      transparent 100%
-    );
-  }
-
   /* --- flap -------------------------------------------------------------- */
 
   .flap {
@@ -133,9 +103,9 @@
 
   .foot {
     position: absolute;
-    left: 84px;
-    right: 84px;
-    bottom: 62px;
+    left: 56px;
+    right: 56px;
+    bottom: 104px;
     text-align: center;
   }
 
@@ -154,10 +124,6 @@
 </head>
 <body>
 <div class="sheet envelope">
-  <div class="photo">
-    <img src="assets/candid.jpg" alt="">
-  </div>
-
   <div class="flap"></div>
 
   <div class="flap-edge">

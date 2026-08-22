@@ -93,32 +93,6 @@ def build_hero():
     print("hero.jpg", im.size)
 
 
-def build_candid():
-    """Envelope back: an ordinary evening out, pushed to a plum/champagne duotone.
-
-    Cut to 2.42:1, the ratio of the band it sits in, so the mask does the
-    shaping rather than object-fit throwing away half the frame.
-    """
-    im = Image.open(os.path.join(SRC, "engagement-13.jpg")).convert("RGB")
-    im = cover(im, 1800, 744, focus=0.40)
-    im = duotone(im, (26, 13, 32), CHAMPAGNE, strength=1.0)
-    im = ImageEnhance.Brightness(im).enhance(1.06)
-    im = ImageEnhance.Contrast(im).enhance(1.04)
-    im.save(os.path.join(OUT, "candid.jpg"), quality=92, subsampling=0)
-    print("candid.jpg", im.size)
-
-    # The envelope prints on ivory, so the same frame needs the ramp the other
-    # way up: plum in the shadows, ivory in the highlights, so it dissolves
-    # into the paper instead of sitting on it as a dark rectangle.
-    iv = Image.open(os.path.join(SRC, "engagement-13.jpg")).convert("RGB")
-    iv = cover(iv, 1800, 744, focus=0.40)
-    iv = duotone(iv, (58, 32, 70), (250, 245, 233), strength=1.0)
-    iv = ImageEnhance.Contrast(iv).enhance(1.12)
-    iv = ImageEnhance.Brightness(iv).enhance(0.98)
-    iv.save(os.path.join(OUT, "candid-ivory.jpg"), quality=92, subsampling=0)
-    print("candid-ivory.jpg", iv.size)
-
-
 def build_qr():
     """One QR per printed version of the card, as a cream plaque.
 
@@ -208,6 +182,5 @@ def build_seal_figure():
 
 if __name__ == "__main__":
     build_hero()
-    build_candid()
     build_qr()
     build_seal_figure()
