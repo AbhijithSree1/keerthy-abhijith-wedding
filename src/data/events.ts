@@ -30,7 +30,7 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     key: 'wedding',
-    label: 'Temple Wedding',
+    label: 'Thalikettu',
     dayLabel: 'Sat · 12 December',
     date: '2026-12-12T07:00:00+05:30',
     timeLabel: 'Muhurtham · 7:00 – 7:30 AM',

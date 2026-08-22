@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const LINKS = [
-  { href: '#families', label: 'Families' },
   { href: '#events', label: 'Celebrations' },
   { href: '#gallery', label: 'Gallery' },
   { href: '#rsvp', label: 'RSVP' },
