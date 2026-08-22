@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import DoorIntro from './components/DoorIntro';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
+import Families from './components/Families';
 import EventsTimeline from './components/EventsTimeline';
 import Gallery from './components/Gallery';
 import Registry from './components/Registry';
@@ -29,6 +30,7 @@ export default function WeddingSite() {
       <Nav />
       <main>
         <Hero greeting={greeting} events={events} />
+        <Families />
         <EventsTimeline visible={events} />
         <Gallery />
         <Registry />
