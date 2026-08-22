@@ -150,23 +150,9 @@ body.bleed .sheet > .inner {
   inset: 0;
 }
 
-/* ---------- kasavu border ------------------------------------------------
-   A Kerala mundu's kara: a fine outer thread, a breath of cloth, then the
-   woven gold band. Used as the card's frame and as the heavy bottom band.  */
-
-.kasavu-frame {
-  position: absolute;
-  inset: 46px;
-  border: 1.5px solid var(--kara-line);
-  pointer-events: none;
-}
-
-.kasavu-frame::before {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border: 0.75px solid var(--kara-line-soft);
-}
+/* ---------- kasavu band --------------------------------------------------
+   A Kerala mundu's kara, run across the head and foot of the sheet. There is
+   no rectangular frame: the woven band is the whole edge treatment.        */
 
 /* the woven band — fine vertical gold threads, like the kara of a mundu */
 .kasavu-band {

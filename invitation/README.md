@@ -47,7 +47,7 @@ Both come out of one set of theme tokens declared in `:root` in `shared.css`.
 `.sheet.ivory` flips a whole sheet (the envelope front); `.on-ivory` flips a
 *region* of one (the flap on the envelope back, which is an ivory island on a
 plum sheet). Same declaration block, two selectors. Shared components
-(`.kasavu-frame`, `.kasavu-band`, `.label`, `.rule`, `.motif`) read those tokens
+(`.kasavu-band`, `.label`, `.rule`, `.motif`) read those tokens
 and **must not hardcode a colour**; a literal in one of them puts the plum
 sheet's ink on the ivory sheet.
 
