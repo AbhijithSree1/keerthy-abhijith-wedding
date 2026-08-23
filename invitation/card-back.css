@@ -215,3 +215,59 @@
   color: rgba(236, 217, 171, 0.88);
 }
 
+
+/* --- transport -----------------------------------------------------------
+   Buses run to the Changanassery venue, and the two families set off from
+   their own side at different times — so this line differs between the
+   bride's and groom's printings. `.only-bride` / `.only-groom` in shared.css
+   do the switching; both are always in the markup and one is hidden.
+
+   It sits inside the event row rather than in a block of its own, so there is
+   no doubt which of the days the bus belongs to. */
+.transport {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin-top: 7px;
+  font-family: var(--font-label);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: rgba(232, 205, 130, 0.9);
+}
+
+.transport .t-head {
+  text-transform: uppercase;
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  color: rgba(198, 165, 216, 0.8);
+  /* a hairline rule in front of the word, so the note reads as an aside to
+     the event above it rather than as another line of the address */
+  padding-left: 22px;
+  position: relative;
+}
+.transport .t-head::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 14px;
+  height: 1px;
+  background: rgba(203, 162, 77, 0.55);
+}
+
+/* --- a card with one event ------------------------------------------------
+   The wedding-day card lists a single ceremony now that Thalikettu is off the
+   invitation. A left-hand "LATE MORNING" column against one row reads as a
+   table missing its other rows, and it only repeats the date already standing
+   above it — so that column goes and the row centres under the heading. */
+.events.single .ev {
+  grid-template-columns: 1fr;
+  text-align: center;
+  padding: 20px 4px 22px;
+}
+.events.single .ev .day {
+  display: none;
+}
+.events.single .transport {
+  justify-content: center;
+}
