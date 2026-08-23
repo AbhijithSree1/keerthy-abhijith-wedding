@@ -44,7 +44,7 @@ export const EVENTS: WeddingEvent[] = [
   },
   {
     key: 'backwater',
-    label: 'Auditorium Wedding',
+    label: 'Wedding',
     dayLabel: 'Sat · 12 December',
     date: '2026-12-12T11:00:00+05:30',
     timeLabel: 'Late morning · 11:00 AM',
