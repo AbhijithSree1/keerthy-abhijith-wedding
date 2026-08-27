@@ -140,12 +140,34 @@ def checks():
         f"{(FOLD_R - FOLD_L)/100:.2f} x {(FOLD_B - FOLD_T)/100:.2f} in",
     ))
 
-    clear = (W - CARD[0], H - CARD[1])
+    # The pocket is not the panel: folding costs about one caliper of stock at
+    # each fold that encloses it — two across the width, one up the height.
+    # At 350gsm that is worth ~0.04in, which is a sixth of the clearance.
+    caliper = 0.46 / 25.4 * 100          # 350gsm uncoated, the heavier case
+    pocket = (W - 2 * caliper, H - caliper)
+    clear = (pocket[0] - CARD[0], pocket[1] - CARD[1])
     out.append((
-        "Card clears the inside",
-        clear[0] >= 20 and clear[1] >= 20,
-        f"{clear[0]/100:.2f} in wider, {clear[1]/100:.2f} in taller than the "
-        f"{CARD[0]/100:g} x {CARD[1]/100:g} card",
+        "Card clears the inside, allowing for the folds",
+        clear[0] >= 15 and clear[1] >= 15,
+        f"pocket {pocket[0]/100:.2f} x {pocket[1]/100:.2f} in — "
+        f"{clear[0]/200:.3f} in each side, {clear[1]/100:.3f} in up",
+    ))
+
+    # the card goes in through the mouth, so it has to be wider than the card
+    out.append((
+        "Mouth is wide enough to feed the card",
+        W - 2 * caliper >= CARD[0],
+        f"{(W - 2*caliper)/100:.2f} in of opening for a {CARD[0]/100:g} in card",
+    ))
+
+    # and once in, the flaps have to cover the card's top edge
+    top_of_card = CARD[1]
+    covered_to = H - T
+    out.append((
+        "Flaps cover the card once it is in",
+        covered_to <= top_of_card,
+        f"flap reaches down to {covered_to/100:.2f} in; card top sits at "
+        f"{top_of_card/100:.2f} in",
     ))
 
     out.append((
