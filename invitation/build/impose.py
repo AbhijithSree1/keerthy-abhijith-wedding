@@ -27,7 +27,7 @@ PRINT = os.path.join(ROOT, "print")
 
 PT = 72.0
 BLEED = 0.125
-GUTTER = 0.25       # between pieces, so crop marks have somewhere to live
+GUTTER = 0.5        # between pieces: two facing crop marks have to fit in it
 GRIP = 0.35         # unprintable edge most presses need
 
 # The sheets an Indian digital or small-offset studio will actually have.
@@ -61,15 +61,22 @@ def fits(piece, sheet):
 
 
 def crop_marks(page, x, y, w, h, bleed_pt):
-    """Four L-shaped marks at the trim corners, drawn out in the bleed."""
-    run = 0.18 * PT
+    """Four L-shaped marks, aligned to the trim lines and starting where the
+    bleed ends.
+
+    The offset is the point. A mark that begins part-way across the bleed puts
+    ink inside the area the guillotine is aiming at, and any drift outward
+    leaves a black tick on the finished card. Starting at the bleed edge means
+    the marks can only ever be cut away. They still line up with the trim, so
+    the cutter has the same two lines to sight along."""
+    run = 0.15 * PT
     shape = page.new_shape()
     for cx, sx in ((x + bleed_pt, -1), (x + w - bleed_pt, 1)):
         for cy, sy in ((y + bleed_pt, -1), (y + h - bleed_pt, 1)):
-            shape.draw_line((cx + sx * bleed_pt * 0.35, cy),
-                            (cx + sx * (bleed_pt * 0.35 + run), cy))
-            shape.draw_line((cx, cy + sy * bleed_pt * 0.35),
-                            (cx, cy + sy * (bleed_pt * 0.35 + run)))
+            shape.draw_line((cx + sx * bleed_pt, cy),
+                            (cx + sx * (bleed_pt + run), cy))
+            shape.draw_line((cx, cy + sy * bleed_pt),
+                            (cx, cy + sy * (bleed_pt + run)))
     shape.finish(color=(0, 0, 0), width=0.25)
     shape.commit()
 
