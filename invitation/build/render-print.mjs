@@ -30,6 +30,9 @@ const OUT = path.join(ROOT, "print");
 
 const DPI = 600;
 
+// 192 authoring px to the inch, against the 96 px/in Chromium assumes in PDF
+const PDF_SCALE = 96 / 192;
+
 /* name in the package  <-  the page that draws it. Both cards share one front
    design; it is written out twice under each card's own name so the two sets
    cannot be mixed up on the press floor. */
@@ -101,11 +104,18 @@ for (const side of ["bride", "groom"]) {
 
     // The PDF page is sized to the artwork exactly, with no printer margin, so
     // the plate lands edge to edge with nothing scaled to fit.
+    //
+    // scale is not optional. Chromium lays a PDF out at the CSS convention of
+    // 96px to the inch, but this artwork is authored at 192px to the inch — so
+    // without it the sheet claims twice its real size in both directions and
+    // only the top-left quarter lands on the page. PDF_SCALE converts between
+    // the two; it is 192/96 inverted, not a fudge factor.
     const pdf = path.join(dirPdf, `${plate.as}.pdf`);
     await page.pdf({
       path: pdf,
       width: `${wIn}in`,
       height: `${hIn}in`,
+      scale: PDF_SCALE,
       printBackground: true,
       margin: { top: 0, bottom: 0, left: 0, right: 0 },
       pageRanges: "1",

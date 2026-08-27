@@ -14,7 +14,7 @@ import subprocess
 import sys
 
 import pymupdf
-from PIL import Image
+from PIL import Image, ImageChops
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -65,10 +65,35 @@ def set_boxes(path, stem):
     return media
 
 
+# A PDF and a PNG of the same plate are rasterised by different engines, so
+# they never match exactly — antialiasing and gamma put the honest difference
+# around 4 levels. A PDF that lost part of the plate scores an order of
+# magnitude worse, which is the whole point of this gate: the first version of
+# this package shipped with every PDF cropped to its top-left quarter, because
+# it was checked by eye on crops rather than compared whole.
+DIFF_LIMIT = 12.0
+
+
+def check_against_raster(side, stem):
+    pdf = os.path.join(PRINT, side, "pdf", stem + ".pdf")
+    png = os.path.join(PRINT, side, "png-600dpi", stem + ".png")
+
+    pix = pymupdf.open(pdf)[0].get_pixmap(dpi=150)
+    a = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+    b = Image.open(png).convert("RGB").resize(a.size, Image.LANCZOS)
+
+    diff = ImageChops.difference(a, b).convert("L")
+    hist = diff.histogram()
+    total = sum(hist)
+    mean = sum(i * n for i, n in enumerate(hist)) / total
+    return mean
+
+
 def main():
     if not os.path.isdir(PRINT):
         sys.exit("no print/ directory — run build/render-print.mjs first")
 
+    bad = []
     for side in ("bride", "groom"):
         pdf_dir = os.path.join(PRINT, side, "pdf")
         for name in sorted(os.listdir(pdf_dir)):
@@ -78,10 +103,20 @@ def main():
             media = set_boxes(os.path.join(pdf_dir, name), stem)
             trim = TRIM[stem]
             trim_txt = f"trim {trim[0]} x {trim[1]} in" if trim else "cut to die-line"
+            mean = check_against_raster(side, stem)
+            flag = "" if mean <= DIFF_LIMIT else "   !! DOES NOT MATCH THE RENDER"
+            if flag:
+                bad.append(f"{side}/{stem}")
             print(
                 f"{side}/{stem:28} media {media.width / PT:.3f} x "
-                f"{media.height / PT:.3f} in  {trim_txt}"
+                f"{media.height / PT:.3f} in  {trim_txt}  diff {mean:.1f}{flag}"
             )
+
+    if bad:
+        sys.exit(
+            "\nThese PDFs do not match the rendered plate — do not send them:\n  "
+            + "\n  ".join(bad)
+        )
 
     # The raster backup ships as JPEG, not PNG. At quality 95 with no chroma
     # subsampling the difference from the lossless render is 0.7 levels mean —
