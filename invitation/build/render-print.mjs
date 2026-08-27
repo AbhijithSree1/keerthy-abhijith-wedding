@@ -41,9 +41,19 @@ const PLATES = [
   { file: "card-back-all", as: "card-A-all-events-back" },
   { file: "card-front", as: "card-B-wedding-day-front" },
   { file: "card-back-public", as: "card-B-wedding-day-back" },
-  { file: "envelope-front", as: "envelope-front" },
-  { file: "envelope-back", as: "envelope-back" },
+  // The envelope prints as one flat sheet, not as two rectangles. See the
+  // header of envelope-flat.html for why the two rectangles cannot work.
+  { file: "envelope-flat", as: "envelope-outside-flat" },
   { file: "envelope-diecut", as: "envelope-diecut", bleed: false },
+];
+
+/* Pictures of the finished envelope, for the printer to work towards. These
+   are NOT artwork — envelope-back draws its flap inside the rectangle, which
+   is a thing paper cannot do — so they ship as JPEGs in a mockups/ folder and
+   never as a PDF anyone could put on a press. */
+const MOCKUPS = [
+  { file: "envelope-front", as: "MOCKUP-envelope-closed-front" },
+  { file: "envelope-back", as: "MOCKUP-envelope-closed-back" },
 ];
 
 fs.rmSync(OUT, { recursive: true, force: true });
@@ -59,8 +69,9 @@ for (const side of ["bride", "groom"]) {
   fs.mkdirSync(dirPdf, { recursive: true });
   fs.mkdirSync(dirPng, { recursive: true });
 
-  for (const plate of PLATES) {
-    const bleed = plate.bleed !== false;
+  for (const plate of [...PLATES, ...MOCKUPS]) {
+    const isMockup = MOCKUPS.includes(plate);
+    const bleed = plate.bleed !== false && !isMockup;
 
     await page.goto(pathToFileURL(path.join(ROOT, `${plate.file}.html`)).href, {
       waitUntil: "load",
@@ -99,6 +110,16 @@ for (const side of ["bride", "groom"]) {
       height: Math.ceil(box.height),
     });
     await page.waitForTimeout(80);
+
+    if (isMockup) {
+      const dirMock = path.join(OUT, side, "mockups");
+      fs.mkdirSync(dirMock, { recursive: true });
+      const shot = path.join(dirMock, `${plate.as}.jpg`);
+      await el.screenshot({ path: shot, type: "jpeg", quality: 88 });
+      console.log(`${side}/mockups/${plate.as}  (reference only, not artwork)`);
+      continue;
+    }
+
     const png = path.join(dirPng, `${plate.as}.png`);
     await el.screenshot({ path: png });
 

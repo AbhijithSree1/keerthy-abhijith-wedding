@@ -27,6 +27,7 @@ const PAGES = [
   { name: "card-back-public", sides: true }, // the wedding day only
   { name: "envelope-front", sides: true },
   { name: "envelope-back", sides: true },
+  { name: "envelope-flat", sides: true }, // the sheet that actually prints
   // the die-line is a technical drawing: no sides, and no bleed
   { name: "envelope-diecut", sides: false, bleed: false },
 ];

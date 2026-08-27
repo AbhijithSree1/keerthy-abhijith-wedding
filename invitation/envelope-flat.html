@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Envelope — flat, outside face</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="assets/envelope-die.css">
+<style>
+  /* =========================================================================
+     THE ENVELOPE AS IT IS ACTUALLY PRINTED.
+
+     envelope-front.html and envelope-back.html are pictures of a finished
+     envelope seen from each side. They cannot be printed: the back draws its
+     flap inside a 5.25 x 7.25 rectangle with a clip-path, and on a real
+     envelope the flap is not inside that rectangle — it is an extra panel of
+     paper hanging off the top of the flat sheet, which only becomes the back
+     once it is folded over.
+
+     This page is the flat sheet. One face of it, die-cut and folded, becomes
+     the whole outside of the envelope:
+
+        top flap        ivory        folds down last, closes the envelope
+        centre panel    ivory        the address side — does not fold
+        side flaps      plum         fold in
+        bottom flap     plum         folds up over them, glued — this is the back
+
+     All of that is on ONE side of the paper, which is what makes an envelope
+     a one-sided print: every flap rotates through 180 degrees, so the face
+     that is down on the press bed ends up as the exterior everywhere.
+
+     Geometry is the die-line's, in hundredths of an inch scaled by 1.92 to
+     reach the 192px-to-the-inch this artwork is authored at:
+
+        fold x   115 -> 220.8px      640 -> 1228.8px
+        fold y   290 -> 556.8px     1015 -> 1948.8px
+        centre panel  1008 x 1392px  ==  5.25 x 7.25 in exactly
+     ========================================================================= */
+
+  .sheet.flat {
+    width: var(--die-sheet-w);
+    height: var(--die-sheet-h);
+    background: none;
+  }
+  body.bleed .sheet.flat {
+    width: calc(var(--die-sheet-w) + 48px);
+    height: calc(var(--die-sheet-h) + 48px);
+  }
+  body.bleed .sheet.flat > .inner {
+    inset: 24px;
+  }
+  .sheet.flat::after { display: none; }  /* tooth is painted per region below */
+
+  /* ---- the ground, in two colours split on the fold lines ---------------
+     Ivory everywhere the outside should read ivory, plum on the two side
+     flaps and the bottom flap. Both run past the die's edges, so whatever
+     the cutter does there is bleed and not white paper. */
+
+  .ground {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(125% 44% at 50% -6%, #fdfaf3 0%, #f8f2e5 34%, #f3ecdc 66%, #ede4d0 100%);
+  }
+
+  .ground::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  }
+
+  .plum {
+    position: absolute;
+    background:
+      radial-gradient(140% 90% at 50% 0%, var(--mauve) 0%, var(--plum-mid) 26%, var(--plum) 56%, var(--plum-deep) 100%);
+  }
+  .plum::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+  }
+
+  /* the side flaps: from the top fold to the bottom fold, outboard of the
+     vertical folds. They run off the sheet so they bleed. */
+  .plum.side-l {
+    left: -40px; top: var(--die-fold-t);
+    width: calc(var(--die-fold-l) + 40px); height: var(--die-panel-h);
+  }
+  .plum.side-r {
+    right: -40px; top: var(--die-fold-t);
+    width: calc(var(--die-side-flap) + 40px); height: var(--die-panel-h);
+  }
+
+  /* ---- the bottom flap, drawn upside down on purpose -------------------
+     This flap turns through 180 degrees to become the back, so whatever is
+     printed on it arrives rotated. A gradient running light-to-dark down the
+     sheet would arrive dark-to-light — the reverse of the card and of the
+     flap above it. Rotating the region here means the artwork inside is
+     drawn as it should finally read, and the fold puts it right. */
+  .plum.bottom {
+    left: -40px; right: -40px;
+    top: var(--die-fold-b); bottom: -40px;
+    transform: rotate(180deg);
+  }
+
+  /* ---- the address panel ----------------------------------------------
+     Exactly the centre panel of the die, so this is the same 5.25 x 7.25
+     artwork that envelope-front.html shows — laid into its real position on
+     the sheet rather than standing alone. */
+
+  .panel {
+    position: absolute;
+    left: var(--die-fold-l);
+    top: var(--die-fold-t);
+    width: var(--die-panel-w);
+    height: var(--die-panel-h);
+  }
+
+  .stack {
+    position: absolute;
+    inset: 228px 96px 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .head { display: flex; flex-direction: column; align-items: center; }
+
+  .crest { color: var(--seal-ink); opacity: 0.92; }
+
+  .crest-sub {
+    font-size: 10.5px;
+    letter-spacing: 0.46em;
+    color: var(--text-soft);
+    margin-top: 20px;
+  }
+
+  .head .names {
+    font-family: var(--font-script);
+    font-size: 52px;
+    line-height: 1.08;
+    margin-top: 12px;
+    color: var(--text-script);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    gap: 0.15em;
+  }
+  .head .names .amp { font-size: 0.66em; }
+
+  .to { width: 100%; }
+
+  .to-label {
+    font-size: 10.5px;
+    letter-spacing: 0.46em;
+    color: var(--text-label);
+    text-align: left;
+    margin-bottom: 42px;
+    padding-left: 4px;
+  }
+
+  .lines { display: flex; flex-direction: column; gap: 84px; }
+
+  .lines span {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--kara-line) 7%,
+      var(--kara-line) 93%, transparent 100%);
+  }
+  .lines span:last-child { margin-right: 44%; }
+
+  .foot {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .from .from-label {
+    font-size: 9.5px;
+    letter-spacing: 0.34em;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+  }
+  .from .who { font-size: 20px; color: var(--text-strong); line-height: 1.35; }
+  .from .where {
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text-soft);
+    margin-top: 2px;
+  }
+
+  .when {
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    color: var(--text-label);
+    text-align: right;
+    line-height: 2;
+  }
+
+  /* ---- the seal, on the flap itself ------------------------------------
+     On the mockup the seal straddled the flap's edge. It cannot: the flap
+     and the back it closes against are different regions of the sheet that
+     only meet after folding, so no printed mark can cross that join. The
+     seal sits wholly inside the flap, near its point, which is where it
+     lands once the flap is folded down over the plum back. */
+
+  .flap-seal {
+    position: absolute;
+    left: 50%;
+    /* measured down from the sheet's top edge, which is the flap's point */
+    top: var(--die-seal-from-point);
+    /* The 180 turn again: the flap's point aims up on the flat sheet and down
+       on the finished envelope, so an upright Ganapati here would arrive on
+       its head. Drawn inverted, it folds the right way up. */
+    transform: translate(-50%, -50%) rotate(180deg);
+    /* the same gold disc with the plum figure the approved mockup used; the
+       ivory sheet's own token would give a plum disc, which loses the
+       Ganapati against it */
+    --seal-fill: #c9a24d;
+    color: #22102b;
+  }
+</style>
+</head>
+<body>
+<div class="sheet flat on-ivory">
+  <div class="inner">
+    <div class="ground"></div>
+    <div class="plum side-l"></div>
+    <div class="plum side-r"></div>
+    <div class="plum bottom"></div>
+
+    <span class="motif flap-seal" data-motif="ganapatiSeal" data-w="190"></span>
+
+    <div class="panel">
+      <div class="kasavu-band top"></div>
+      <div class="kasavu-band bottom"></div>
+
+      <div class="stack">
+        <div class="head">
+          <span class="motif crest" data-motif="seal" data-w="118"
+                data-opts='{"arcs":false}'></span>
+          <p class="label crest-sub">The wedding of</p>
+          <p class="names pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></p>
+        </div>
+
+        <div class="to">
+          <p class="label to-label">To</p>
+          <div class="lines">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="foot">
+          <div class="from">
+            <p class="label from-label">With love, from</p>
+            <span class="only-bride">
+              <p class="who">Thompil Puthenpurayil</p>
+              <p class="where">Manjadi, Thiruvalla &middot; +91 88914 53672</p>
+            </span>
+            <span class="only-groom">
+              <p class="who">Sreenitha</p>
+              <p class="where">Thonnalloor, Pandalam &middot; +91 94475 94088</p>
+            </span>
+          </div>
+          <p class="label when">12 December<br>2026</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/envelope-die.js"></script>
+<script src="assets/seal-config.js"></script>
+<script src="motifs.js"></script>
+</body>
+</html>

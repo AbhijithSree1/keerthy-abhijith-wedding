@@ -16,6 +16,9 @@ import sys
 import pymupdf
 from PIL import Image, ImageChops
 
+sys.path.insert(0, HERE_BOOT := os.path.dirname(os.path.abspath(__file__)))
+from envelope_geometry import DIE  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PRINT = os.path.join(ROOT, "print")
@@ -29,9 +32,11 @@ TRIM = {
     "card-A-all-events-back": (5.0, 7.0),
     "card-B-wedding-day-front": (5.0, 7.0),
     "card-B-wedding-day-back": (5.0, 7.0),
-    "envelope-front": (5.25, 7.25),
-    "envelope-back": (5.25, 7.25),
-    # the die-line is cut to the drawing, not to a rectangle
+    # the flat envelope sheet is cut to the die, but it still carries bleed,
+    # so its trim is the die's own bounding box — taken from the geometry
+    # rather than typed here, because the die has changed once already
+    "envelope-outside-flat": (DIE["sheetW"] / 100, DIE["sheetH"] / 100),
+    # the die-line is a drawing, printed at size with no bleed
     "envelope-diecut": None,
 }
 
@@ -53,9 +58,12 @@ def set_boxes(path, stem):
             media.x1 - inset,
             media.y1 - inset,
         )
-        want = (round(trim[0] * PT, 1), round(trim[1] * PT, 1))
-        got = (round(rect.width, 1), round(rect.height, 1))
-        assert got == want, f"{stem}: trim came out {got}, expected {want}"
+        # a pixel of rounding is fine; a wrong panel size is not
+        want = (trim[0] * PT, trim[1] * PT)
+        got = (rect.width, rect.height)
+        assert max(abs(g - w) for g, w in zip(got, want)) < 1.0, (
+            f"{stem}: trim came out {got}, expected {want}"
+        )
         page.set_trimbox(rect)
         page.set_bleedbox(media)
 
@@ -124,24 +132,33 @@ def main():
     # is the difference between a pack you can email and one you cannot.
     for side in ("bride", "groom"):
         png_dir = os.path.join(PRINT, side, "png-600dpi")
-        jpg_dir = os.path.join(PRINT, side, "raster-600dpi")
+        jpg_dir = os.path.join(PRINT, side, "raster-300dpi")
         os.makedirs(jpg_dir, exist_ok=True)
         for name in sorted(os.listdir(png_dir)):
             if not name.endswith(".png"):
                 continue
             im = Image.open(os.path.join(png_dir, name)).convert("RGB")
+            # 300 dpi is what a press needs, and the PDFs are the real
+            # deliverable now that they are checked against these renders —
+            # so the fallback set halves its resolution to keep each pack
+            # inside what mail will carry.
+            im = im.resize((im.width // 2, im.height // 2), Image.LANCZOS)
             im.save(
                 os.path.join(jpg_dir, name[:-4] + ".jpg"),
                 "JPEG",
                 quality=95,
                 optimize=True,
                 subsampling=0,
-                dpi=(600, 600),
+                dpi=(300, 300),
             )
 
         shutil.copy(
             os.path.join(HERE, "PRINT-SPEC.md"),
             os.path.join(PRINT, side, "PRINT-SPEC.md"),
+        )
+        shutil.copy(
+            os.path.join(HERE, "EDITING-AND-FONTS.md"),
+            os.path.join(PRINT, side, "EDITING-AND-FONTS.md"),
         )
 
     # One zip per side: each is a complete, self-contained pack for one
@@ -151,7 +168,8 @@ def main():
         if os.path.exists(out):
             os.remove(out)
         subprocess.run(
-            ["zip", "-r", "-q", out, "pdf", "raster-600dpi", "PRINT-SPEC.md"],
+            ["zip", "-r", "-q", out, "pdf", "imposed", "raster-300dpi",
+             "mockups", "PRINT-SPEC.md", "EDITING-AND-FONTS.md"],
             cwd=os.path.join(PRINT, side),
             check=True,
         )

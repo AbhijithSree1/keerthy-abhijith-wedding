@@ -22,9 +22,12 @@ reason the raster set is here.
 | `card-A-all-events-back` | Card A, three celebrations | Card A, side 2 |
 | `card-B-wedding-day-front` | Card B, photo side | Card B, side 1 |
 | `card-B-wedding-day-back` | Card B, the wedding day only | Card B, side 2 |
-| `envelope-front` | Address side | Envelope, outside |
-| `envelope-back` | Plum body, ivory flap, seal | Envelope, inside face |
+| `envelope-outside-flat` | The whole envelope, flat | One side of the flat sheet |
 | `envelope-diecut` | Cutting and folding drawing | Not printed — see §6 |
+
+`mockups/` holds two JPEGs of what the finished envelope should look like,
+closed, from each side. **They are reference pictures, not artwork.** Nothing
+in that folder goes on a press.
 
 **There are two different cards.** Card A goes to guests invited to all three
 celebrations; Card B goes to everyone else. They share the same front. Both are
@@ -43,7 +46,8 @@ Both must be printed; they are not interchangeable.
 | | Finished (trim) | Artwork supplied | Bleed |
 | --- | --- | --- | --- |
 | Card | 5 × 7 in · 127 × 178 mm | 5.25 × 7.25 in | 0.125 in / 3.2 mm all round |
-| Envelope | 5.25 × 7.25 in (A7) · 133 × 184 mm | 5.5 × 7.5 in | 0.125 in / 3.2 mm all round |
+| Envelope, finished | 5.25 × 7.25 in (A7) · 133 × 184 mm | — | — |
+| Envelope, flat sheet | 7.56 × 12.15 in | 7.81 × 12.40 in | 0.125 in / 3.2 mm all round |
 | Envelope die-line | 7.56 × 12.15 in flat | — | none |
 
 Every PDF carries its **TrimBox** and **BleedBox**, so the cut line is recorded
@@ -107,18 +111,42 @@ of the gold and print the Ganapati, or have it redrawn.
 
 ## 6. Envelope
 
-The envelope prints on a flat sheet and is made up afterwards.
+The envelope is **one flat sheet, printed on one side only**, then die-cut,
+folded and glued.
 
-- `envelope-front` is the **outside** — the face with the address lines.
-- `envelope-back` is the **inside face** — the plum body with the ivory flap.
-  When the envelope is folded, this is what forms the back and the flap.
-- `envelope-diecut` is the **cutting and folding drawing**, at 7.56 × 12.15 in
-  flat. It is a technical drawing: cut lines and fold lines, not artwork. Do not
-  print it onto the envelope.
+`envelope-outside-flat` is that sheet. Everything on it becomes the exterior of
+the finished envelope, because every flap turns through 180° — so the face that
+lies down on the press bed ends up outside everywhere:
 
-Give the die-line to whoever makes the envelope. If they already have a standard
-A7 (5.25 × 7.25 in) envelope die they prefer, theirs is fine — say so, and the
-artwork can be re-laid to fit it.
+| Region of the sheet | Colour | Becomes |
+| --- | --- | --- |
+| Top flap | Ivory, with the gold seal | The closing flap |
+| Centre panel, 5.25 × 7.25 in | Ivory, with the address panel | The address side |
+| Side flaps | Plum | Fold in |
+| Bottom flap | Plum | Folds up over them, glued — the back |
+
+`envelope-diecut` is the cutting and folding drawing at the same 7.56 × 12.15 in,
+registered to the artwork. It is a technical drawing — cut lines and fold lines —
+and is not printed onto anything.
+
+**Nothing is printed on the inside face.** If a printed liner is wanted, ask and
+it can be added.
+
+### Please read before quoting
+
+If you already have an A7 envelope die you would rather use — and most envelope
+makers do — **say so, and send us its dimensions.** The artwork will be re-laid
+onto your die. That is cheaper and lower risk than cutting a new one, and it is
+the first thing worth settling.
+
+Two things that are deliberate, so they are not "fixed" on the way through:
+
+- **The seal sits wholly inside the top flap**, not across its edge. The flap
+  and the back it closes against are separate regions of the sheet that only
+  meet after folding, so no printed mark can cross that join. The mockups show
+  the seal at the flap's point because that is where it lands once folded.
+- **The plum runs off the die's edges** on the side and bottom flaps. That is
+  the bleed.
 
 ---
 
@@ -149,6 +177,8 @@ run.** Both card versions carry *different* codes — test both.
 4. Check the bus time: **10:30 AM on the bride's printing, 9:30 AM on the
    groom's.** They are the easiest thing in the job to get the wrong way round.
 5. Confirm Card A and Card B are bagged and labelled separately.
+6. Fold one envelope from a proof sheet before running the rest, and check the
+   seal lands where the mockup shows it.
 
 ---
 
@@ -159,3 +189,45 @@ size, which is comfortably above the 300 dpi a press needs. It is the only
 element in the job that could not be made sharper — everything else is vector.
 If a higher-resolution original of that photograph exists, it is worth
 re-cutting the artwork from it before printing; if not, it is fine as it is.
+
+
+---
+
+## 10. Running 300–400
+
+`imposed/` holds the plates already laid onto **SRA3 (320 × 450 mm)** with
+gutters and crop marks — print those directly, or re-impose to suit your press.
+The counts below are for **400 invitations per family side**.
+
+| | SRA3 12.6 × 17.7 | 13 × 19 | 20 × 30 |
+| --- | --- | --- | --- |
+| Each card plate | 4-up | 4-up | 10-up |
+| Envelope flat sheet | 1-up | 1-up | 3-up |
+| **Sheets per side** | **800** | **800** | **294** |
+| **Sheets, both sides** | **1600** | **1600** | **588** |
+
+The envelope is the expensive piece. Its flat sheet is 8.21 × 15.96 in with
+bleed, which is one-up on SRA3 whichever way it is turned — so 400 envelopes is
+400 sheets on a digital press. **On a 20 × 30 sheet it goes three-up**, and the
+whole job drops from 1600 sheets to 588. At this quantity it is worth pricing
+both digital and small offset before committing.
+
+Per invitation the run is: one card (two sides), and one envelope. Card A and
+Card B are different cards — split the quantity between them however the guest
+list falls, and tell us the split if you want the imposition redone to match.
+
+### Order of work
+
+1. Print the card plates, both sides, and trim to 5 × 7 in.
+2. Print the envelope flat sheets, one side only.
+3. Die-cut the envelope sheets to `envelope-diecut`.
+4. Crease on the four fold lines, fold, and glue the bottom flap to the side
+   flaps. The top flap stays free.
+5. Fold one from a proof sheet and check it before running the rest.
+
+## 11. Editing
+
+See `EDITING-AND-FONTS.md`. The short version: the PDFs are vector and you are
+welcome to re-impose, recolour and change the die — but the type is outlined, so
+**do not retype any wording**. Send corrections back and they are re-rendered
+from source in minutes, consistently across both sides and both cards.

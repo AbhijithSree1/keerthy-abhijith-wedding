@@ -51,8 +51,7 @@ PLATES = [
     ("card-A-all-events-back", "Card A · side 2", "Three celebrations", "5 × 7 in"),
     ("card-B-wedding-day-front", "Card B · side 1", "The same photo side", "5 × 7 in"),
     ("card-B-wedding-day-back", "Card B · side 2", "The wedding day only", "5 × 7 in"),
-    ("envelope-front", "Envelope · outside", "Address panel", "5.25 × 7.25 in"),
-    ("envelope-back", "Envelope · inside face", "Plum body, ivory flap, seal", "5.25 × 7.25 in"),
+    ("envelope-outside-flat", "Envelope · the printed sheet", "One side, die-cut and folded", "7.56 × 12.15 in flat"),
     ("envelope-diecut", "Envelope · die-line", "Cut and fold drawing — not printed", "7.56 × 12.15 in flat"),
 ]
 
@@ -270,8 +269,7 @@ def page(side):
           <tr><td class="f">card-A-all-events-back</td><td>Card A, side 2</td><td class="f">5 × 7 in</td></tr>
           <tr><td class="f">card-B-wedding-day-front</td><td>Card B, side 1</td><td class="f">5 × 7 in</td></tr>
           <tr><td class="f">card-B-wedding-day-back</td><td>Card B, side 2</td><td class="f">5 × 7 in</td></tr>
-          <tr><td class="f">envelope-front</td><td>Envelope, outside</td><td class="f">5.25 × 7.25 in</td></tr>
-          <tr><td class="f">envelope-back</td><td>Envelope, inside face</td><td class="f">5.25 × 7.25 in</td></tr>
+          <tr><td class="f">envelope-outside-flat</td><td>One side of the flat sheet</td><td class="f">7.56 × 12.15 in</td></tr>
           <tr><td class="f">envelope-diecut</td><td>Not printed — die-line</td><td class="f">7.56 × 12.15 in</td></tr>
         </tbody>
       </table>
@@ -340,15 +338,30 @@ def page(side):
   <section class="prose">
     <p class="num">06</p>
     <h2>The envelope</h2>
-    <p>The envelope prints flat and is made up afterwards.
-    <code>envelope-front</code> is the outside, with the address lines.
-    <code>envelope-back</code> is the inside face — the plum body and ivory flap
-    that become the back once folded.</p>
-    <p><code>envelope-diecut</code> is the cutting and folding drawing, flat at
-    7.56 × 12.15 in. It is a technical drawing, not artwork: give it to whoever
-    makes the envelope and do not print it onto anything. If they have a
-    standard A7 die they would rather use, theirs is fine — say so and the
-    artwork can be re-laid to fit it.</p>
+    <p>The envelope is <strong>one flat sheet, printed on one side</strong>,
+    then die-cut, folded and glued. Everything on that sheet becomes the
+    exterior, because every flap turns through 180° — the face lying on the
+    press bed ends up outside everywhere.</p>
+    <ul>
+      <li><strong>Top flap</strong> — ivory, carrying the gold seal.</li>
+      <li><strong>Centre panel</strong> — ivory, the address side. 5.25 × 7.25 in,
+        and it does not fold.</li>
+      <li><strong>Side flaps and bottom flap</strong> — plum. They fold in and up
+        to form the back.</li>
+    </ul>
+    <p><code>envelope-diecut</code> is the cutting and folding drawing at the
+    same size, registered to the artwork. It is a technical drawing, not
+    artwork: give it to whoever makes the envelope and do not print it onto
+    anything.</p>
+    <div class="flag">
+      <span class="h">Ask the printer this first</span>
+      <p>If they already have an A7 envelope die — most envelope makers do —
+      use theirs and send us the dimensions, and the artwork gets re-laid onto
+      it. Cheaper and lower risk than cutting a new die.</p>
+    </div>
+    <p>The <code>mockups</code> folder holds two pictures of the finished
+    envelope closed, so the printer can see what they are working towards. They
+    are reference only and must never go on a press.</p>
   </section>
 
   <section class="prose">
