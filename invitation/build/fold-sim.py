@@ -90,6 +90,14 @@ def main():
     top = region(sheet, mask, (0, 0, sw, ft)).rotate(180)
     back.alpha_composite(top, (-fl, 0))
 
+    # the two faces on their own: these are the mockups that ship in the pack,
+    # so the picture of the finished envelope is the fold of the real artwork
+    # rather than a separately drawn impression of it
+    for name, im in (("front", front), ("back", back)):
+        im.convert("RGB").save(
+            os.path.join(ROOT, "out", f"fold-sim-{side}-{name}.png")
+        )
+
     gap = 60
     out = Image.new("RGB", (pw * 2 + gap * 3, ph + gap * 2), (46, 42, 48))
     out.paste(front.convert("RGB"), (gap, gap))

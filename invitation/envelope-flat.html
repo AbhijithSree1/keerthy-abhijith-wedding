@@ -57,7 +57,11 @@
 
   .ground {
     position: absolute;
-    inset: 0;
+    /* out past the sheet, not to it: with bleed on, .inner is inset by the
+       bleed, so a ground at inset:0 stops at the trim and leaves the bleed
+       ring unpainted. It went unnoticed against the plum ground and showed up
+       the moment an ivory flap ran to the sheet edge. */
+    inset: -40px;
     background:
       radial-gradient(125% 44% at 50% -6%, #fdfaf3 0%, #f8f2e5 34%, #f3ecdc 66%, #ede4d0 100%);
   }

@@ -25,9 +25,11 @@ reason the raster set is here.
 | `envelope-outside-flat` | The whole envelope, flat | One side of the flat sheet |
 | `envelope-diecut` | Cutting and folding drawing | Not printed — see §6 |
 
-`mockups/` holds two JPEGs of what the finished envelope should look like,
-closed, from each side. **They are reference pictures, not artwork.** Nothing
-in that folder goes on a press.
+`mockups/` holds two JPEGs of the finished envelope, front and back. They are
+not drawings of what it ought to look like — they are the artwork in this pack
+folded by `build/fold-sim.py`, so they show what the sheet actually becomes.
+**They are reference pictures, not artwork.** Nothing in that folder goes on a
+press.
 
 **There are two different cards.** Card A goes to guests invited to all three
 celebrations; Card B goes to everyone else. They share the same front. Both are
@@ -197,6 +199,14 @@ re-cutting the artwork from it before printing; if not, it is fine as it is.
 
 `imposed/` holds the plates already laid onto **SRA3 (320 × 450 mm)** with
 gutters and crop marks — print those directly, or re-impose to suit your press.
+
+It also holds `envelope-outside-flat-SRA3-1up-CUT-GUIDE.pdf`: the same sheet
+with **the die drawn on it in red, and the four creases marked as blue ticks**
+in the waste outside the cut. If you are cutting by hand rather than to a die,
+print that one — cut along the red line and it is consumed by the blade, then
+join tick to tick with a ruler to crease. The creases are ticks rather than
+lines on purpose: a dashed line drawn across the flap would still be there
+after folding.
 The counts below are for **400 invitations per family side**.
 
 | | SRA3 12.6 × 17.7 | 13 × 19 | 20 × 30 |

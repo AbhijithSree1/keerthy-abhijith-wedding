@@ -152,6 +152,21 @@ def main():
                 dpi=(300, 300),
             )
 
+        # the mockups are the fold simulation's output — a fold of the very
+        # artwork in this pack, not a separate drawing of what it should be
+        subprocess.run(
+            [sys.executable, os.path.join(HERE, "fold-sim.py"), side],
+            check=True, capture_output=True,
+        )
+        mock = os.path.join(PRINT, side, "mockups")
+        os.makedirs(mock, exist_ok=True)
+        for face in ("front", "back"):
+            im = Image.open(os.path.join(ROOT, "out", f"fold-sim-{side}-{face}.png"))
+            im.convert("RGB").save(
+                os.path.join(mock, f"MOCKUP-envelope-{face}.jpg"),
+                "JPEG", quality=88, optimize=True,
+            )
+
         shutil.copy(
             os.path.join(HERE, "PRINT-SPEC.md"),
             os.path.join(PRINT, side, "PRINT-SPEC.md"),

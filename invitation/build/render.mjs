@@ -25,9 +25,11 @@ const PAGES = [
   { name: "card-front", sides: true },
   { name: "card-back-all", sides: true }, // guests invited to all four
   { name: "card-back-public", sides: true }, // the wedding day only
-  { name: "envelope-front", sides: true },
-  { name: "envelope-back", sides: true },
-  { name: "envelope-flat", sides: true }, // the sheet that actually prints
+  // envelope-front and envelope-back are gone. They drew a finished envelope
+  // by hand, with a flap shape and a seal position the die never had, and were
+  // impossible to print besides. The sheet below is what prints; what it folds
+  // into comes from build/fold-sim.py rather than from a second drawing.
+  { name: "envelope-flat", sides: true },
   // the die-line is a technical drawing: no sides, and no bleed
   { name: "envelope-diecut", sides: false, bleed: false },
 ];

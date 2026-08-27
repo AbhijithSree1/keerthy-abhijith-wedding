@@ -51,10 +51,12 @@ const PLATES = [
    are NOT artwork — envelope-back draws its flap inside the rectangle, which
    is a thing paper cannot do — so they ship as JPEGs in a mockups/ folder and
    never as a PDF anyone could put on a press. */
-const MOCKUPS = [
-  { file: "envelope-front", as: "MOCKUP-envelope-closed-front" },
-  { file: "envelope-back", as: "MOCKUP-envelope-closed-back" },
-];
+/* Nothing here any more. The mockups used to be renders of envelope-front and
+   envelope-back, which drew a finished envelope by hand — and drew it wrong,
+   with a flap shape and a seal position the die never had. They are now the
+   fold simulation's own output, copied in by build/package-print.py, so the
+   picture of the finished envelope is a fold of the artwork that ships. */
+const MOCKUPS = [];
 
 fs.rmSync(OUT, { recursive: true, force: true });
 

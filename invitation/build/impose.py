@@ -18,6 +18,9 @@ import sys
 
 import pymupdf
 
+sys.path.insert(0, HERE_BOOT := os.path.dirname(os.path.abspath(__file__)))
+from envelope_geometry import DIE  # noqa: E402
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PRINT = os.path.join(ROOT, "print")
@@ -71,7 +74,52 @@ def crop_marks(page, x, y, w, h, bleed_pt):
     shape.commit()
 
 
-def impose(side, stem, sheet_name, quantity, write=True):
+def die_guide(page, ox, oy, bleed_pt):
+    """Draw the envelope's cut line and fold ticks over a placed sheet.
+
+    For a studio without a die, this is the difference between guessing and
+    cutting. The cut line sits exactly on the die, so the blade consumes it and
+    nothing is left on the finished envelope. The folds are ticks in the waste
+    outside the cut rather than lines across the piece, for the same reason —
+    a dashed line drawn over the flap would still be there after folding.
+    """
+    def at(x, y):
+        """die coordinates (hundredths of an inch) -> points on the sheet"""
+        return (ox + bleed_pt + x / 100 * PT, oy + bleed_pt + y / 100 * PT)
+
+    shape = page.new_shape()
+    pts = [at(x, y) for x, y in DIE["outline"]]
+    for a, b in zip(pts, pts[1:]):
+        shape.draw_line(a, b)
+    shape.finish(color=(0.85, 0.1, 0.1), width=0.5)
+    shape.commit()
+
+    tick = 0.16 * PT
+    off = 0.02 * PT
+    shape = page.new_shape()
+    # vertical folds: tick above the top fold and below the bottom fold
+    for x in (DIE["foldL"], DIE["foldR"]):
+        top = at(x, DIE["foldT"])
+        shape.draw_line((top[0], top[1] - off), (top[0], top[1] - off - tick))
+        bot = at(x, DIE["foldB"])
+        shape.draw_line((bot[0], bot[1] + off), (bot[0], bot[1] + off + tick))
+    # horizontal folds: tick outboard of each side flap
+    for y in (DIE["foldT"], DIE["foldB"]):
+        left = at(DIE["foldL"], y)
+        shape.draw_line((left[0] - off, left[1]), (left[0] - off - tick, left[1]))
+        right = at(DIE["foldR"], y)
+        shape.draw_line((right[0] + off, right[1]), (right[0] + off + tick, right[1]))
+    shape.finish(color=(0.05, 0.35, 0.75), width=0.6)
+    shape.commit()
+
+    page.insert_text(
+        (ox, oy - 0.14 * PT),
+        "RED = cut  ·  BLUE ticks = crease, join tick to tick",
+        fontsize=7, color=(0.3, 0.3, 0.3),
+    )
+
+
+def impose(side, stem, sheet_name, quantity, write=True, guide=False):
     src = pymupdf.open(os.path.join(PRINT, side, "pdf", stem + ".pdf"))
     r = src[0].rect
     piece = (r.width / PT, r.height / PT)
@@ -96,12 +144,17 @@ def impose(side, stem, sheet_name, quantity, write=True):
             box = pymupdf.Rect(x, y, x + pw * PT, y + ph * PT)
             page.show_pdf_page(box, src, 0, rotate=90 if rot else 0)
             crop_marks(page, x, y, pw * PT, ph * PT, BLEED * PT)
+            if guide:
+                if rot:
+                    raise SystemExit("cut guide assumes the sheet is not turned")
+                die_guide(page, x, y, BLEED * PT)
 
     dst = None
     if write:
         d = os.path.join(PRINT, side, "imposed")
         os.makedirs(d, exist_ok=True)
-        dst = os.path.join(d, f"{stem}-{sheet_name}-{n}up.pdf")
+        suffix = "-CUT-GUIDE" if guide else ""
+        dst = os.path.join(d, f"{stem}-{sheet_name}-{n}up{suffix}.pdf")
         out.save(dst)
     return n, cols, rows, rot, math.ceil(quantity / n), dst
 
@@ -130,7 +183,9 @@ def main():
     for side in ("bride", "groom"):
         for stem in PLATES:
             impose(side, stem, "SRA3", quantity)
-    print("wrote print/<side>/imposed/ for SRA3")
+        # and the envelope again with the die drawn on it, for cutting by hand
+        impose(side, "envelope-outside-flat", "SRA3", quantity, guide=True)
+    print("wrote print/<side>/imposed/ for SRA3, plus the envelope cut guide")
 
 
 if __name__ == "__main__":
