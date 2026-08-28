@@ -157,7 +157,9 @@ Two things that are deliberate, so they are not "fixed" on the way through:
 Each card back carries a QR code that takes guests to the wedding website. It is
 the one element on the card that can silently stop working.
 
-- It prints at **1 inch / 25.4 mm square**. **Do not reduce it.**
+- It prints at **1.125 in / 28.6 mm square**. **Do not reduce it.** The
+  all-events code carries a longer URL, so it has more modules in that square
+  and less margin than it looks.
 - **Do not invert it, tint it, or print it as gold on plum.** It must stay dark
   on the cream plaque it sits on. The plaque is not decoration — it is the
   quiet zone the scanner needs.
