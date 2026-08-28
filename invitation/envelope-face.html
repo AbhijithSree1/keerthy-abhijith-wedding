@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Envelope — face only, to print on a bought envelope</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* =========================================================================
+     THE CHEAP ENVELOPE.
+
+     Making an envelope from scratch means a custom die and a flat sheet that
+     is one-up on SRA3 however you turn it — 400 envelopes is 400 press sheets.
+     That is not a design problem to solve, it is the card's size: a 5x7 card
+     needs 7.95in of width across the side flaps and 15.70in of length up the
+     flaps, and neither shrinks.
+
+     So: buy the envelopes ready-made and print only this, their front. One
+     pass, no die, no folding, no gluing.
+
+     Two ink versions, set by a class on <body>:
+
+       .on-ivory   plum and gold ink, for a cream or ivory envelope
+       .on-plum    gold ink alone, for a plum envelope — one colour, which is
+                   the cheapest of all and the one that can be foil-blocked
+
+     There is no printed ground. The envelope's own paper is the ground, which
+     is the whole point.
+     ========================================================================= */
+
+  .sheet.face {
+    width: 1008px;   /* 5.25 x 7.25in — a standard A7 envelope face */
+    height: 1392px;
+    background: none;
+  }
+  .sheet.face::after { display: none; }
+
+  /* preview only: paints the bought envelope's colour behind the ink so we can
+     see it. build/render-face.mjs drops this for the plate itself. */
+  body.preview .sheet.face.on-ivory { background: #f4eddf; }
+  body.preview .sheet.face.on-plum {
+    background: radial-gradient(130% 80% at 50% 0%, #3d2149, #24132c 60%, #170c1c);
+  }
+
+  .sheet.face.on-plum {
+    --ink: #e2c073;
+    --ink-soft: rgba(226, 192, 115, 0.72);
+    --ink-strong: #f0d79a;
+    --rule: rgba(226, 192, 115, 0.6);
+    --seal-fill: none;
+    --seal-ink: #e2c073;
+  }
+  .sheet.face.on-ivory {
+    --ink: #4a2a58;
+    --ink-soft: rgba(74, 42, 88, 0.68);
+    --ink-strong: #33193d;
+    --rule: rgba(150, 112, 30, 0.75);
+    --seal-fill: #2f1739;
+    --seal-ink: #c9a24d;
+  }
+
+  .stack {
+    position: absolute;
+    inset: 210px 96px 108px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .head { display: flex; flex-direction: column; align-items: center; }
+  .crest { color: var(--seal-ink); }
+
+  .crest-sub {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    color: var(--ink-soft);
+    margin-top: 20px;
+  }
+
+  .names {
+    font-family: var(--font-script);
+    font-size: 58px;
+    line-height: 1.16;
+    margin-top: 12px;
+    color: var(--ink-strong);
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    gap: 0.15em;
+  }
+  .names .amp { font-size: 0.66em; color: var(--ink); }
+
+  .to { width: 100%; }
+  .to-label {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0.32em;
+    color: var(--ink-soft);
+    text-align: left;
+    margin-bottom: 40px;
+    padding-left: 4px;
+  }
+  .lines { display: flex; flex-direction: column; gap: 84px; }
+  .lines span {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rule) 7%, var(--rule) 93%, transparent);
+  }
+  .lines span:last-child { margin-right: 44%; }
+
+  .foot {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .from-label {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .from .who { font-size: 24px; color: var(--ink-strong); line-height: 1.32; }
+  .from .where {
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .when {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    text-align: right;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+<div class="sheet face on-ivory">
+  <div class="inner">
+    <div class="stack">
+      <div class="head">
+        <span class="motif crest" data-motif="seal" data-w="118"
+              data-opts='{"arcs":false}'></span>
+        <p class="crest-sub">The wedding of</p>
+        <p class="names pair"><span class="bride">Keerthy</span><span class="amp">&amp;</span><span class="groom">Abhijith</span></p>
+      </div>
+
+      <div class="to">
+        <p class="to-label">To</p>
+        <div class="lines"><span></span><span></span><span></span><span></span></div>
+      </div>
+
+      <div class="foot">
+        <div class="from">
+          <p class="from-label">With love, from</p>
+          <span class="only-bride">
+            <p class="who">Thompil Puthenpurayil</p>
+            <p class="where">Manjadi, Thiruvalla &middot; +91 88914 53672</p>
+          </span>
+          <span class="only-groom">
+            <p class="who">Sreenitha</p>
+            <p class="where">Thonnalloor, Pandalam &middot; +91 94475 94088</p>
+          </span>
+        </div>
+        <p class="when">12 December<br>2026</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/seal-config.js"></script>
+<script src="motifs.js"></script>
+</body>
+</html>

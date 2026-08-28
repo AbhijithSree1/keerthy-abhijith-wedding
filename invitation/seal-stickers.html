@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ganapati seals — sticker sheet</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* A sheet of gold Ganapati seals, 40mm across.
+     This is what closes a bought envelope, and it is what puts the Ganapati
+     back once the flap is no longer something we print. Stickers are the
+     cheapest piece in the whole job: 70 to an SRA3 sheet, so 400 seals is six
+     sheets. They can be kiss-cut on the press, or punched with a 40mm punch,
+     which costs almost nothing.
+
+     Gold on plum, so they read as a wax seal against either envelope colour. */
+  .sheet.stickers {
+    width: 2419px;   /* SRA3, 12.598 x 17.717 in */
+    height: 3402px;
+    background: #ffffff;
+  }
+  .sheet.stickers::after { display: none; }
+
+  .grid {
+    position: absolute;
+    inset: 67px;      /* 0.35in press grip */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-content: start;
+    justify-items: center;
+    gap: 19px;
+  }
+
+  .seal-cell {
+    /* 40mm finished. The gold disc is drawn a little larger than the cut so it
+       bleeds past it — otherwise every sticker has a white ring where the
+       punch missed the edge of the artwork. */
+    width: 302px;
+    height: 302px;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* gold disc, plum figure. The supplied Ganapati artwork is a fixed plum,
+       so a plum disc makes it disappear — the same trap the envelope flap
+       fell into. */
+    --seal-fill: #c9a24d;
+    color: #22102b;
+  }
+
+  /* the cut circle, drawn so a punch or a kiss-cut has something to follow */
+  .seal-cell::after {
+    content: "";
+    position: absolute;
+    width: 302px;
+    height: 302px;
+    border-radius: 50%;
+    border: 0.5px dashed rgba(180, 40, 40, 0.55);
+  }
+
+  .note {
+    position: absolute;
+    left: 67px;
+    bottom: 22px;
+    font-family: var(--font-body);
+    font-size: 22px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+<div class="sheet stickers">
+  <div class="grid" id="grid"></div>
+  <p class="note">Ganapati seal &middot; 40&nbsp;mm &middot; dashed circle = cut / punch line &middot; 70 per SRA3 sheet</p>
+</div>
+<script src="assets/seal-config.js"></script>
+<script>
+  const grid = document.getElementById("grid");
+  for (let i = 0; i < 70; i++) {
+    const cell = document.createElement("div");
+    cell.className = "seal-cell";
+    const s = document.createElement("span");
+    s.className = "motif";
+    s.dataset.motif = "ganapatiSeal";
+    s.dataset.w = "316";
+    cell.appendChild(s);
+    grid.appendChild(cell);
+  }
+</script>
+<script src="motifs.js"></script>
+</body>
+</html>
