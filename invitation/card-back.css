@@ -115,7 +115,7 @@
 
 .events {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 
 .ev {
@@ -124,7 +124,9 @@
   align-items: baseline;
   column-gap: 22px;
   text-align: left;
-  padding: 13px 4px 14px;
+  /* tightened when the Thalikettu note went in: three event rows each
+     carrying two sub-lines put the stack 22px over the card */
+  padding: 10px 4px 11px;
   border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
 }
 .ev:first-child {
@@ -191,7 +193,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 13px;
+  gap: 11px;
 }
 
 /* a cream plaque, not a cutout: the code has to be dark-on-light with its
@@ -221,26 +223,30 @@
 }
 
 
-/* --- transport -----------------------------------------------------------
-   Buses run to the Changanassery venue, and the two families set off from
-   their own side at different times — so this line differs between the
-   bride's and groom's printings. `.only-bride` / `.only-groom` in shared.css
-   do the switching; both are always in the markup and one is hidden.
+/* --- notes under an event ------------------------------------------------
+   Small asides that belong to one day: the bus times, and the temple ceremony
+   that happens the same morning. Both sit inside the event row rather than in
+   a block of their own, so there is no doubt which day they attach to, and
+   both are deliberately quiet — the 11am ceremony is the one nearly everyone
+   is coming to, and these must not compete with it.
 
-   It sits inside the event row rather than in a block of its own, so there is
-   no doubt which of the days the bus belongs to. */
-.transport {
+   The bus line differs between the two printings; `.only-bride` /
+   `.only-groom` in shared.css do that switching. */
+.evnote {
   display: flex;
   align-items: baseline;
+  /* if a note ever does have to wrap, the second line lines up under the
+     first rather than under the label */
+  flex-wrap: wrap;
   gap: 9px;
-  margin-top: 7px;
+  margin-top: 6px;
   font-family: var(--font-label);
   font-size: 18px;
   letter-spacing: 0.08em;
   color: rgba(232, 205, 130, 0.9);
 }
 
-.transport .t-head {
+.evnote .n-head {
   text-transform: uppercase;
   font-size: 16px;
   letter-spacing: 0.18em;
@@ -250,7 +256,7 @@
   padding-left: 22px;
   position: relative;
 }
-.transport .t-head::before {
+.evnote .n-head::before {
   content: "";
   position: absolute;
   left: 0;
@@ -273,6 +279,6 @@
 .events.single .ev .day {
   display: none;
 }
-.events.single .transport {
+.events.single .evnote {
   justify-content: center;
 }
