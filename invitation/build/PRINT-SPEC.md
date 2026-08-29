@@ -6,15 +6,13 @@ Hand this folder to the printer as it stands. Everything they need is in it.
 
 ## 1. What is in the folder
 
-`pdf/` is the artwork to print. `raster-600dpi/` is the same seven plates
-flattened to 600 dpi JPEG — a fallback only, if anything goes wrong with the
-PDFs. **Print from the PDFs unless the printer says otherwise.** Do not print
-both.
+`pdf/` is the artwork to print. `svg-editable/` is the same plates as SVG with
+live text, for anyone who needs to adjust something. `fonts/` holds the three
+families both formats need — **install those first**, or your editor will
+substitute and the layout will look wrong while every word is right.
 
-The PDFs are vector: all the type is outlines, so it stays sharp at any size
-rather than being frozen at one resolution. Chromium writes some glyphs as
-Type3 fonts, which a few older prepress workflows dislike — that is the only
-reason the raster set is here.
+Everything is vector and every font is properly embedded, so the type stays
+sharp at any size and stays selectable in Illustrator, CorelDRAW and Inkscape.
 
 | File | What it is | Prints on |
 | --- | --- | --- |

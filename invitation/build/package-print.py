@@ -195,9 +195,12 @@ def main():
         if os.path.exists(out):
             os.remove(out)
         subprocess.run(
+            # raster-300dpi is no longer shipped. It existed as a hedge against
+            # the PDFs being unusable, and they carry real embedded fonts now;
+            # between those and the SVGs there is nothing a studio cannot open.
+            # It is still generated, and can be added back in a line.
             ["zip", "-r", "-q", out, "pdf", "svg-editable", "fonts", "imposed",
-             "raster-300dpi", "mockups", "PRINT-SPEC.md",
-             "EDITING-AND-FONTS.md"],
+             "mockups", "PRINT-SPEC.md", "EDITING-AND-FONTS.md"],
             cwd=os.path.join(PRINT, side),
             check=True,
         )
