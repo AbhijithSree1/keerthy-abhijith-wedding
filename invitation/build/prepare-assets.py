@@ -93,6 +93,9 @@ def build_hero():
     print("hero.jpg", im.size)
 
 
+TARGET_QR_PX = 370   # what the card draws it into, in 300dpi device pixels
+
+
 def build_qr():
     """One QR per printed version of the card, as a cream plaque.
 
@@ -106,14 +109,25 @@ def build_qr():
         qr = qrcode.QRCode(
             version=None,
             error_correction=qrcode.constants.ERROR_CORRECT_M,
-            box_size=20,
+            box_size=1,
             border=4,  # the spec's quiet zone, in modules
         )
         qr.add_data(url)
         qr.make(fit=True)
         img = qr.make_image(fill_color=PLUM_DEEP, back_color=CREAM).convert("RGB")
+
+        # Scale so the file lands as close to its printed device size as a
+        # whole module allows. The card draws the code into 370 device pixels
+        # at 300dpi; a source that is not a whole multiple of its own module
+        # grid has to be resampled at a fraction, and a QR resampled at a
+        # fraction loses module edges. The two codes have different module
+        # counts, so each gets its own box size and neither is scaled much.
+        modules = img.width
+        box = max(1, round(TARGET_QR_PX / modules))
+        img = img.resize((modules * box, modules * box), Image.NEAREST)
         img.save(os.path.join(OUT, f"qr-{name}.png"))
-        print(f"qr-{name}.png", img.size, f"{img.width // 20} modules", "->", url)
+        print(f"qr-{name}.png {img.size[0]}px  {modules} modules incl. border"
+              f"  box {box}px  -> {url}")
 
 
 def build_seal_figure():

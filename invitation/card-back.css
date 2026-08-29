@@ -5,7 +5,7 @@
 
 .stack {
   position: absolute;
-  inset: 104px 92px 112px;
+  inset: 100px 92px 104px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,10 +15,10 @@
 /* --- families ------------------------------------------------------------ */
 
 .eyebrow {
-  font-size: 19px;
+  font-size: 27px;
   letter-spacing: 0.3em;
   color: rgba(198, 165, 216, 0.92);
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 /* Traditional two-family setting: each side leads with the full name, then
@@ -30,7 +30,7 @@
   grid-template-columns: 1fr auto 1fr;
   gap: 0 24px;
   align-items: start;
-  margin-top: 20px;
+  margin-top: 13px;
   width: 100%;
 }
 
@@ -59,7 +59,7 @@
   font-family: var(--font-script);
   font-size: 44px;
   /* the script overshoots its box, same as the names on the front */
-  line-height: 1.3;
+  line-height: 1.2;
   padding: 0 0.12em;
   color: var(--gold-bright);
   white-space: nowrap;
@@ -67,39 +67,39 @@
 
 .families .rel {
   font-style: italic;
-  font-size: 23px;
+  font-size: 27px;
   color: rgba(198, 165, 216, 0.9);
   margin-top: 2px;
 }
 
 .families .who {
   font-size: 29px;
-  line-height: 1.26;
+  line-height: 1.2;
   color: var(--ivory);
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 /* house name and number under each family, so the card carries both */
 .families .house {
   font-style: italic;
-  font-size: 22px;
+  font-size: 27px;
   line-height: 1.28;
   color: rgba(236, 217, 171, 0.86);
-  margin-top: 7px;
+  margin-top: 4px;
 }
 
 .families .tel {
   font-family: var(--font-label);
-  font-size: 21px;
+  font-size: 27px;
   letter-spacing: 0.06em;
   color: rgba(198, 165, 216, 0.86);
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .invite {
-  font-size: 26px;
-  line-height: 1.36;
-  margin-top: 12px;
+  font-size: 27px;
+  line-height: 1.26;
+  margin-top: 8px;
   max-width: 560px;
 }
 
@@ -109,24 +109,27 @@
 .section-rule {
   width: 100%;
   margin-top: auto;
-  padding-top: 10px;
+  padding-top: 6px;
 }
 .section-rule .line { max-width: 260px; }
 
 .events {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .ev {
   display: grid;
-  grid-template-columns: 152px 1fr;
+  /* Widened from 152px: at 10pt the date no longer fits the old column and
+     ran straight into the event name. Tracking comes in too — letter-spacing
+     is what makes a date column expensive. */
+  grid-template-columns: 205px 1fr;
   align-items: baseline;
-  column-gap: 22px;
+  column-gap: 18px;
   text-align: left;
   /* tightened when the Thalikettu note went in: three event rows each
      carrying two sub-lines put the stack 22px over the card */
-  padding: 9px 4px 9px;
+  padding: 7px 4px 7px;
   border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
 }
 .ev:first-child {
@@ -136,8 +139,8 @@
 .ev .day {
   font-family: var(--font-label);
   text-transform: uppercase;
-  font-size: 19px;
-  letter-spacing: 0.1em;
+  font-size: 27px;
+  letter-spacing: 0.04em;
   color: var(--champagne);
   white-space: nowrap;
 }
@@ -152,7 +155,7 @@
 .ev .what .time {
   display: inline;
   font-family: var(--font-label);
-  font-size: 20px;
+  font-size: 27px;
   letter-spacing: 0.1em;
   color: rgba(232, 205, 130, 0.92);
   margin-left: 10px;
@@ -162,7 +165,7 @@
 .ev .venue {
   display: block;
   font-style: italic;
-  font-size: 23px;
+  font-size: 27px;
   color: rgba(198, 165, 216, 0.9);
   margin-top: 3px;
   line-height: 1.25;
@@ -171,7 +174,7 @@
 /* The public card covers one day rather than four, so it heads the block with
    the date and drops the per-row dates that would just repeat it. */
 .day-head {
-  font-size: 19px;
+  font-size: 27px;
   letter-spacing: 0.22em;
   color: var(--champagne);
   margin-top: 24px;
@@ -193,32 +196,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 9px;
+  gap: 4px;
 }
 
 /* a cream plaque, not a cutout: the code has to be dark-on-light with its
    quiet zone intact or phones will not read it off the printed card */
 .qr-block img {
-  /* 224px, which is 1.167in — and, more to the point, exactly 350 device
-     pixels at the 300dpi this renders to. 216px landed on 337.5, and half a
-     pixel of subpixel offset is enough to make the module edges uneven once
-     they are scaled; the all-events code, which carries the longer URL and so
-     has the smallest modules, then failed the 70% stress scale in
-     build/verify-qr.py. Keep this a whole number of device pixels. */
-  width: 224px;
-  height: 224px;
+  /* 237px = 370 device pixels at 300dpi, which is the size
+     build/prepare-assets.py now generates both codes at. Drawn essentially
+     1:1, so the browser is not resampling a module grid at a fraction — which
+     is what kept breaking one code or the other every time the layout moved. */
+  width: 237px;
+  height: 237px;
   display: block;
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(203, 162, 77, 0.5), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
-  /* nearest-neighbour keeps the module edges hard; smooth scaling leaves grey
-     half-modules that cost the decoder contrast exactly where it samples */
-  image-rendering: pixelated;
+  /* Not `pixelated`. That was right when the worry was an upscale, but these
+     codes are 1060px and 820px being drawn into 350 device pixels — a
+     non-integer downscale, where nearest-neighbour drops whole module edges
+     and aliases. Smooth downscaling averages instead, which is what the
+     decoder wants. The two codes have different module counts, so no single
+     display size is integral for both; averaging sidesteps that entirely. */
+  image-rendering: auto;
 }
 
 .qr-block .caption {
   font-family: var(--font-label);
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 27px;
   letter-spacing: 0.2em;
   color: rgba(236, 217, 171, 0.88);
 }
@@ -241,9 +246,9 @@
      on the first line. */
   align-items: flex-start;
   gap: 9px;
-  margin-top: 6px;
+  margin-top: 4px;
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   letter-spacing: 0.01em;
   color: rgba(242, 215, 114, 0.92);
 }
@@ -251,7 +256,7 @@
 .evnote .n-head {
   text-transform: uppercase;
   font-family: var(--font-label);
-  font-size: 18px;
+  font-size: 27px;
   letter-spacing: 0.18em;
   color: rgba(198, 165, 216, 0.8);
   flex: none;
