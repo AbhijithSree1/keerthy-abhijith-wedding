@@ -37,6 +37,14 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
   const isSingleEvent = visibleEvents.length === 1;
   const isOnlyWeddingDay = visibleEvents.every(e => e.key === 'wedding' || e.key === 'backwater');
 
+  /* A guest invited only to the wedding day has nothing on the page to tell
+     the auditorium ceremony apart from, so it is simply the reception to
+     them — the same call the printed wedding-day card makes. */
+  const labelFor = (ev: (typeof EVENTS)[number]) =>
+    isOnlyWeddingDay && ev.labelWhenWeddingDayOnly
+      ? ev.labelWhenWeddingDayOnly
+      : ev.label;
+
   let title = "The Celebrations";
   if (isOnlyWeddingDay) {
     title = "The Wedding";
@@ -90,7 +98,7 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                     {ev.dayLabel}
                   </p>
                   <h3 className="font-script text-4xl leading-tight" style={{ color: 'var(--color-maroon-deep)' }}>
-                    {ev.label}
+                    {labelFor(ev)}
                   </h3>
                   <p className="mt-1 font-semibold" style={{ color: 'var(--color-ink)' }}>
                     {ev.timeLabel}
@@ -101,10 +109,15 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                       {ev.travelNote}
                     </p>
                   )}
+                  {ev.busNote && (
+                    <p className="mt-1 text-sm italic opacity-90" style={{ color: 'var(--color-ink-soft)' }}>
+                      {ev.busNote}
+                    </p>
+                  )}
                   <div className={`mt-3 flex flex-wrap gap-5 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
                     <AddToCalendar 
                       event={{
-                        title: `Keerthy & Abhijith - ${ev.label}`,
+                        title: `Keerthy & Abhijith - ${labelFor(ev)}`,
                         description: `We can't wait to celebrate with you!\n\n${ev.venueName}\n\nTime: ${ev.timeLabel}`,
                         location: ev.mapQuery || ev.venueName,
                         startDate: ev.date,
