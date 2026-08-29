@@ -18,7 +18,7 @@ export default function Story() {
         <p className="font-label text-xs uppercase tracking-[0.32em]" style={{ color: 'var(--color-maroon)' }}>
           How it began
         </p>
-        <h2 className="font-script mt-1 text-[clamp(3rem,7vw,4.4rem)] leading-tight" style={{ color: 'var(--color-maroon-deep)' }}>
+        <h2 className="font-script mt-4 text-[clamp(3rem,7vw,4.4rem)] leading-[1.3]" style={{ color: 'var(--color-maroon-deep)' }}>
           Our Story
         </h2>
       </Reveal>

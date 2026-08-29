@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
-import { EVENTS, type EventKey } from '../data/events';
+import { EVENTS, eventLabel, type EventKey } from '../data/events';
 import Reveal from './Reveal';
 import AddToCalendar from './AddToCalendar';
 
@@ -37,17 +37,11 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
   const isSingleEvent = visibleEvents.length === 1;
   const isOnlyWeddingDay = visibleEvents.every(e => e.key === 'wedding' || e.key === 'backwater');
 
-  /* A guest invited only to the wedding day has nothing on the page to tell
-     the auditorium ceremony apart from, so it is simply the reception to
-     them — the same call the printed wedding-day card makes. */
-  const labelFor = (ev: (typeof EVENTS)[number]) =>
-    isOnlyWeddingDay && ev.labelWhenWeddingDayOnly
-      ? ev.labelWhenWeddingDayOnly
-      : ev.label;
+  const labelFor = (ev: (typeof EVENTS)[number]) => eventLabel(ev, visible);
 
   let title = "The Celebrations";
   if (isOnlyWeddingDay) {
-    title = "The Wedding";
+    title = "Our Wedding";
   } else if (isSingleEvent && visibleEvents[0].key === 'reception') {
     title = "The Reception";
   }
@@ -58,7 +52,7 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
         <p className="font-label text-xs uppercase tracking-[0.32em]" style={{ color: 'var(--color-maroon)' }}>
           Join us for
         </p>
-        <h2 className="font-script mt-1 text-[clamp(3rem,7vw,4.4rem)] leading-tight" style={{ color: 'var(--color-maroon-deep)' }}>
+        <h2 className="font-script mt-4 text-[clamp(3rem,7vw,4.4rem)] leading-[1.3]" style={{ color: 'var(--color-maroon-deep)' }}>
           {title}
         </h2>
         {!isOnlyWeddingDay && !isSingleEvent && (
@@ -97,13 +91,13 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                   <p className="font-label text-[0.68rem] uppercase tracking-[0.22em]" style={{ color: 'var(--color-gold-bright)' }}>
                     {ev.dayLabel}
                   </p>
-                  <h3 className="font-script text-4xl leading-tight" style={{ color: 'var(--color-maroon-deep)' }}>
+                  <h3 className="font-script mt-2 text-4xl leading-[1.3]" style={{ color: 'var(--color-maroon-deep)' }}>
                     {labelFor(ev)}
                   </h3>
-                  <p className="mt-1 font-semibold" style={{ color: 'var(--color-ink)' }}>
+                  <p className="mt-2 font-semibold" style={{ color: 'var(--color-ink)' }}>
                     {ev.timeLabel}
                   </p>
-                  <p style={{ color: 'var(--color-ink-soft)' }}>{ev.venueName}</p>
+                  <p className="mt-1" style={{ color: 'var(--color-ink-soft)' }}>{ev.venueName}</p>
                   {ev.travelNote && (
                     <p className="mt-1 text-sm italic opacity-90" style={{ color: 'var(--color-ink-soft)' }}>
                       {ev.travelNote}

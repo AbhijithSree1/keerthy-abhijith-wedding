@@ -83,3 +83,22 @@ export const EVENTS: WeddingEvent[] = [
 ];
 
 export const ALL_EVENT_KEYS = EVENTS.map((e) => e.key);
+
+
+/** What an event is called to a guest with this invitation.
+
+    A guest invited only to the wedding day has nothing else on the page to
+    tell the auditorium ceremony apart from, so to them it is simply the
+    reception — the same call the printed wedding-day card makes. Guests
+    invited to all three still see it as the Wedding, because the reception on
+    the 13th is there to distinguish it from.
+
+    This lives here rather than in a component because the timeline, the RSVP
+    checkboxes and the RSVP we receive all have to agree. */
+export function eventLabel(ev: WeddingEvent, visible: EventKey[]): string {
+  const onlyWeddingDay =
+    visible.length > 0 && visible.every((k) => k === 'wedding' || k === 'backwater');
+  return onlyWeddingDay && ev.labelWhenWeddingDayOnly
+    ? ev.labelWhenWeddingDayOnly
+    : ev.label;
+}

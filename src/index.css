@@ -12,8 +12,12 @@
   --color-ivory: #f3ecdf;         /* cream — light text / borders on dark */
   --color-ivory-deep: #4a3358;    /* subtle plum border on dark */
 
-  --color-maroon: #c6a5d8;        /* lavender accent — overlines, links */
-  --color-maroon-deep: #f2e7d2;   /* light champagne — headings */
+  /* Two colours on dark plum, not three: the gold family and ivory. These two
+     used to be a lavender accent and a near-white, which read as a third and
+     fourth colour competing with the gold in the nav. Both now sit in the same
+     gold family as the "K & A" mark and the nav links. */
+  --color-maroon: #ecd9ab;        /* champagne — overlines, small links */
+  --color-maroon-deep: #e8cd82;   /* gold — script headings */
 
   --color-gold: #cba24d;
   --color-gold-bright: #e8cd82;

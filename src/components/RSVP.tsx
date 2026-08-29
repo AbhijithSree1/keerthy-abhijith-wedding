@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Reveal from './Reveal';
-import { EVENTS, type EventKey } from '../data/events';
+import { EVENTS, eventLabel, type EventKey } from '../data/events';
 
 /* ---- where replies go ----------------------------------------------------
  * Paste the Google Apps Script web app URL here once it is deployed — see
@@ -43,8 +43,14 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
         events_attending: formData.attending === 'no' 
           ? 'None' 
           : isMultiEvent 
-            ? Object.keys(attendingEvents).filter((k) => attendingEvents[k as EventKey]).map((k) => EVENTS.find((ev) => ev.key === k)?.label).join(', ')
-            : visibleEvents.map((e) => e.label).join(', ')
+            ? Object.keys(attendingEvents)
+                .filter((k) => attendingEvents[k as EventKey])
+                .map((k) => {
+                  const ev = EVENTS.find((x) => x.key === k);
+                  return ev ? eventLabel(ev, visible) : k;
+                })
+                .join(', ')
+            : visibleEvents.map((e) => eventLabel(e, visible)).join(', ')
       };
 
       if (RSVP_ENDPOINT) {
@@ -85,7 +91,7 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
         <p className="font-label text-xs uppercase tracking-[0.32em]" style={{ color: 'var(--color-maroon)' }}>
           Kindly respond
         </p>
-        <h2 className="font-script mt-1 text-[clamp(2.8rem,7vw,4rem)]" style={{ color: 'var(--color-maroon-deep)' }}>
+        <h2 className="font-script mt-4 text-[clamp(2.8rem,7vw,4rem)] leading-[1.3]" style={{ color: 'var(--color-maroon-deep)' }}>
           RSVP
         </h2>
       </Reveal>
@@ -157,7 +163,7 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
                           className="h-4 w-4 accent-[var(--color-gold)]"
                         />
                         <span style={{ color: 'var(--color-ink)' }}>
-                          {e.label} <span className="text-xs opacity-70 block sm:inline sm:ml-1">({e.dayLabel})</span>
+                          {eventLabel(e, visible)} <span className="text-xs opacity-70 block sm:inline sm:ml-1">({e.dayLabel})</span>
                         </span>
                       </label>
                     ))}
@@ -216,15 +222,6 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
         )}
       </Reveal>
 
-      <Reveal delay={0.2} className="mt-12">
-        <p className="italic" style={{ color: 'var(--color-ink-soft)' }}>
-          Prefer to reply directly? Call or WhatsApp Abhijith at{' '}
-          <a href="tel:+916282529966" style={{ color: 'var(--color-maroon)' }}>
-            +91 62825 29966
-          </a>
-          .
-        </p>
-      </Reveal>
     </section>
   );
 }

@@ -49,7 +49,7 @@ export default function Travel() {
         <p className="font-label text-xs uppercase tracking-[0.32em]" style={{ color: 'var(--color-maroon)' }}>
           Getting here
         </p>
-        <h2 className="font-script mt-1 text-[clamp(3rem,7vw,4.4rem)] leading-tight" style={{ color: 'var(--color-maroon-deep)' }}>
+        <h2 className="font-script mt-4 text-[clamp(3rem,7vw,4.4rem)] leading-[1.3]" style={{ color: 'var(--color-maroon-deep)' }}>
           Travel &amp; Stay
         </h2>
       </Reveal>
@@ -57,17 +57,25 @@ export default function Travel() {
       <div className="grid gap-8 text-center sm:grid-cols-3">
         {CARDS.map((c, i) => (
           <Reveal key={c.title} delay={i * 0.1}>
-            <h3 className="font-script text-3xl" style={{ color: 'var(--color-maroon-deep)' }}>
+            <h3 className="font-script mt-2 text-3xl leading-[1.3]" style={{ color: 'var(--color-maroon-deep)' }}>
               {c.title}
             </h3>
             <p className="mt-2" style={{ color: 'var(--color-ink-soft)' }}>
               {c.body ?? (
                 <>
-                  Call or WhatsApp Abhijith Sreekumar at{' '}
-                  <a href="tel:+916282529966" style={{ color: 'var(--color-maroon)' }}>
-                    +91 62825 29966
+                  {/* A link rather than a number, and WhatsApp rather than a
+                      call: Abhijith is not in India, so a phone call will not
+                      reach him. The number stays out of the page — it is a
+                      public site, and the link carries it anyway. */}
+                  <a
+                    href="https://wa.me/918157824490"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-b pb-0.5 transition-opacity hover:opacity-80"
+                    style={{ color: 'var(--color-maroon)', borderColor: 'var(--color-maroon)' }}
+                  >
+                    Message Abhijith on WhatsApp
                   </a>
-                  .
                 </>
               )}
             </p>
