@@ -93,7 +93,7 @@ def build_hero():
     print("hero.jpg", im.size)
 
 
-TARGET_QR_PX = 370   # what the card draws it into, in 300dpi device pixels
+TARGET_QR_PX = 300   # what the card draws it into, in 300dpi device pixels
 
 
 def build_qr():

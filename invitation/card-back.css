@@ -180,14 +180,6 @@
   margin-top: 24px;
 }
 
-/* --- the chai glasses ----------------------------------------------------
-   Kept as a mark between the schedule and the QR. It carries its own meaning
-   without a caption under it, and it echoes the divider on the card front. */
-
-.chai-mark {
-  margin-top: auto;
-}
-
 /* --- QR ------------------------------------------------------------------ */
 
 .qr-block {
@@ -202,12 +194,12 @@
 /* a cream plaque, not a cutout: the code has to be dark-on-light with its
    quiet zone intact or phones will not read it off the printed card */
 .qr-block img {
-  /* 237px = 370 device pixels at 300dpi, which is the size
-     build/prepare-assets.py now generates both codes at. Drawn essentially
-     1:1, so the browser is not resampling a module grid at a fraction — which
-     is what kept breaking one code or the other every time the layout moved. */
-  width: 237px;
-  height: 237px;
+  /* 192px — one inch, which is as small as a printed code of this module
+     count should go. build/prepare-assets.py generates both codes near this
+     size so the browser is barely scaling them; verify-qr.py is what says
+     whether a size is actually safe, not the eye. */
+  width: 192px;
+  height: 192px;
   display: block;
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(203, 162, 77, 0.5), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
@@ -223,7 +215,9 @@
 .qr-block .caption {
   font-family: var(--font-label);
   text-transform: uppercase;
-  font-size: 27px;
+  /* Below the 10pt floor on purpose: this is a caption on a code, not
+     something anyone reads at arm's length. */
+  font-size: 19px;
   letter-spacing: 0.2em;
   color: rgba(236, 217, 171, 0.88);
 }
