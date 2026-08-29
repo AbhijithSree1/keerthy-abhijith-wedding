@@ -15,10 +15,16 @@
   --plum-mid: #2a1533;
   --mauve: #3d2149;
 
-  --gold: #b8912f;
-  --gold-mid: #cba24d;
-  --gold-bright: #e8cd82;
-  --champagne: #ecd9ab;
+  /* The first set was a pale champagne. On screen it read as gold because the
+     plum around it is so dark; in CMYK on paper that little saturation comes
+     back as beige, which is what the studio saw. These are pushed warmer and
+     considerably more saturated, and the ramp from highlight to shadow is
+     widened — a wide light-to-dark ramp is most of what makes flat ink read
+     as metal. */
+  --gold: #a87d14;
+  --gold-mid: #d4a634;
+  --gold-bright: #f2d772;
+  --champagne: #f0dca2;
   --ivory: #f3ecdf;
   --lavender: #c6a5d8;
 
@@ -41,12 +47,12 @@
   --text-script: var(--gold-bright);
 
   /* the kasavu kara: outer thread, inner hairline, woven band */
-  --kara-line: rgba(203, 162, 77, 0.72);
-  --kara-line-soft: rgba(203, 162, 77, 0.34);
-  --kara-thread: rgba(232, 205, 130, 0.62);
-  --kara-wash: rgba(184, 145, 47, 0.22);
-  --kara-edge: rgba(232, 205, 130, 0.75);
-  --rule-line: rgba(203, 162, 77, 0.85);
+  --kara-line: rgba(212, 166, 52, 0.72);
+  --kara-line-soft: rgba(212, 166, 52, 0.34);
+  --kara-thread: rgba(242, 215, 114, 0.62);
+  --kara-wash: rgba(168, 125, 20, 0.22);
+  --kara-edge: rgba(242, 215, 114, 0.75);
+  --rule-line: rgba(212, 166, 52, 0.85);
 
   --seal-fill: #150c19;
   --seal-ink: var(--gold-bright);
@@ -256,7 +262,7 @@ body.groom .only-groom { display: block; }
      box and the final "h" of Abhijith came out sliced. Only shows on whichever
      name lands last — "Keerthy" ends in a y, which does not overhang. */
   padding: 0.12em 0.26em;
-  background: linear-gradient(178deg, #f6e8bf 0%, var(--gold-bright) 38%, var(--gold-mid) 74%, #a8842a 100%);
+  background: linear-gradient(178deg, #fdf4d0 0%, var(--gold-bright) 30%, var(--gold-mid) 62%, #a97d18 88%, #86610d 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

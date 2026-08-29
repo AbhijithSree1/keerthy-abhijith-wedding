@@ -234,36 +234,42 @@
    `.only-groom` in shared.css do that switching. */
 .evnote {
   display: flex;
-  align-items: baseline;
-  /* if a note ever does have to wrap, the second line lines up under the
-     first rather than under the label */
-  flex-wrap: wrap;
+  /* The Thalikettu note carries a time and a venue and will not fit beside its
+     label on one line, so it is set as two deliberate lines rather than left
+     to wrap into a ragged one. Top-aligned, with the hairline dropped to sit
+     on the first line. */
+  align-items: flex-start;
   gap: 9px;
   margin-top: 6px;
-  font-family: var(--font-label);
-  font-size: 18px;
-  letter-spacing: 0.08em;
-  color: rgba(232, 205, 130, 0.9);
+  font-family: var(--font-body);
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: rgba(242, 215, 114, 0.92);
 }
 
 .evnote .n-head {
   text-transform: uppercase;
+  font-family: var(--font-label);
   font-size: 16px;
   letter-spacing: 0.18em;
   color: rgba(198, 165, 216, 0.8);
-  /* a hairline rule in front of the word, so the note reads as an aside to
-     the event above it rather than as another line of the address */
-  padding-left: 22px;
-  position: relative;
+  flex: none;
 }
-.evnote .n-head::before {
+
+/* The hairline belongs to the row, not to the label — the bus line has no
+   label any more, and it still needs the rule that marks it as an aside. */
+.evnote .n-body {
+  line-height: 1.4;
+}
+
+.evnote::before {
   content: "";
-  position: absolute;
-  left: 0;
-  top: 0.42em;
+  align-self: flex-start;
+  margin-top: 0.62em;
+  flex: none;
   width: 14px;
   height: 1px;
-  background: rgba(203, 162, 77, 0.55);
+  background: rgba(212, 166, 52, 0.55);
 }
 
 /* --- a card with one event ------------------------------------------------
