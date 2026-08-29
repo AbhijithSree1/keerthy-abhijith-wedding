@@ -1,45 +1,37 @@
 # Editing these files, and the fonts they use
 
-## What is editable, and what is not
+## What is editable
 
-The PDFs in `pdf/` are **vector**. Opened in Illustrator, CorelDRAW or Inkscape
-you can move things, recolour them, change the die, and rescale without any
-loss of quality.
+**Everything, in any of the three formats.**
 
-**The text arrives as outlines, not as live text.** Chromium writes the type as
-glyph outlines when it makes the PDF, so you can move a name or restyle it as
-artwork, but you cannot click into it and retype. That is deliberate — it means
-the files print identically anywhere, with no missing-font risk on your machine.
+- `svg-editable/` — open these in **Inkscape** (free), Illustrator or
+  CorelDRAW. The text is live: click into it, retype it, restyle it, move it.
+- `pdf/` — the same artwork with real embedded fonts. Also editable, and this
+  is what to print from.
+- `fonts/` — the three families the artwork uses. **Install these first.**
+  Without them your editor substitutes something else, and the layout will look
+  wrong even though every word is right. All three are SIL Open Font License
+  and free to install and redistribute.
 
-**So: do not retype anything.** If a name, an address, a phone number, a time or
-a venue is wrong, send it back to us rather than setting it again by hand. The
-whole suite is generated from one source, and a correction is a one-line change
-and a re-render — it takes minutes, and it keeps both families' versions and
-both card versions consistent. Retyping one panel by hand will not match the
-letter-spacing of the others.
+The one exception: the couple's names on the card front are a gold gradient
+clipped to the letters, and a gradient clipped to text can only exist as
+outlines. They are shapes, not text. Nobody needs to retype them.
 
-**What you are welcome to change without asking:**
+### If you change anything, tell us
 
-- Imposition, gutters, crop and registration marks, colour bars.
-- The die: if you have an A7 envelope die you would rather use, use it. Send us
-  its dimensions and we will re-lay the artwork to fit — see below.
-- CMYK conversion, trapping, and any press curve you need.
+You are welcome to re-impose, recolour, change the die, and adjust spacing. But
+if you change **wording** — a name, a time, a venue, a phone number — send it
+back to us as well. The suite is generated from one source and a correction
+re-renders in minutes across both families' versions and both card versions at
+once. A panel edited by hand in one file will not match the other three.
 
-## The fonts
+### Please don't
 
-All four are open-licence (SIL Open Font License) and free to download and
-install. We have not bundled them because the copies in our build are subsets —
-they carry only the characters this artwork uses, and would fail on any text you
-typed yourself.
-
-| Font | Used for |
-| --- | --- |
-| Great Vibes | The names, in script |
-| Cormorant Garamond (Light, Light Italic) | Body text and venues |
-| Cinzel | The small letter-spaced capitals |
-
-All four are on Google Fonts. You only need them if you are re-setting text —
-for printing the supplied PDFs, you do not need them at all.
+- **Don't resize the type.** The sizes were raised deliberately after the first
+  proof came back too small; nothing a guest reads is below 10pt now.
+- **Don't shrink or redraw the QR codes.** See §7.
+- **Don't re-save the PDFs from a PDF editor** — export a new file instead, and
+  keep ours untouched as the reference.
 
 ## The envelope die
 

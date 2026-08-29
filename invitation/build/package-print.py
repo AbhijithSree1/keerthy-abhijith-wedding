@@ -176,6 +176,18 @@ def main():
             os.path.join(PRINT, side, "EDITING-AND-FONTS.md"),
         )
 
+        # The fonts travel with the editable files. Without them installed,
+        # Inkscape substitutes something else and the layout looks wrong even
+        # though every word is correct.
+        fonts_dir = os.path.join(PRINT, side, "fonts")
+        os.makedirs(fonts_dir, exist_ok=True)
+        home_fonts = os.path.expanduser("~/.fonts")
+        if os.path.isdir(home_fonts):
+            for f in sorted(os.listdir(home_fonts)):
+                if f.endswith(".ttf"):
+                    shutil.copy(os.path.join(home_fonts, f),
+                                os.path.join(fonts_dir, f))
+
     # One zip per side: each is a complete, self-contained pack for one
     # family's printing, and each stays under the 30MB most mail will carry.
     for side in ("bride", "groom"):
@@ -183,8 +195,9 @@ def main():
         if os.path.exists(out):
             os.remove(out)
         subprocess.run(
-            ["zip", "-r", "-q", out, "pdf", "imposed", "raster-300dpi",
-             "mockups", "PRINT-SPEC.md", "EDITING-AND-FONTS.md"],
+            ["zip", "-r", "-q", out, "pdf", "svg-editable", "fonts", "imposed",
+             "raster-300dpi", "mockups", "PRINT-SPEC.md",
+             "EDITING-AND-FONTS.md"],
             cwd=os.path.join(PRINT, side),
             check=True,
         )
