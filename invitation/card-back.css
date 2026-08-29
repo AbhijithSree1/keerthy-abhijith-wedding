@@ -5,7 +5,7 @@
 
 .stack {
   position: absolute;
-  inset: 108px 92px 132px;
+  inset: 104px 92px 112px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@
 /* --- families ------------------------------------------------------------ */
 
 .eyebrow {
-  font-size: 17px;
+  font-size: 19px;
   letter-spacing: 0.3em;
   color: rgba(198, 165, 216, 0.92);
   margin-top: 8px;
@@ -44,7 +44,7 @@
 
 .families .divider .amp-mark {
   font-family: var(--font-script);
-  font-size: 36px;
+  font-size: 38px;
   line-height: 1.15;
   color: var(--gold-bright);
 }
@@ -57,7 +57,7 @@
 
 .families .full {
   font-family: var(--font-script);
-  font-size: 42px;
+  font-size: 44px;
   /* the script overshoots its box, same as the names on the front */
   line-height: 1.3;
   padding: 0 0.12em;
@@ -67,39 +67,39 @@
 
 .families .rel {
   font-style: italic;
-  font-size: 21px;
+  font-size: 23px;
   color: rgba(198, 165, 216, 0.9);
   margin-top: 2px;
 }
 
 .families .who {
-  font-size: 26px;
-  line-height: 1.28;
+  font-size: 29px;
+  line-height: 1.26;
   color: var(--ivory);
-  margin-top: 6px;
+  margin-top: 5px;
 }
 
 /* house name and number under each family, so the card carries both */
 .families .house {
   font-style: italic;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.28;
   color: rgba(236, 217, 171, 0.86);
-  margin-top: 9px;
+  margin-top: 7px;
 }
 
 .families .tel {
   font-family: var(--font-label);
-  font-size: 19px;
+  font-size: 21px;
   letter-spacing: 0.06em;
   color: rgba(198, 165, 216, 0.86);
   margin-top: 6px;
 }
 
 .invite {
-  font-size: 24px;
-  line-height: 1.4;
-  margin-top: 16px;
+  font-size: 26px;
+  line-height: 1.36;
+  margin-top: 12px;
   max-width: 560px;
 }
 
@@ -109,13 +109,13 @@
 .section-rule {
   width: 100%;
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 10px;
 }
 .section-rule .line { max-width: 260px; }
 
 .events {
   width: 100%;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .ev {
@@ -126,7 +126,7 @@
   text-align: left;
   /* tightened when the Thalikettu note went in: three event rows each
      carrying two sub-lines put the stack 22px over the card */
-  padding: 10px 4px 11px;
+  padding: 9px 4px 9px;
   border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
 }
 .ev:first-child {
@@ -136,7 +136,7 @@
 .ev .day {
   font-family: var(--font-label);
   text-transform: uppercase;
-  font-size: 17px;
+  font-size: 19px;
   letter-spacing: 0.1em;
   color: var(--champagne);
   white-space: nowrap;
@@ -144,7 +144,7 @@
 
 .ev .what {
   display: block;
-  font-size: 27px;
+  font-size: 30px;
   color: var(--ivory);
   line-height: 1.16;
 }
@@ -152,7 +152,7 @@
 .ev .what .time {
   display: inline;
   font-family: var(--font-label);
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 0.1em;
   color: rgba(232, 205, 130, 0.92);
   margin-left: 10px;
@@ -162,7 +162,7 @@
 .ev .venue {
   display: block;
   font-style: italic;
-  font-size: 21px;
+  font-size: 23px;
   color: rgba(198, 165, 216, 0.9);
   margin-top: 3px;
   line-height: 1.25;
@@ -171,7 +171,7 @@
 /* The public card covers one day rather than four, so it heads the block with
    the date and drops the per-row dates that would just repeat it. */
 .day-head {
-  font-size: 17px;
+  font-size: 19px;
   letter-spacing: 0.22em;
   color: var(--champagne);
   margin-top: 24px;
@@ -189,23 +189,24 @@
 
 .qr-block {
   margin-top: auto;
-  padding-top: 4px;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 11px;
+  gap: 9px;
 }
 
 /* a cream plaque, not a cutout: the code has to be dark-on-light with its
    quiet zone intact or phones will not read it off the printed card */
 .qr-block img {
-  /* 1.125in rather than 1in. The all-events code carries a longer URL, so it
-     has more modules in the same square, and after the type was enlarged it
-     stopped decoding at the 70% stress scale in build/verify-qr.py. Module
-     size is the whole game with a printed code — a bigger square is the fix,
-     not a better scanner. */
-  width: 216px;
-  height: 216px;
+  /* 224px, which is 1.167in — and, more to the point, exactly 350 device
+     pixels at the 300dpi this renders to. 216px landed on 337.5, and half a
+     pixel of subpixel offset is enough to make the module edges uneven once
+     they are scaled; the all-events code, which carries the longer URL and so
+     has the smallest modules, then failed the 70% stress scale in
+     build/verify-qr.py. Keep this a whole number of device pixels. */
+  width: 224px;
+  height: 224px;
   display: block;
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(203, 162, 77, 0.5), 0 8px 20px -8px rgba(0, 0, 0, 0.6);
@@ -217,7 +218,7 @@
 .qr-block .caption {
   font-family: var(--font-label);
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 0.2em;
   color: rgba(236, 217, 171, 0.88);
 }
@@ -242,7 +243,7 @@
   gap: 9px;
   margin-top: 6px;
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 0.01em;
   color: rgba(242, 215, 114, 0.92);
 }
@@ -250,7 +251,7 @@
 .evnote .n-head {
   text-transform: uppercase;
   font-family: var(--font-label);
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 0.18em;
   color: rgba(198, 165, 216, 0.8);
   flex: none;
