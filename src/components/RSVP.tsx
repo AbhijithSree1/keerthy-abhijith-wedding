@@ -3,16 +3,16 @@ import Reveal from './Reveal';
 import { EVENTS, eventLabel, type EventKey } from '../data/events';
 
 /* ---- where replies go ----------------------------------------------------
- * Paste the Google Apps Script web app URL here once it is deployed — see
- * rsvp-backend/README.md. Until then the form keeps posting to Formspree.
+ * Google Apps Script web app bound to the WeddingRSVP sheet: it appends a row
+ * and emails the reply through. Setup, and the redeploy step that a script
+ * edit needs, are in rsvp-backend/README.md.
  *
- * Formspree's free tier allows 50 submissions a month across the whole
- * account and keeps 30 days of history; past the cap replies are refused
- * outright. The Apps Script endpoint writes to a Google Sheet with neither
- * limit, so this should be switched over before the cards go out.
+ * This replaced Formspree, whose free tier caps at 50 submissions a month
+ * across the whole account and drops history after 30 days — neither of which
+ * survives cards that go out months before the day.
  */
-const RSVP_ENDPOINT = '';
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mzdnrdlz';
+const RSVP_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbzapZohThpRVuDFP3xuq_z-VbZWwPPkH9lEeqBtrJPDAqUGF3KtmqbKge36ayO7qTGd/exec';
 
 export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
   const visibleEvents = EVENTS.filter((e) => visible.length === 0 || visible.includes(e.key));
@@ -53,32 +53,20 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
             : visibleEvents.map((e) => eventLabel(e, visible)).join(', ')
       };
 
-      if (RSVP_ENDPOINT) {
-        /* Apps Script sends no CORS headers on its redirect, so the response
-         * cannot be read from the browser. text/plain keeps this a "simple"
-         * request — no preflight, which Apps Script would reject outright —
-         * and no-cors lets the POST through with an opaque response. The
-         * delivery is reliable; the acknowledgement is what we give up, so a
-         * reply that fails to send would still be thanked. The sheet is the
-         * record: check it rather than trusting the on-screen message. */
-        await fetch(RSVP_ENDPOINT, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload),
-        });
-        setStatus('success');
-      } else {
-        const response = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload),
-        });
-        setStatus(response.ok ? 'success' : 'error');
-      }
+      /* Apps Script sends no CORS headers on its redirect, so the response
+       * cannot be read from the browser. text/plain keeps this a "simple"
+       * request — no preflight, which Apps Script would reject outright — and
+       * no-cors lets the POST through with an opaque response. The delivery is
+       * reliable; the acknowledgement is what we give up, so a reply that
+       * failed to send would still be thanked. The sheet is the record: check
+       * it rather than trusting the on-screen message. */
+      await fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+      });
+      setStatus('success');
     } catch (error) {
       console.error(error);
       setStatus('error');

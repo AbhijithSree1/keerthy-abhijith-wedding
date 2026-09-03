@@ -20,15 +20,11 @@ npm run preview # preview the production build locally
 - `public/img/` — 10 placeholder engagement photos (resized/compressed for web)
 
 ## Things to fill in before sending links
-1. **RSVP endpoint** — replies still go to Formspree, whose free tier stops
-   accepting them after 50 a month and keeps only 30 days of history. Follow
-   `rsvp-backend/README.md` to stand up the free Google Sheet endpoint, then
-   paste its URL into `RSVP_ENDPOINT` in `src/components/RSVP.tsx`.
-2. **Love story** — `src/components/Story.tsx` is written but not rendered
+1. **Love story** — `src/components/Story.tsx` is written but not rendered
    anywhere, and still holds placeholder copy.
-3. **Sangeet venue address** — in `src/data/events.ts`, currently a generic map
+2. **Sangeet venue address** — in `src/data/events.ts`, currently a generic map
    search query.
-4. **Photos** — swap files in `public/img/` with the real selects whenever
+3. **Photos** — swap files in `public/img/` with the real selects whenever
    ready. Resize to ~1600px on the long edge at JPEG quality ~80 before
    committing: the gallery loads every photo on the homepage, so full-size
    camera files make the page enormous. Watch out for EXIF rotation on
