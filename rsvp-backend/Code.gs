@@ -15,7 +15,7 @@ const SHEET_NAME = 'RSVPs';
 // Optional: get an email the moment someone replies, the way Formspree did.
 // Leave as '' for no email. Apps Script allows 100 emails/day on a free
 // account, which is far more headroom than the wedding needs.
-const NOTIFY_EMAIL = '';
+const NOTIFY_EMAIL = 'nbabhisreekumar@gmail.com';
 
 const HEADERS = [
   'Received',

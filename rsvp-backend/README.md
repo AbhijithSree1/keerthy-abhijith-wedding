@@ -13,8 +13,9 @@ submission cap, no cost, and the replies live in a spreadsheet you own.
 1. Create a new Google Sheet — name it something like *Wedding RSVPs*.
 2. In that sheet: **Extensions → Apps Script**.
 3. Delete the placeholder `myFunction` and paste in all of `Code.gs`.
-4. If you want an email on each reply, set `NOTIFY_EMAIL` at the top of the
-   file to your address. Leave it as `''` for none.
+4. `NOTIFY_EMAIL` is already set to nbabhisreekumar@gmail.com, so each reply
+   also arrives as an email. Change it to a different address, or set it back
+   to `''` for no email.
 5. **Deploy → New deployment**, gear icon → **Web app**, then set:
    - *Execute as*: **Me**
    - *Who has access*: **Anyone**  ← must be "Anyone", not "Anyone with a
