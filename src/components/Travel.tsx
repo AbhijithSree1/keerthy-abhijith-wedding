@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Reveal from './Reveal';
 
-const TOTAL_PHOTOS = 41;
+const TOTAL_PHOTOS = 45;
 
 function getRandomPhotos(count: number): string[] {
   const selected = new Set<number>();

@@ -86,11 +86,16 @@ export default function DoorIntro({ events }: { events?: EventKey[] }) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <img src={`${import.meta.env.BASE_URL}img/couple-portrait.jpg`} alt="Keerthy and Abhijith" className="h-full w-full object-cover" />
+          <img
+            src={`${import.meta.env.BASE_URL}img/couple-portrait.jpg`}
+            alt="Keerthy and Abhijith"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: 'center 72%' }}
+          />
         </motion.div>
 
         <motion.h1
-          className="font-script mt-5 text-[clamp(2.8rem,10vw,4.4rem)] leading-[0.95]"
+          className="font-script mt-8 sm:mt-9 text-[clamp(2.8rem,10vw,4.4rem)] leading-[0.95]"
           style={{ color: 'var(--color-ivory)' }}
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,7 +105,7 @@ export default function DoorIntro({ events }: { events?: EventKey[] }) {
         </motion.h1>
 
         <motion.p
-          className="font-label mt-3 text-[0.66rem] uppercase tracking-[0.28em]"
+          className="font-label mt-4 text-[0.66rem] uppercase tracking-[0.28em]"
           style={{ color: 'rgba(236,217,171,0.85)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -115,7 +120,7 @@ export default function DoorIntro({ events }: { events?: EventKey[] }) {
         type="button"
         onClick={untie}
         disabled={loosening}
-        className="relative z-10 mt-5 flex flex-col items-center gap-2"
+        className="relative z-10 mt-7 sm:mt-8 flex flex-col items-center gap-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.7 }}
