@@ -68,15 +68,6 @@ export default function DoorIntro({ events }: { events?: EventKey[] }) {
         animate={{ opacity: loosening ? 0.15 : 1 }}
         transition={{ duration: 0.6 }}
       >
-        <motion.span
-          className="font-label mb-4 text-[0.66rem] uppercase tracking-[0.34em]"
-          style={{ color: 'var(--color-gold-bright)' }}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-        >
-          Together with their families
-        </motion.span>
 
         {/* Duotone purple/white portrait */}
         <motion.div
