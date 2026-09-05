@@ -90,7 +90,7 @@ export default function DoorIntro({ events }: { events?: EventKey[] }) {
             src={`${import.meta.env.BASE_URL}img/couple-portrait.jpg`}
             alt="Keerthy and Abhijith"
             className="h-full w-full object-cover"
-            style={{ objectPosition: 'center 72%' }}
+            style={{ objectPosition: 'center 62%' }}
           />
         </motion.div>
 
