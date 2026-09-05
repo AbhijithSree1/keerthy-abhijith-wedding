@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Reveal from './Reveal';
 
-const TOTAL_PHOTOS = 43;
+const TOTAL_PHOTOS = 41;
 const PHOTOS = Array.from({ length: TOTAL_PHOTOS }, (_, i) => `${import.meta.env.BASE_URL}img/engagement-${String(i + 1).padStart(2, '0')}.jpg`);
 
 export default function Gallery() {
