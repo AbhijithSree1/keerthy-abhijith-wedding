@@ -17,6 +17,7 @@ export interface WeddingEvent {
       so unlike the card it has to name both. */
   busNote?: string;
   venueNote?: string;
+  dressCode?: string;
   mapQuery?: string;
   extraLink?: { label: string; href: string };
 }
@@ -74,6 +75,7 @@ export const EVENTS: WeddingEvent[] = [
     timeLabel: 'Evening · 5:30 PM',
     venueName: 'Trip is Life, Varkala, Kerala',
     travelNote: 'Nearest Railway station: Varkala · Buses provided',
+    dressCode: 'Elegant and classy',
     mapQuery: 'Trip is Life Varkala Kerala',
     extraLink: {
       label: 'Venue Website',

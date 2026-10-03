@@ -108,6 +108,11 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                       {ev.busNote}
                     </p>
                   )}
+                  {ev.dressCode && (
+                    <p className="mt-1 text-sm italic opacity-90" style={{ color: 'var(--color-ink-soft)' }}>
+                      Dress code: {ev.dressCode}
+                    </p>
+                  )}
                   <div className={`mt-3 flex flex-wrap gap-5 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
                     <AddToCalendar 
                       event={{
