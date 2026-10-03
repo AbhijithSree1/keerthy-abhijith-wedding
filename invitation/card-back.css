@@ -128,9 +128,8 @@
   column-gap: 18px;
   text-align: left;
   /* tightened when the Thalikettu note went in: three event rows each
-     carrying two sub-lines put the stack 22px over the card; tightened again
-     for the reception's dress-code note */
-  padding: 7px 4px 7px;
+     carrying two sub-lines put the stack 22px over the card */
+  padding: 13px 4px 13px;
   border-bottom: 0.75px solid rgba(203, 162, 77, 0.26);
 }
 .ev:first-child {
