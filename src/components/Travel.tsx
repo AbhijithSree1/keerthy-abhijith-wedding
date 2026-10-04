@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Reveal from './Reveal';
+import type { EventKey } from '../data/events';
 
 const TOTAL_PHOTOS = 45;
 
@@ -14,14 +15,29 @@ function getRandomPhotos(count: number): string[] {
   );
 }
 
-const CARDS = [
+/** Towns worth staying in, by the events a guest is invited to — someone
+    invited only to the wedding day has no reason to be pointed at Varkala. */
+const STAY_TOWNS: Record<EventKey, string[]> = {
+  sangeet: ['Thiruvalla'],
+  wedding: ['Thiruvalla'],
+  backwater: ['Changanassery'],
+  reception: ['Varkala'],
+};
+
+function stayTowns(visible: EventKey[]): string {
+  const towns = [...new Set(visible.flatMap((k) => STAY_TOWNS[k]))];
+  if (towns.length <= 1) return towns[0] ?? 'Thiruvalla';
+  return `${towns.slice(0, -1).join(', ')} and ${towns[towns.length - 1]}`;
+}
+
+const cards = (visible: EventKey[]) => [
   {
     title: 'By Air',
     body: 'The nearest airports are Trivandrum International (TRV, ~3 hrs from Thiruvalla) and Cochin International (COK, ~2.5 hrs). Taxis and pre-paid cabs are available from both airports.',
   },
   {
     title: 'Where to Stay',
-    body: 'Hotels and homestays are available in Thiruvalla and Varkala. We recommend booking early as December is peak season in Kerala. Reach out to us and we can help you find the perfect place.',
+    body: `Hotels and homestays are available in ${stayTowns(visible)}. We recommend booking early as December is peak season in Kerala. Reach out to us and we can help you find the perfect place.`,
   },
   {
     title: 'Any Questions',
@@ -29,7 +45,8 @@ const CARDS = [
   },
 ];
 
-export default function Travel() {
+export default function Travel({ visible }: { visible: EventKey[] }) {
+  const CARDS = cards(visible);
   const [photos, setPhotos] = useState<string[]>([]);
 
   useEffect(() => {

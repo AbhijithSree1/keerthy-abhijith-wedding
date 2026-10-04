@@ -31,7 +31,7 @@ export default function WeddingSite() {
         <EventsTimeline visible={events} />
         <Gallery />
         <RSVP visible={events} />
-        <Travel />
+        <Travel visible={events} />
 
         <section className="mx-auto max-w-[1100px] px-5 pb-24 pt-8 text-center">
           <Reveal className="mb-8">
