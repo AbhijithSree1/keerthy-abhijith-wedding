@@ -52,10 +52,8 @@ export const EVENTS: WeddingEvent[] = [
     venueName: 'Sreevallabha Temple, Thiruvalla, Kerala',
     travelNote: 'Nearest Railway station: Thiruvalla',
     /* A close-family ceremony: no directions or calendar button, and not on
-       the RSVP form. The note points to "later that day" rather than naming
-       the next event, which is "Reception" or "Wedding" depending on the invitation. */
-    privateNote:
-      'A private ceremony for close family · We warmly look forward to celebrating with you later that day',
+       the RSVP form. */
+    privateNote: 'A private ceremony with close family.',
     rsvp: false,
     calendar: false,
     extraLink: {
