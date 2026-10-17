@@ -21,7 +21,7 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
   const [formData, setFormData] = useState({
     name: '',
     attending: 'yes',
-    guests: 1,
+    guests: '',
     message: '',
   });
 
@@ -38,7 +38,7 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
       const payload = {
         name: formData.name,
         attending: formData.attending,
-        guests: formData.guests,
+        guests: formData.attending === 'yes' ? parseInt(formData.guests, 10) : 0,
         message: formData.message,
         events_attending: formData.attending === 'no' 
           ? 'None' 
@@ -171,8 +171,9 @@ export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
                   required={formData.attending === 'yes'}
                   className="w-full rounded-md border p-3 outline-none transition-colors"
                   style={{ borderColor: 'var(--color-ivory-deep)' }}
+                  inputMode="numeric"
                   value={formData.guests}
-                  onChange={(e) => setFormData({ ...formData, guests: parseInt(e.target.value) || 1 })}
+                  onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
                 />
               </Reveal>
             )}
