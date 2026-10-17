@@ -119,14 +119,16 @@ export default function EventsTimeline({ visible }: { visible: EventKey[] }) {
                     </p>
                   )}
                   <div className={`mt-3 flex flex-wrap gap-5 ${!isSingleEvent && i % 2 === 0 ? 'sm:justify-end' : ''}`}>
-                    <AddToCalendar 
-                      event={{
-                        title: `Keerthy & Abhijith - ${labelFor(ev)}`,
-                        description: `We can't wait to celebrate with you!\n\n${ev.venueName}\n\nTime: ${ev.timeLabel}`,
-                        location: ev.mapQuery || ev.venueName,
-                        startDate: ev.date,
-                      }} 
-                    />
+                    {ev.calendar !== false && (
+                      <AddToCalendar 
+                        event={{
+                          title: `Keerthy & Abhijith - ${labelFor(ev)}`,
+                          description: `We can't wait to celebrate with you!\n\n${ev.venueName}\n\nTime: ${ev.timeLabel}`,
+                          location: ev.mapQuery || ev.venueName,
+                          startDate: ev.date,
+                        }} 
+                      />
+                    )}
                     {ev.extraLink && (
                       <a
                         href={ev.extraLink.href}
