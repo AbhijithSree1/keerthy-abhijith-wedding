@@ -17,6 +17,10 @@ export interface WeddingEvent {
       so unlike the card it has to name both. */
   busNote?: string;
   venueNote?: string;
+  /** A short line under the event, e.g. that it is for close family only. */
+  privateNote?: string;
+  /** False keeps the event off the RSVP form. */
+  rsvp?: boolean;
   dressCode?: string;
   mapQuery?: string;
   extraLink?: { label: string; href: string };
@@ -45,7 +49,12 @@ export const EVENTS: WeddingEvent[] = [
     timeLabel: 'Muhurtham · 7:45 – 8:45 AM',
     venueName: 'Sreevallabha Temple, Thiruvalla, Kerala',
     travelNote: 'Nearest Railway station: Thiruvalla',
-    mapQuery: 'Sreevallabha Temple Thiruvalla Kerala',
+    /* A close-family ceremony: no directions, and not on the RSVP form. The
+       note points to "later that day" rather than naming the next event,
+       which is "Reception" or "Wedding" depending on the invitation. */
+    privateNote:
+      'A private ceremony for close family · We warmly look forward to celebrating with you later that day',
+    rsvp: false,
     extraLink: {
       label: 'About the Temple',
       href: 'https://en.wikipedia.org/wiki/Sreevallabha_Temple',

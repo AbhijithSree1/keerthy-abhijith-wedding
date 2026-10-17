@@ -15,7 +15,9 @@ const RSVP_ENDPOINT =
   'https://script.google.com/macros/s/AKfycbzapZohThpRVuDFP3xuq_z-VbZWwPPkH9lEeqBtrJPDAqUGF3KtmqbKge36ayO7qTGd/exec';
 
 export default function RSVP({ visible = [] }: { visible?: EventKey[] }) {
-  const visibleEvents = EVENTS.filter((e) => visible.length === 0 || visible.includes(e.key));
+  const visibleEvents = EVENTS.filter(
+    (e) => e.rsvp !== false && (visible.length === 0 || visible.includes(e.key))
+  );
   const isMultiEvent = visibleEvents.length > 1;
 
   const [formData, setFormData] = useState({
